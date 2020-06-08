@@ -1,3 +1,4 @@
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,4 +19,11 @@ public class HomeTests extends BaseUI {
         Assert.assertTrue(Data.homePageTitleExpected.equals(driver.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Home"));
     }
 
+    @Test
+    public void testYouTubeVideoLink() {
+        WebElement frame = driver.findElement(Locators.FRAME_WITH_YOUTUBE_VIDEO);
+        action.moveToElement(frame).perform();
+        driver.switchTo().frame(frame);
+        driver.findElement(Locators.YOUTUBE_VIDEO_PLAY_BUTTON);
+    }
 }

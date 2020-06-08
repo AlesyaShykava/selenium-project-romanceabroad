@@ -3,6 +3,9 @@ public class Data {
     //'Search' page
     public static final String searchPageTitleExpected = "Meet single Ukrainian women online: dating and marriage at Marry Ukrainian Lady";
     public static final String expectedUrlSearchPage = "https://romanceabroad.com/users/search";
+    public static final String minAgeForSearch = "20";
+    public static final String maxAgeForSearch = "30";
+    public static final String orderValueDataCreated = "date_created";
 
     //'Home' page
     public static final String homePageTitleExpected = "The Best Free Ukrainian Dating Site| Romanceabroad.Com";

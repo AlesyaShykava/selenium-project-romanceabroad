@@ -15,6 +15,8 @@ public class Locators {
     public static final By JOIN_FOR_FREE_NOW_LINK = By.cssSelector("#show-registration-block");
 
     //other element on the 'Home' page
+    public static final By FRAME_WITH_YOUTUBE_VIDEO = By.xpath("//iframe[@src='https://www.youtube.com/embed/RRECuJzm3IY?start=85']");
+    public static final By YOUTUBE_VIDEO_PLAY_BUTTON = By.cssSelector(".ytp-large-play-button.ytp-button");
 
     //elements on the 'Sign In' page
     public static final By SIGN_IN_PAGE_EMAIL_FIELD = By.cssSelector("input[id='email'][type='text']");
@@ -43,6 +45,13 @@ public class Locators {
     public static final By REGISTRATION_FORM_MONTH_DECEMBER = By.xpath("//li[@data-handler='selectMonth'][@data-value='11']/a");
     public static final By REGISTRATION_FORM_YEAR_SELECTION_CARET = By.xpath("//div[@id='yearSelect']//span[@class='caret']");
     public static final By REGISTRATION_FORM_YEAR_1990 = By.xpath("//li[@data-handler='selectYear'][@data-value='1990']/a");
+
+    //elements on 'Search' page
+    public static final By SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN = By.xpath("//select[@id='age_min']");
+    public static final By SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN = By.xpath("//select[@id='age_max']");
+    public static final By SEARCH_PAGE_SEARCH_PARAMETERS_SEARCH_BUTTON = By.xpath("//input[@id='main_search_button_user_advanced']");
+    public static final By SEARCH_PAGE_ORDER_DROPDOWN = By.xpath("//select[contains(@id, 'sorter-select')]");
+    public static final By SEARCH_PAGE_USER_FROM_SEARCH = By.xpath("//a[@href='https://romanceabroad.com/users/view/330/profile'][@class='g-users-gallery__name']");
 
     //elements with common locators on different pages
 
