@@ -2,13 +2,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class HowWeWorkTests extends BaseUI {
-    private String currentUrlHowItWorks;
+    private String currentUrl;
 
     @Test
     public void testHowWeWorkPage() {
-        driver.findElement(Locators.HOW_IT_WORKS_LINK).click();
-        currentUrlHowItWorks = driver.getCurrentUrl();
-        Assert.assertEquals(currentUrlHowItWorks, Data.expectedUrlHowItWorksPage);
-        Assert.assertTrue(Data.howItWorksPageTitleExpected.equals(driver.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "How We Work"));
+        homePage.clickOnLink(Locators.HOW_IT_WORKS_LINK);
+        currentUrl = howWeWorkPage.getCurrentUrl();
+        Assert.assertEquals(currentUrl, Data.expectedUrlHowItWorksPage);
+        Assert.assertTrue(Data.howItWorksPageTitleExpected.equals(howWeWorkPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "How We Work"));
     }
 }

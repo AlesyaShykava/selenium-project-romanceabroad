@@ -33,10 +33,11 @@ public class Data {
     public static final String blogPageTitleExpected = "Blog";
     public static final String expectedUrlBlogPage = "https://romanceabroad.com/content/view/blog";
 
-    //expected url for pages
-    public static final String expectedUrlLoginPage = "https://romanceabroad.com/users/login_form";
+    //'Restore Password' page
     public static final String expectedUrlRestorePage = "https://romanceabroad.com/users/restore";
 
+    //'Login' pages
+    public static final String expectedUrlLoginPage = "https://romanceabroad.com/users/login_form";
 
     //'Registration' form
     public static final String registrationFormEmailIncorrectAlertMessageExpected = "Email is incorrect, please try again";
@@ -50,6 +51,6 @@ public class Data {
     public static final String incorrectTestData = "abc";
     public static final String correctEmail = "example@abc.abc";
     public static final String correctPassword = "123456";
-    public static final String correctNickName = "someNickName";
+    public static final String correctNickName = "nick";
     public static final String correctPhone = "123456789";
 }
