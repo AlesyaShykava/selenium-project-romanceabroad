@@ -2,13 +2,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class BlogTests extends BaseUI {
-    private String currentUrlBlog;
+    private String currentUrl;
 
     @Test
     public void testBlogPage() {
-        driver.findElement(Locators.BLOG_LINK).click();
-        currentUrlBlog = driver.getCurrentUrl();
-        Assert.assertTrue(Data.blogPageTitleExpected.equals(driver.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Blog"));
-        Assert.assertEquals(currentUrlBlog, Data.expectedUrlBlogPage);
+        homePage.clickOnLink(Locators.BLOG_LINK);
+        currentUrl = blogPage.getCurrentUrl();
+        Assert.assertTrue(Data.blogPageTitleExpected.equals(blogPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Blog"));
+        Assert.assertEquals(currentUrl, Data.expectedUrlBlogPage);
     }
 }

@@ -45,12 +45,13 @@ public class Locators {
     public static final By REGISTRATION_FORM_MONTH_DECEMBER = By.xpath("//li[@data-handler='selectMonth'][@data-value='11']/a");
     public static final By REGISTRATION_FORM_YEAR_SELECTION_CARET = By.xpath("//div[@id='yearSelect']//span[@class='caret']");
     public static final By REGISTRATION_FORM_YEAR_1990 = By.xpath("//li[@data-handler='selectYear'][@data-value='1990']/a");
+    public static final By REGISTRATION_FORM_TERMS_AND_CONDITIONS_CHECKBOX = By.xpath("//input[@id='confirmation']");
 
     //elements on 'Search' page
     public static final By SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN = By.xpath("//select[@id='age_min']");
     public static final By SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN = By.xpath("//select[@id='age_max']");
     public static final By SEARCH_PAGE_SEARCH_PARAMETERS_SEARCH_BUTTON = By.xpath("//input[@id='main_search_button_user_advanced']");
-    public static final By SEARCH_PAGE_ORDER_DROPDOWN = By.xpath("//select[contains(@id, 'sorter-select')]");
+    public static final By SEARCH_PAGE_ORDER_DROPDOWN = By.cssSelector("select[id*='sorter-select']");
     public static final By SEARCH_PAGE_USER_FROM_SEARCH = By.xpath("//a[@href='https://romanceabroad.com/users/view/330/profile'][@class='g-users-gallery__name']");
 
     //elements with common locators on different pages

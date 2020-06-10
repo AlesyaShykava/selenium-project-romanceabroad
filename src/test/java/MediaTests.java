@@ -2,13 +2,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class MediaTests extends BaseUI {
-    private String currentUrlMedia;
+    private String currentUrl;
 
     @Test
     public void testMediaPage() {
-        driver.findElement(Locators.MEDIA_LINK).click();
-        currentUrlMedia = driver.getCurrentUrl();
-        Assert.assertTrue(Data.mediaPageTitleExpected.equals(driver.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Media"));
-        Assert.assertEquals(currentUrlMedia, Data.expectedUrlMediaPage);
+        homePage.clickOnLink(Locators.MEDIA_LINK);
+        currentUrl = mediaPage.getCurrentUrl();
+        Assert.assertTrue(Data.mediaPageTitleExpected.equals(mediaPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Media"));
+        Assert.assertEquals(currentUrl, Data.expectedUrlMediaPage);
     }
 }

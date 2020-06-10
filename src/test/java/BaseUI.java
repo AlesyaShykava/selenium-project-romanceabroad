@@ -1,9 +1,5 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -12,14 +8,34 @@ public class BaseUI {
     protected String mainURl = "https://romanceabroad.com/";
     protected WebDriver driver;
     protected WebDriverWait wait;
-    protected Actions action;
+    protected HomePage homePage;
+    protected BlogPage blogPage;
+    protected GiftsPage giftsPage;
+    protected HowWeWorkPage howWeWorkPage;
+    protected MediaPage mediaPage;
+    protected RegistrationModal registrationModal;
+    protected RestorePasswordPage restorePasswordPage;
+    protected SignInModal signInModal;
+    protected SearchPage searchPage;
+    protected TourToUkrainePage tourToUkrainePage;
+    protected LoginPage loginPage;
 
     @BeforeMethod
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
-        action = new Actions(driver);
         wait = new WebDriverWait(driver, 20);
+        homePage = new HomePage(driver, wait);
+        blogPage = new BlogPage(driver, wait);
+        giftsPage = new GiftsPage(driver, wait);
+        howWeWorkPage = new HowWeWorkPage(driver, wait);
+        mediaPage = new MediaPage(driver, wait);
+        registrationModal = new RegistrationModal(driver, wait);
+        restorePasswordPage = new RestorePasswordPage(driver, wait);
+        signInModal = new SignInModal(driver, wait);
+        searchPage = new SearchPage(driver, wait);
+        tourToUkrainePage = new TourToUkrainePage(driver, wait);
+        loginPage = new LoginPage(driver, wait);
         driver.manage().window().maximize();
         driver.get(mainURl);
     }
@@ -27,15 +43,5 @@ public class BaseUI {
     @AfterMethod
     public void afterActions() {
         driver.quit();
-    }
-
-    protected void moveMouseToElementAndClick(By locator) {
-        action.moveToElement(driver.findElement(locator)).perform();
-        driver.findElement(locator).click();
-    }
-
-    protected void selectFromDropDownListByValue(WebElement element, String value) {
-        Select select = new Select(element);
-        select.selectByValue(value);
     }
 }
