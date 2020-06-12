@@ -1,8 +1,11 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
+import java.util.Collections;
 
 public class BaseUI {
     protected String mainURl = "https://romanceabroad.com/";
@@ -23,8 +26,8 @@ public class BaseUI {
     @BeforeMethod
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "chromedriver");
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 20);
+        driver = new ChromeDriver(getChromeOptions());
+        wait = new WebDriverWait(driver, 40);
         homePage = new HomePage(driver, wait);
         blogPage = new BlogPage(driver, wait);
         giftsPage = new GiftsPage(driver, wait);
@@ -43,5 +46,12 @@ public class BaseUI {
     @AfterMethod
     public void afterActions() {
         driver.quit();
+    }
+
+    private ChromeOptions getChromeOptions() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+        chromeOptions.setExperimentalOption("useAutomationExtension", false);
+        return chromeOptions;
     }
 }
