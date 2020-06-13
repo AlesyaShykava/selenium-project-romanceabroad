@@ -22,6 +22,11 @@ public class HomePage extends BaseActions{
         wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SIGN_IN_PAGE_EMAIL_FIELD));
     }
 
+    public void clickOnSearchLink() {
+        driver.findElement(Locators.SEARCH_LINK).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN));
+    }
+
     public void playYouTubeVideo() {
         WebElement frame = driver.findElement(Locators.FRAME_WITH_YOUTUBE_VIDEO);
         action.moveToElement(frame).perform();

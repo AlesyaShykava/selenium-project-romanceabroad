@@ -13,7 +13,6 @@ public class SearchPage extends BaseActions {
     }
 
     public void performSearchBasedOnMinAndMaxAgeParameters(String minAgeForSearch, String maxAgeForSearch) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN));
         selectFromDropDownListByValue(driver.findElement(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN), minAgeForSearch);
         wait.until(ExpectedConditions.elementToBeClickable(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN));
         selectFromDropDownListByValue(driver.findElement(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN), maxAgeForSearch);
@@ -21,7 +20,7 @@ public class SearchPage extends BaseActions {
             Thread.sleep(1000);
         } catch (InterruptedException e) { }
         driver.findElement(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_SEARCH_BUTTON).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='autogen_loading_block'][contains(@style, 'display: none')]")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(Locators.SEARCH_PAGE_LOADING_SPINNER));
     }
 
     public void setUpOrder(String orderValueDataCreated) {
@@ -37,20 +36,35 @@ public class SearchPage extends BaseActions {
     }
 
     public void pagination_clickOnNextButton() {
-        driver.findElement(By.xpath("//li[@class='next']/a[@data-page]")).click();
+        driver.findElement(Locators.SEARCH_PAGE_PAGINATION_NEXT_BUTTON).click();
     }
 
-    public List<String> getListOfWomenSummary() {
-        List<WebElement> listWomanSummary = driver.findElements(Locators.SEARCH_PAGE_SEARCH_RESULT_WOMAN_SUMMARY);
-        if(pagination_isNextButtonPresent()) {
-            pagination_clickOnNextButton();
-            List<WebElement> listWomanSummaryPageResult = driver.findElements(Locators.SEARCH_PAGE_SEARCH_RESULT_WOMAN_SUMMARY);
-            listWomanSummary.addAll(listWomanSummaryPageResult);
-        }
+    public List<String> getSearchResultListOfWomenSummary() {
         List<String> result = new ArrayList<>();
-        for(int i = 0; i < listWomanSummary.size(); i++) {
-            result.add(listWomanSummary.get(i).getText());
+        while(true) {
+            List<WebElement> listWomanSummaryPageResult = driver.findElements(Locators.SEARCH_PAGE_SEARCH_RESULT_WOMAN_SUMMARY);
+            for(int i = 0; i < listWomanSummaryPageResult.size(); i++) {
+                result.add(listWomanSummaryPageResult.get(i).getText());
+            }
+            if (pagination_isNextButtonPresent()) {
+                pagination_clickOnNextButton();
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(Locators.SEARCH_PAGE_LOADING_SPINNER));
+            }
+            else break;
         }
         return result;
+    }
+
+    public List<Integer> getMinAgeDropDownValues() {
+        List<WebElement> minAgeOptionsElements = driver.findElements(Locators.SEARCH_PAGE_MIN_AGE_OPTIONS);
+        List<Integer> minAgeValues = new ArrayList<>();
+        for(WebElement element : minAgeOptionsElements) {
+            minAgeValues.add(Integer.parseInt(element.getAttribute("value")));
+        }
+        return minAgeValues;
+    }
+
+    public String getPeopleFoundTitle() {
+        return driver.findElement(Locators.SEARCH_PAGE_PEOPLE_FOUND_TITLE).getText();
     }
 }

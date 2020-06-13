@@ -40,6 +40,10 @@ public class RegistrationModal extends BaseActions {
         driver.findElement(Locators.REGISTRATION_FORM_TERMS_AND_CONDITIONS_CHECKBOX).click();
     }
 
+    public boolean isTermsAndConditionsChecked() {
+        return driver.findElement(Locators.REGISTRATION_FORM_TERMS_AND_CONDITIONS_CHECKBOX).isSelected();
+    }
+
     public void clickOnPagination() {
         driver.findElement(Locators.REGISTRATION_FORM_PAGINATION).click();
     }

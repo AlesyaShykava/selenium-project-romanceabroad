@@ -12,7 +12,9 @@ public class RegistrationTests extends BaseUI {
         registrationModal.fillInNickNameWithCorrectRandomData();
         registrationModal.fillInPhone(Data.correctPhone);
         registrationModal.selectDOB(Locators.REGISTRATION_FORM_DAY_14, Locators.REGISTRATION_FORM_MONTH_DECEMBER, Locators.REGISTRATION_FORM_YEAR_1990);
-        registrationModal.checkTermsAndConditionsCheckbox();
+        if(!registrationModal.isTermsAndConditionsChecked()) {
+            registrationModal.checkTermsAndConditionsCheckbox();
+        }
     }
 
     @Test

@@ -55,6 +55,10 @@ public class Locators {
     public static final By SEARCH_PAGE_USER_FROM_SEARCH = By.xpath("//a[@href='https://romanceabroad.com/users/view/330/profile'][@class='g-users-gallery__name']");
     public static final By SEARCH_PAGE_SEARCH_RESULT_WOMAN_SUMMARY = By.xpath("//div[@class='text-overflow'][a]");
     public static final By SEARCH_PAGE_PAGINATION_NEXT_BUTTON = By.xpath("//li[@class='next']/a[@data-page]");
+    public static final By SEARCH_PAGE_MIN_AGE_OPTIONS = By.xpath("//select[@name='age_min']/option");
+    public static final By SEARCH_PAGE_MAX_AGE_OPTIONS = By.xpath("//select[@name='age_max']/option");
+    public static final By SEARCH_PAGE_PEOPLE_FOUND_TITLE = By.xpath("//div[@class='st-info']/div");
+    public static final By SEARCH_PAGE_LOADING_SPINNER = By.xpath("//div[@id='autogen_loading_block']");
 
     //elements with common locators on different pages
 

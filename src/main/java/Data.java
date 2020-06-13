@@ -6,6 +6,8 @@ public class Data {
     public static final String minAgeForSearch = "20";
     public static final String maxAgeForSearch = "30";
     public static final String orderValueDataCreated = "date_created";
+    public static final int searchParametersMinAgeExpected = 18;
+    public static final int searchParametersMaxAgeExpected = 80;
 
     //'Home' page
     public static final String homePageTitleExpected = "The Best Free Ukrainian Dating Site| Romanceabroad.Com";
