@@ -8,7 +8,8 @@ public class GiftsTests extends BaseUI {
     public void testGiftsPage() {
         homePage.clickOnLink(Locators.GIFTS_LINK);
         currentUrl = giftsPage.getCurrentUrl();
-        Assert.assertTrue(Data.giftsPageTitleExpected.equals(giftsPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Gifts"));
-        Assert.assertEquals(currentUrl, Data.expectedUrlGiftsPage);
+        softAssert.assertTrue(Data.giftsPageTitleExpected.equals(giftsPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Gifts"));
+        softAssert.assertEquals(currentUrl, Data.expectedUrlGiftsPage);
+        softAssert.assertAll();
     }
 }

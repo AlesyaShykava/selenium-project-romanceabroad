@@ -8,7 +8,8 @@ public class BlogTests extends BaseUI {
     public void testBlogPage() {
         homePage.clickOnLink(Locators.BLOG_LINK);
         currentUrl = blogPage.getCurrentUrl();
-        Assert.assertTrue(Data.blogPageTitleExpected.equals(blogPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Blog"));
-        Assert.assertEquals(currentUrl, Data.expectedUrlBlogPage);
+        softAssert.assertTrue(Data.blogPageTitleExpected.equals(blogPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Blog"));
+        softAssert.assertEquals(currentUrl, Data.expectedUrlBlogPage);
+        softAssert.assertAll();
     }
 }

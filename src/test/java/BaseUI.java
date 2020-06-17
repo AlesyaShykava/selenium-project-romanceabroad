@@ -1,16 +1,23 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.asserts.SoftAssert;
 
+import java.lang.reflect.Method;
 import java.util.Collections;
 
 public class BaseUI {
     protected String mainURl = "https://romanceabroad.com/";
     protected WebDriver driver;
     protected WebDriverWait wait;
+    protected SoftAssert softAssert = new SoftAssert();
     protected HomePage homePage;
     protected BlogPage blogPage;
     protected GiftsPage giftsPage;
@@ -24,9 +31,25 @@ public class BaseUI {
     protected LoginPage loginPage;
 
     @BeforeMethod
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver");
-        driver = new ChromeDriver(getChromeOptions());
+    @Parameters("browser")
+    public void setup(@Optional("chrome") String browser, Method method){
+        if (browser.equalsIgnoreCase("firefox")) {
+            System.setProperty("webdriver.gecko.driver", "geckodriver");
+            driver = new FirefoxDriver();
+        } else if (browser.equalsIgnoreCase("chrome")) {
+            System.setProperty("webdriver.chrome.driver", "chromedriver");
+            driver = new ChromeDriver(getChromeOptions());
+            //driver.get("chrome://settings/clearBrowserData");
+        } else if (browser.equalsIgnoreCase("IE")) {
+            System.setProperty("webdriver.ie.driver", "IEDriverServer");
+            driver = new InternetExplorerDriver();
+            driver.manage().deleteAllCookies();
+        } else {
+            System.setProperty("webdriver.chrome.driver", "chromedriver");
+            driver = new ChromeDriver(getChromeOptions());
+            driver.get("chrome://settings/clearBrowserData");
+        }
+
         wait = new WebDriverWait(driver, 40);
         homePage = new HomePage(driver, wait);
         blogPage = new BlogPage(driver, wait);
