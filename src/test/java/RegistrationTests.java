@@ -25,7 +25,8 @@ public class RegistrationTests extends BaseUI {
         registrationModal.clickOnPagination();
         String emailIncorrectAlertMessageActual = registrationModal.getEmailAlertMessage();
         String passwordIncorrectAlertMessageActual = registrationModal.getPasswordAlertMessage();
-        Assert.assertTrue(Data.registrationFormEmailIncorrectAlertMessageExpected.equals(emailIncorrectAlertMessageActual));
-        Assert.assertTrue(Data.registrationFormPasswordIncorrectAlertMessageExpected.equals(passwordIncorrectAlertMessageActual));
+        softAssert.assertTrue(Data.registrationFormEmailIncorrectAlertMessageExpected.equals(emailIncorrectAlertMessageActual));
+        softAssert.assertTrue(Data.registrationFormPasswordIncorrectAlertMessageExpected.equals(passwordIncorrectAlertMessageActual));
+        softAssert.assertAll();
     }
 }

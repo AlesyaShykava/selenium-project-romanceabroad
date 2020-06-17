@@ -9,9 +9,10 @@ public class RestorePasswordTests extends BaseUI {
         homePage.clickOnSignInLink();
         signInModal.clickOnForgotPasswordLink();
         currentUrl = restorePasswordPage.getCurrentUrl();
-        Assert.assertEquals(currentUrl, Data.expectedUrlRestorePage);
+        softAssert.assertEquals(currentUrl, Data.expectedUrlRestorePage);
         restorePasswordPage.fillInEmailField(Data.incorrectTestData);
         restorePasswordPage.clickOnSubmitButton();
         restorePasswordPage.checkErrorBlockIsDisplayed();
+        softAssert.assertAll();
     }
 }

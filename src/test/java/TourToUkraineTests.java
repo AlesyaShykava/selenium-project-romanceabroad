@@ -8,7 +8,8 @@ public class TourToUkraineTests extends BaseUI {
     public void testTourToUkrainePage() {
         homePage.clickOnLink(Locators.TOUR_TO_UKRAINE_LINK);
         currentUrl = tourToUkrainePage.getCurrentUrl();
-        Assert.assertTrue(Data.tourToUkrainePageTitleExpected.equals(tourToUkrainePage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Tour To Ukraine"));
-        Assert.assertEquals(currentUrl, Data.expectedUrlTourToUkrainePage);
+        softAssert.assertTrue(Data.tourToUkrainePageTitleExpected.equals(tourToUkrainePage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Tour To Ukraine"));
+        softAssert.assertEquals(currentUrl, Data.expectedUrlTourToUkrainePage);
+        softAssert.assertAll();
     }
 }

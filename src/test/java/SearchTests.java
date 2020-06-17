@@ -10,8 +10,9 @@ public class SearchTests extends BaseUI {
     public void testSearchPage() {
         homePage.clickOnSearchLink();
         currentUrl = searchPage.getCurrentUrl();
-        Assert.assertEquals(currentUrl, Data.expectedUrlSearchPage);
-        Assert.assertTrue(Data.searchPageTitleExpected.equals(searchPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Search"));
+        softAssert.assertEquals(currentUrl, Data.expectedUrlSearchPage);
+        softAssert.assertTrue(Data.searchPageTitleExpected.equals(searchPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Search"));
+        softAssert.assertAll();
     }
 
     @Test
@@ -33,11 +34,12 @@ public class SearchTests extends BaseUI {
                 String womanSummary = listWomanSummary.get(i);
                 int ageOfWoman = Integer.parseInt(womanSummary.substring(womanSummary.length() - 2));
                 boolean isAgeCorrespondGivenParameters = ageOfWoman >= Integer.parseInt(Data.minAgeForSearch) && ageOfWoman <= Integer.parseInt(Data.maxAgeForSearch);
-                Assert.assertTrue(isAgeCorrespondGivenParameters);
+                softAssert.assertTrue(isAgeCorrespondGivenParameters);
             }
         } else {
             System.out.println("Search result is empty, please select another data for test");
         }
+        softAssert.assertAll();
     }
 
     @Test
@@ -55,16 +57,14 @@ public class SearchTests extends BaseUI {
     public void checkSearchParametersMinAgeValues(){
         homePage.clickOnSearchLink();
         List<Integer> minAgeValues = searchPage.getMinAgeDropDownValues();
-        int size = minAgeValues.size();
-        if(size == Data.searchParametersMaxAgeExpected - Data.searchParametersMinAgeExpected + 1) {
-            Assert.assertTrue(minAgeValues.get(0) == Data.searchParametersMinAgeExpected);
-            Assert.assertTrue(minAgeValues.get(size - 1) == Data.searchParametersMaxAgeExpected);
-            for(int i = 0; i < size; i++) {
-                Assert.assertTrue(minAgeValues.get(i) == Data.searchParametersMinAgeExpected + i);
-            }
+        int sizeOfListWithMinAgeValues = minAgeValues.size();
+        boolean isNumberOfValuesEqualsToExpected = (sizeOfListWithMinAgeValues == Data.searchParametersMaxAgeExpected - Data.searchParametersMinAgeExpected + 1);
+        Assert.assertTrue(isNumberOfValuesEqualsToExpected, "Number of options in min_age dropdown does not correspond to expected");
+        softAssert.assertTrue(minAgeValues.get(0) == Data.searchParametersMinAgeExpected, String.format("Min age value is not equals to expected %s", Data.searchParametersMinAgeExpected));
+        softAssert.assertTrue(minAgeValues.get(sizeOfListWithMinAgeValues - 1) == Data.searchParametersMaxAgeExpected, String.format("Max age value is not equals to expected %s", Data.searchParametersMaxAgeExpected));
+        for(int i = 0; i < sizeOfListWithMinAgeValues; i++) {
+            softAssert.assertTrue(minAgeValues.get(i) == Data.searchParametersMinAgeExpected + i);
         }
-        else {
-            Assert.fail("Number of options in min_age dropdown does not correspond to expected");
-        }
+        softAssert.assertAll();
     }
 }
