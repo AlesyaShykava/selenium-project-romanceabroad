@@ -1,8 +1,14 @@
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class SearchTests extends BaseUI {
     private String currentUrl;
@@ -93,6 +99,17 @@ public class SearchTests extends BaseUI {
                     break;
                 }
             }
+        }
+    }
+
+    @Test
+    public void getScreenshotSearchPage() {
+        homePage.clickOnSearchLink();
+        File tempFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(tempFile, new File("screenshots/searchPageScreenshot.png"));
+        } catch (IOException e) {
+            System.out.println("Screenshot was not saved");
         }
     }
 }
