@@ -23,15 +23,4 @@ public class SignInTests extends BaseUI {
         loginPage.checkErrorBlockIsDisplayed();
         Assert.assertEquals(loginPage.getCurrentUrl(), Data.expectedUrlLoginPage);
     }
-
-    @Test
-    public void getScreenshotOfSignInModal() {
-        homePage.clickOnSignInLink();
-        File temporalFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(temporalFile, new File("screenshots/signInModalScreenshot1"));
-        } catch (IOException e) {
-            System.out.println("File was not saved");
-        }
-    }
 }
