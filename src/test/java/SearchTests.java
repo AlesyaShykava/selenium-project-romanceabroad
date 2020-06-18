@@ -2,9 +2,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Random;
 
 public class SearchTests extends BaseUI {
     private String currentUrl;
+    Random random = new Random();
 
     @Test
     public void testSearchPage() {
@@ -33,7 +35,7 @@ public class SearchTests extends BaseUI {
             for (int i = 0; i < listWomanSummary.size(); i++) {
                 String womanSummary = listWomanSummary.get(i);
                 int ageOfWoman = Integer.parseInt(womanSummary.substring(womanSummary.length() - 2));
-                boolean isAgeCorrespondGivenParameters = ageOfWoman >= Integer.parseInt(Data.minAgeForSearch) && ageOfWoman <= Integer.parseInt(Data.maxAgeForSearch);
+                boolean isAgeCorrespondGivenParameters = ageOfWoman >= Data.minAgeForSearch && ageOfWoman <= Data.maxAgeForSearch;
                 softAssert.assertTrue(isAgeCorrespondGivenParameters);
             }
         } else {
@@ -66,5 +68,31 @@ public class SearchTests extends BaseUI {
             softAssert.assertTrue(minAgeValues.get(i) == Data.searchParametersMinAgeExpected + i);
         }
         softAssert.assertAll();
+    }
+
+    @Test
+    public void checkSummaryOnSearchPageCorrespondToInfoOnProfilePage(){
+        homePage.clickOnSearchLink();
+        List<Integer> minAgeValues = searchPage.getMinAgeDropDownValues();
+        boolean isSearchResultEmpty = true;
+        while (isSearchResultEmpty) {
+            int randomMinAgeValue = minAgeValues.get(random.nextInt(minAgeValues.size()));
+            searchPage.performSearchBasedOnMinAndMaxAgeParameters(randomMinAgeValue, Data.searchParametersMaxAgeExpected);
+            isSearchResultEmpty = searchPage.getSearchResultListOfWomenSummary().isEmpty();
+            if(isSearchResultEmpty) continue;
+
+            List<String> listWomanSummary = searchPage.getSearchResultListOfWomenSummary();
+            String selectedRandomProfileUserName = searchPage.clickOnRandomProfileLinkFromSearchResult();
+
+            for (String womanSummary : listWomanSummary) {
+                String womanUserName = womanSummary.substring(0, womanSummary.indexOf(", "));
+                if (selectedRandomProfileUserName.equals(womanUserName)) {
+                    int ageToCheck = Integer.parseInt(womanSummary.substring(womanSummary.length() - 2));
+                    Assert.assertEquals(selectedRandomProfileUserName, profilePage.getUserName());
+                    Assert.assertEquals(ageToCheck, profilePage.getAge());
+                    break;
+                }
+            }
+        }
     }
 }

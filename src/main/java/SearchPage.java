@@ -12,10 +12,10 @@ public class SearchPage extends BaseActions {
         super(webDriver, wait);
     }
 
-    public void performSearchBasedOnMinAndMaxAgeParameters(String minAgeForSearch, String maxAgeForSearch) {
-        selectFromDropDownListByValue(driver.findElement(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN), minAgeForSearch);
+    public void performSearchBasedOnMinAndMaxAgeParameters(int minAgeForSearch, int maxAgeForSearch) {
+        selectFromDropDownListByValue(driver.findElement(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN), Integer.toString(minAgeForSearch));
         wait.until(ExpectedConditions.elementToBeClickable(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN));
-        selectFromDropDownListByValue(driver.findElement(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN), maxAgeForSearch);
+        selectFromDropDownListByValue(driver.findElement(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN), Integer.toString(maxAgeForSearch));
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) { }
@@ -66,5 +66,14 @@ public class SearchPage extends BaseActions {
 
     public String getPeopleFoundTitle() {
         return driver.findElement(Locators.SEARCH_PAGE_PEOPLE_FOUND_TITLE).getText();
+    }
+
+    public String clickOnRandomProfileLinkFromSearchResult() {
+        List<WebElement> linksToProfilePage = driver.findElements(Locators.SEARCH_PAGE_PROFILE_LINKS);
+        int randomIndexOfLinkToClick = random.nextInt(linksToProfilePage.size());
+        WebElement randomProfileLinkForCheck = linksToProfilePage.get(randomIndexOfLinkToClick);
+        String userName = randomProfileLinkForCheck.getText();
+        randomProfileLinkForCheck.click();
+        return userName;
     }
 }

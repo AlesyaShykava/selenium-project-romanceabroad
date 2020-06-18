@@ -29,6 +29,7 @@ public class BaseUI {
     protected SearchPage searchPage;
     protected TourToUkrainePage tourToUkrainePage;
     protected LoginPage loginPage;
+    protected ProfilePage profilePage;
 
     @BeforeMethod
     @Parameters("browser")
@@ -62,6 +63,7 @@ public class BaseUI {
         searchPage = new SearchPage(driver, wait);
         tourToUkrainePage = new TourToUkrainePage(driver, wait);
         loginPage = new LoginPage(driver, wait);
+        profilePage = new ProfilePage(driver, wait);
         driver.manage().window().maximize();
         driver.get(mainURl);
     }

@@ -6,10 +6,13 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Random;
+
 public class BaseActions {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Actions action;
+    protected Random random = new Random();
 
     public BaseActions(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
