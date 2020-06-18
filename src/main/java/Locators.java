@@ -59,6 +59,11 @@ public class Locators {
     public static final By SEARCH_PAGE_MAX_AGE_OPTIONS = By.xpath("//select[@name='age_max']/option");
     public static final By SEARCH_PAGE_PEOPLE_FOUND_TITLE = By.xpath("//div[@class='st-info']/div");
     public static final By SEARCH_PAGE_LOADING_SPINNER = By.xpath("//div[@id='autogen_loading_block']");
+    public static final By SEARCH_PAGE_PROFILE_LINKS = By.xpath("//a[@class='g-users-gallery__name']");
+
+    //elements on 'Profile' page
+    public static final By PROFILE_PAGE_USER_NAME = By.xpath("//div[contains(@class, 'user-all-description')]/h1");
+    public static final By PROFILE_PAGE_AGE = By.xpath("//span[contains(text(), 'years old')]");
 
     //elements with common locators on different pages
 
