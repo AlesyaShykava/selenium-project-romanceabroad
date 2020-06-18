@@ -1,15 +1,21 @@
+import com.google.common.io.Files;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Collections;
 
@@ -48,7 +54,7 @@ public class BaseUI {
         } else {
             System.setProperty("webdriver.chrome.driver", "chromedriver");
             driver = new ChromeDriver(getChromeOptions());
-            driver.get("chrome://settings/clearBrowserData");
+            //driver.get("chrome://settings/clearBrowserData");
         }
 
         wait = new WebDriverWait(driver, 40);
@@ -69,8 +75,19 @@ public class BaseUI {
     }
 
     @AfterMethod
-    public void afterActions() {
+    public void afterActions(ITestResult result) {
+        if(ITestResult.FAILURE == result.getStatus()) {recordFail(result);}
         driver.quit();
+    }
+
+    public void recordFail(ITestResult result) {
+        TakesScreenshot camera = (TakesScreenshot)driver;
+        File failScreenshot = camera.getScreenshotAs(OutputType.FILE);
+        try {
+            Files.move(failScreenshot, new File("screenshots/" + result.getName() + ".png"));
+        } catch (IOException e) {
+            System.out.println("Screenshot was not saved");
+        }
     }
 
     private ChromeOptions getChromeOptions() {
