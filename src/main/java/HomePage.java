@@ -28,8 +28,8 @@ public class HomePage extends BaseActions{
     }
 
     public void playYouTubeVideo() {
+        scrollToElementUsingJS(Locators.FRAME_WITH_YOUTUBE_VIDEO);
         WebElement frame = driver.findElement(Locators.FRAME_WITH_YOUTUBE_VIDEO);
-        action.moveToElement(frame).perform();
         driver.switchTo().frame(frame);
         driver.findElement(Locators.YOUTUBE_VIDEO_PLAY_BUTTON);
     }
