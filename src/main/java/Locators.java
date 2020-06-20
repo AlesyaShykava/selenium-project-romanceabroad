@@ -53,7 +53,7 @@ public class Locators {
     public static final By SEARCH_PAGE_SEARCH_PARAMETERS_SEARCH_BUTTON = By.xpath("//input[@id='main_search_button_user_advanced']");
     public static final By SEARCH_PAGE_ORDER_DROPDOWN = By.cssSelector("select[id*='sorter-select']");
     public static final By SEARCH_PAGE_USER_FROM_SEARCH = By.xpath("//a[@href='https://romanceabroad.com/users/view/330/profile'][@class='g-users-gallery__name']");
-    public static final By SEARCH_PAGE_SEARCH_RESULT_WOMAN_SUMMARY = By.xpath("//div[@class='text-overflow'][a]");
+    public static final By SEARCH_PAGE_SEARCH_RESULT_WOMEN_SUMMARY = By.xpath("//div[@class='text-overflow'][a]");
     public static final By SEARCH_PAGE_PAGINATION_NEXT_BUTTON = By.xpath("//li[@class='next']/a[@data-page]");
     public static final By SEARCH_PAGE_MIN_AGE_OPTIONS = By.xpath("//select[@name='age_min']/option");
     public static final By SEARCH_PAGE_MAX_AGE_OPTIONS = By.xpath("//select[@name='age_max']/option");

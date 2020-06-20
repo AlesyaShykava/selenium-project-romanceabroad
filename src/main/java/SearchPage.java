@@ -27,8 +27,8 @@ public class SearchPage extends BaseActions {
         selectFromDropDownListByValue(driver.findElement(Locators.SEARCH_PAGE_ORDER_DROPDOWN), orderValueDataCreated);
     }
 
-    public boolean isUserPresentInSearchResult(By searchPageUserFromSearch) {
-        return driver.findElement(searchPageUserFromSearch).isDisplayed();
+    public boolean isUserPresentInSearchResult(By locator) {
+        return driver.findElement(locator).isDisplayed();
     }
 
     public boolean pagination_isNextButtonPresent() {
@@ -39,10 +39,10 @@ public class SearchPage extends BaseActions {
         driver.findElement(Locators.SEARCH_PAGE_PAGINATION_NEXT_BUTTON).click();
     }
 
-    public List<String> getSearchResultListOfWomenSummary() {
+    public List<String> getListOfWomenSummaryAll() {
         List<String> result = new ArrayList<>();
         while(true) {
-            List<WebElement> listWomanSummaryPageResult = driver.findElements(Locators.SEARCH_PAGE_SEARCH_RESULT_WOMAN_SUMMARY);
+            List<WebElement> listWomanSummaryPageResult = driver.findElements(Locators.SEARCH_PAGE_SEARCH_RESULT_WOMEN_SUMMARY);
             for(int i = 0; i < listWomanSummaryPageResult.size(); i++) {
                 result.add(listWomanSummaryPageResult.get(i).getText());
             }
@@ -51,6 +51,15 @@ public class SearchPage extends BaseActions {
                 wait.until(ExpectedConditions.invisibilityOfElementLocated(Locators.SEARCH_PAGE_LOADING_SPINNER));
             }
             else break;
+        }
+        return result;
+    }
+
+    public List<String> getListOfWomenSummaryFirstPage() {
+        List<String> result = new ArrayList<>();
+        List<WebElement> listWomanSummaryPageResult = driver.findElements(Locators.SEARCH_PAGE_SEARCH_RESULT_WOMEN_SUMMARY);
+        for(int i = 0; i < listWomanSummaryPageResult.size(); i++) {
+            result.add(listWomanSummaryPageResult.get(i).getText());
         }
         return result;
     }
@@ -68,12 +77,14 @@ public class SearchPage extends BaseActions {
         return driver.findElement(Locators.SEARCH_PAGE_PEOPLE_FOUND_TITLE).getText();
     }
 
-    public String clickOnRandomProfileLinkFromSearchResult() {
+    public void clickOnProfileLinkByIndex(int index) {
         List<WebElement> linksToProfilePage = driver.findElements(Locators.SEARCH_PAGE_PROFILE_LINKS);
-        int randomIndexOfLinkToClick = random.nextInt(linksToProfilePage.size());
-        WebElement randomProfileLinkForCheck = linksToProfilePage.get(randomIndexOfLinkToClick);
-        String userName = randomProfileLinkForCheck.getText();
+        WebElement randomProfileLinkForCheck = linksToProfilePage.get(index);
         randomProfileLinkForCheck.click();
-        return userName;
+        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.PROFILE_PAGE_USER_NAME));
+    }
+
+    public String getWomanSummaryByIndex(int index) {
+        return driver.findElements(Locators.SEARCH_PAGE_SEARCH_RESULT_WOMEN_SUMMARY).get(index).getText();
     }
 }
