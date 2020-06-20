@@ -1,11 +1,11 @@
 import com.google.common.io.Files;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
+import utils.EventReporter;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,7 @@ import java.util.Collections;
 
 public class BaseUI {
     protected String mainURl = "https://romanceabroad.com/";
-    protected WebDriver driver;
+    protected EventFiringWebDriver driver;
     protected WebDriverWait wait;
     protected SoftAssert softAssert = new SoftAssert();
     protected HomePage homePage;
@@ -42,18 +43,22 @@ public class BaseUI {
     public void setup(@Optional("chrome") String browser, Method method){
         if (browser.equalsIgnoreCase("firefox")) {
             System.setProperty("webdriver.gecko.driver", "geckodriver");
-            driver = new FirefoxDriver();
+            driver = new EventFiringWebDriver(new FirefoxDriver());
+            driver.register(new EventReporter());
         } else if (browser.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.chrome.driver", "chromedriver");
-            driver = new ChromeDriver(getChromeOptions());
+            driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
+            driver.register(new EventReporter());
             //driver.get("chrome://settings/clearBrowserData");
         } else if (browser.equalsIgnoreCase("IE")) {
             System.setProperty("webdriver.ie.driver", "IEDriverServer");
-            driver = new InternetExplorerDriver();
+            driver = new EventFiringWebDriver(new InternetExplorerDriver());
+            driver.register(new EventReporter());
             driver.manage().deleteAllCookies();
         } else {
             System.setProperty("webdriver.chrome.driver", "chromedriver");
-            driver = new ChromeDriver(getChromeOptions());
+            driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
+            driver.register(new EventReporter());
             //driver.get("chrome://settings/clearBrowserData");
         }
 
