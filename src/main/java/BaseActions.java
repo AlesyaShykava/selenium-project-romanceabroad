@@ -13,7 +13,6 @@ public class BaseActions {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Actions action;
-    protected Random random = new Random();
 
     public BaseActions(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;

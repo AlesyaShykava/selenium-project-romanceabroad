@@ -1,3 +1,5 @@
+import org.testng.annotations.DataProvider;
+
 public class Data {
 
     //'Search' page
@@ -55,4 +57,13 @@ public class Data {
     public static final String correctPassword = "123456";
     public static final String correctNickName = "nick";
     public static final String correctPhone = "123456789";
+
+    @DataProvider(name = "minMaxAgeDataSet")
+    public static Object[][] getMinMaxAgeDataSet() {
+        Object[][] data = new Integer[3][2];
+        data[0][0] = 20;    data[0][1] = 30;
+        data[1][0] = 30;    data[1][1] = 40;
+        data[2][0] = 40;    data[2][1] = 50;
+        return data;
+    }
 }

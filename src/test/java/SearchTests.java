@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 public class SearchTests extends BaseUI {
     private String currentUrl;
@@ -32,17 +31,17 @@ public class SearchTests extends BaseUI {
         Assert.assertTrue(expectedUserFromSearchDisplayed);
     }
 
-    @Test
-    public void checkAgeInSearchResultCorrespondGivenParameters() {
+    @Test(dataProviderClass = Data.class, dataProvider = "minMaxAgeDataSet")
+    public void checkAgeInSearchResultCorrespondGivenParameters(Integer minAge, Integer maxAge) {
         homePage.clickOnSearchLink();
-        searchPage.performSearchBasedOnMinAndMaxAgeParameters(Data.minAgeForSearch, Data.maxAgeForSearch);
-        List<String> listWomanSummary = searchPage.getSearchResultListOfWomenSummary();
+        searchPage.performSearchBasedOnMinAndMaxAgeParameters(minAge, maxAge);
+        List<String> listWomanSummary = searchPage.getListOfWomenSummaryAll();
         if(listWomanSummary.size() > 0) {
             for (int i = 0; i < listWomanSummary.size(); i++) {
                 String womanSummary = listWomanSummary.get(i);
                 int ageOfWoman = Integer.parseInt(womanSummary.substring(womanSummary.length() - 2));
-                boolean isAgeCorrespondGivenParameters = ageOfWoman >= Data.minAgeForSearch && ageOfWoman <= Data.maxAgeForSearch;
-                softAssert.assertTrue(isAgeCorrespondGivenParameters);
+                boolean isAgeCorrespondGivenParameters = ageOfWoman >= minAge && ageOfWoman <= maxAge;
+                softAssert.assertTrue(isAgeCorrespondGivenParameters, String.format("Expected between: %d - %d, actual: %d", minAge, maxAge, ageOfWoman));
             }
         } else {
             System.out.println("Search result is empty, please select another data for test");
@@ -50,11 +49,11 @@ public class SearchTests extends BaseUI {
         softAssert.assertAll();
     }
 
-    @Test
-    public void checkPeopleFoundNumberOnTheTitleOfResultPage() {
+    @Test(dataProviderClass = Data.class, dataProvider = "minMaxAgeDataSet")
+    public void checkPeopleFoundNumberOnTheTitleOfResultPage(Integer minAge, Integer maxAge) {
         homePage.clickOnSearchLink();
-        searchPage.performSearchBasedOnMinAndMaxAgeParameters(Data.minAgeForSearch, Data.maxAgeForSearch);
-        List<String> listWomanSummary = searchPage.getSearchResultListOfWomenSummary();
+        searchPage.performSearchBasedOnMinAndMaxAgeParameters(minAge, maxAge);
+        List<String> listWomanSummary = searchPage.getListOfWomenSummaryAll();
         String peopleFoundTitle = searchPage.getPeopleFoundTitle();
         if(!peopleFoundTitle.contains(Integer.toString(listWomanSummary.size()))) {
             Assert.fail("The incorrect number of founded people is displayed on the title");
@@ -68,8 +67,8 @@ public class SearchTests extends BaseUI {
         int sizeOfListWithMinAgeValues = minAgeValues.size();
         boolean isNumberOfValuesEqualsToExpected = (sizeOfListWithMinAgeValues == Data.searchParametersMaxAgeExpected - Data.searchParametersMinAgeExpected + 1);
         Assert.assertTrue(isNumberOfValuesEqualsToExpected, "Number of options in min_age dropdown does not correspond to expected");
-        softAssert.assertTrue(minAgeValues.get(0) == Data.searchParametersMinAgeExpected, String.format("Min age value is not equals to expected %s", Data.searchParametersMinAgeExpected));
-        softAssert.assertTrue(minAgeValues.get(sizeOfListWithMinAgeValues - 1) == Data.searchParametersMaxAgeExpected, String.format("Max age value is not equals to expected %s", Data.searchParametersMaxAgeExpected));
+        softAssert.assertTrue(minAgeValues.get(0) == Data.searchParametersMinAgeExpected);
+        softAssert.assertTrue(minAgeValues.get(sizeOfListWithMinAgeValues - 1) == Data.searchParametersMaxAgeExpected);
         for(int i = 0; i < sizeOfListWithMinAgeValues; i++) {
             softAssert.assertTrue(minAgeValues.get(i) == Data.searchParametersMinAgeExpected + i);
         }
@@ -82,23 +81,24 @@ public class SearchTests extends BaseUI {
         List<Integer> minAgeValues = searchPage.getMinAgeDropDownValues();
         boolean isSearchResultEmpty = true;
         while (isSearchResultEmpty) {
-            int randomMinAgeValue = minAgeValues.get(random.nextInt(minAgeValues.size()));
-            searchPage.performSearchBasedOnMinAndMaxAgeParameters(randomMinAgeValue, Data.searchParametersMaxAgeExpected);
-            isSearchResultEmpty = searchPage.getSearchResultListOfWomenSummary().isEmpty();
+            int randomMinAge = minAgeValues.get(random.nextInt(minAgeValues.size()));
+            searchPage.performSearchBasedOnMinAndMaxAgeParameters(randomMinAge, Data.searchParametersMaxAgeExpected);
+            isSearchResultEmpty = searchPage.getListOfWomenSummaryFirstPage().isEmpty();
             if(isSearchResultEmpty) continue;
 
-            List<String> listWomanSummary = searchPage.getSearchResultListOfWomenSummary();
-            String selectedRandomProfileUserName = searchPage.clickOnRandomProfileLinkFromSearchResult();
+            int randomIndex = random.nextInt(searchPage.getListOfWomenSummaryFirstPage().size());
 
-            for (String womanSummary : listWomanSummary) {
-                String womanUserName = womanSummary.substring(0, womanSummary.indexOf(", "));
-                if (selectedRandomProfileUserName.equals(womanUserName)) {
-                    int ageToCheck = Integer.parseInt(womanSummary.substring(womanSummary.length() - 2));
-                    Assert.assertEquals(selectedRandomProfileUserName, profilePage.getUserName());
-                    Assert.assertEquals(ageToCheck, profilePage.getAge());
-                    break;
-                }
-            }
+            String womanSummary = searchPage.getWomanSummaryByIndex(randomIndex);
+            String userNameSearchPage = womanSummary.substring(0, womanSummary.indexOf(", "));
+            int ageSearchPage = Integer.parseInt(womanSummary.substring(womanSummary.length() - 2));
+
+            searchPage.clickOnProfileLinkByIndex(randomIndex);
+            String userNameProfilePage = profilePage.getUserName();
+            int ageProfilePage = profilePage.getAge();
+
+            Assert.assertEquals(userNameSearchPage, userNameProfilePage, String.format("Expected name: %s, actual name: ", userNameSearchPage, ageProfilePage));
+            Assert.assertEquals(ageSearchPage, ageProfilePage, String.format("Expected age: %d, actual age: %d", ageSearchPage, ageProfilePage));
+            break;
         }
     }
 
