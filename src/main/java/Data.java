@@ -5,17 +5,39 @@ public class Data {
     //'Search' page
     public static final String searchPageTitleExpected = "Meet single Ukrainian women online: dating and marriage at Marry Ukrainian Lady";
     public static final String expectedUrlSearchPage = "https://romanceabroad.com/users/search";
+    public static final String orderValueDefault = "default";
+    public static final String orderValueName = "name";
+    public static final String orderValueViewsCount = "views_count";
+    public static final String orderValueDataCreated = "date_created";
+
+    //test data for search page
     public static final int minAgeForSearch = 20;
     public static final int maxAgeForSearch = 30;
-    public static final String orderValueDataCreated = "date_created";
     public static final int searchParametersMinAgeExpected = 18;
     public static final int searchParametersMaxAgeExpected = 80;
+
+    @DataProvider(name = "minMaxAgeDataSet")
+    public static Object[][] getMinMaxAgeDataSet() {
+        Object[][] data = new Integer[3][2];
+        data[0][0] = 20;    data[0][1] = 30;
+        data[1][0] = 30;    data[1][1] = 40;
+        data[2][0] = 40;    data[2][1] = 50;
+        return data;
+    }
+
+    @DataProvider(name = "minMaxAgeOrderWomanSummaryDataSet")
+    public static Object[][] getMinMaxAgeOrderWomanSummaryDataSet() {
+        Object[][] data = new Object[3][4];
+        data[0][0] = 20;    data[0][1] = 30;    data[0][2] = orderValueName;            data[0][3] = "Tanya, 25";
+        data[1][0] = 30;    data[1][1] = 40;    data[1][2] = orderValueViewsCount;      data[1][3] = "Solomia Wyshnevetska, 31";
+        data[2][0] = 40;    data[2][1] = 50;    data[2][2] = orderValueDataCreated;     data[2][3] = "Sveta, 45";
+        return data;
+    }
 
     //'Home' page
     public static final String homePageTitleExpected = "The Best Free Ukrainian Dating Site| Romanceabroad.Com";
     public static final String expectedUrlHomePage = "https://romanceabroad.com/#";
     public static final int expectedNumberOfLinksInNavbar = 8;
-    public static final int indexSignInLink = 0;
 
     //'How It Works' page
     public static final String howItWorksPageTitleExpected = "Real Ukrainian women for marriage: legitimate dating site Marry Ukrainian Lady";
@@ -40,16 +62,12 @@ public class Data {
     //'Restore Password' page
     public static final String expectedUrlRestorePage = "https://romanceabroad.com/users/restore";
 
-    //'Login' pages
+    //'Login' page
     public static final String expectedUrlLoginPage = "https://romanceabroad.com/users/login_form";
 
     //'Registration' form
     public static final String registrationFormEmailIncorrectAlertMessageExpected = "Email is incorrect, please try again";
     public static final String registrationFormPasswordIncorrectAlertMessageExpected = "Please choose a password that is at least 6 characters long";
-
-
-    //error messages for test
-    public static final String incorrectTitleTestMessageFormat = "Incorrect title of '%s' Page";
 
     //test data for registration flow
     public static final String incorrectTestData = "abc";
@@ -58,12 +76,9 @@ public class Data {
     public static final String correctNickName = "nick";
     public static final String correctPhone = "123456789";
 
-    @DataProvider(name = "minMaxAgeDataSet")
-    public static Object[][] getMinMaxAgeDataSet() {
-        Object[][] data = new Integer[3][2];
-        data[0][0] = 20;    data[0][1] = 30;
-        data[1][0] = 30;    data[1][1] = 40;
-        data[2][0] = 40;    data[2][1] = 50;
-        return data;
-    }
+    //'Sign In' form
+    public static final String signInFormTitleExpected = "The Best Free Ukrainian Dating Site| Romanceabroad.Com";
+
+    //error messages for test
+    public static final String incorrectTitleTestMessageFormat = "Incorrect title of '%s' Page";
 }

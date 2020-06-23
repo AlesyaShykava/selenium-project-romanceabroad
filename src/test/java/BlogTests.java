@@ -5,7 +5,7 @@ public class BlogTests extends BaseUI {
 
     @Test
     public void testBlogPage() {
-        homePage.clickOnLink(Locators.BLOG_LINK);
+        homePage.clickOnLink(HomePage.LinksOnHomePage.BLOG);
         currentUrl = blogPage.getCurrentUrl();
         softAssert.assertTrue(Data.blogPageTitleExpected.equals(blogPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Blog"));
         softAssert.assertEquals(currentUrl, Data.expectedUrlBlogPage);

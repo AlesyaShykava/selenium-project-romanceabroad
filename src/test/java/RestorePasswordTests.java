@@ -5,7 +5,7 @@ public class RestorePasswordTests extends BaseUI {
 
     @Test
     public void restorePasswordIncorrectEmail() {
-        homePage.clickOnSignInLink();
+        homePage.clickOnLink(HomePage.LinksOnHomePage.SIGN_IN);
         signInModal.clickOnForgotPasswordLink();
         currentUrl = restorePasswordPage.getCurrentUrl();
         softAssert.assertEquals(currentUrl, Data.expectedUrlRestorePage);

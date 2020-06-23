@@ -5,7 +5,7 @@ public class HowWeWorkTests extends BaseUI {
 
     @Test
     public void testHowWeWorkPage() {
-        homePage.clickOnLink(Locators.HOW_IT_WORKS_LINK);
+        homePage.clickOnLink(HomePage.LinksOnHomePage.HOW_IT_WORKS);
         currentUrl = howWeWorkPage.getCurrentUrl();
         softAssert.assertEquals(currentUrl, Data.expectedUrlHowItWorksPage);
         softAssert.assertTrue(Data.howItWorksPageTitleExpected.equals(howWeWorkPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "How We Work"));

@@ -25,6 +25,7 @@ public class SearchPage extends BaseActions {
 
     public void setUpOrder(String orderValueDataCreated) {
         selectFromDropDownListByValue(driver.findElement(Locators.SEARCH_PAGE_ORDER_DROPDOWN), orderValueDataCreated);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(Locators.SEARCH_PAGE_LOADING_SPINNER));
     }
 
     public boolean isUserPresentInSearchResult(By locator) {
@@ -79,8 +80,8 @@ public class SearchPage extends BaseActions {
 
     public void clickOnProfileLinkByIndex(int index) {
         List<WebElement> linksToProfilePage = driver.findElements(Locators.SEARCH_PAGE_PROFILE_LINKS);
-        WebElement randomProfileLinkForCheck = linksToProfilePage.get(index);
-        randomProfileLinkForCheck.click();
+        WebElement profileLink = linksToProfilePage.get(index);
+        profileLink.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.PROFILE_PAGE_USER_NAME));
     }
 

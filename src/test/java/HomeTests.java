@@ -12,7 +12,7 @@ public class HomeTests extends BaseUI {
 
     @Test
     public void testHomePage() {
-        homePage.clickOnLink(Locators.HOME_LINK);
+        homePage.clickOnLink(HomePage.LinksOnHomePage.HOME);
         currentUrl = homePage.getCurrentUrl();
         softAssert.assertEquals(currentUrl, Data.expectedUrlHomePage);
         softAssert.assertTrue(Data.homePageTitleExpected.equals(homePage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Home"));
