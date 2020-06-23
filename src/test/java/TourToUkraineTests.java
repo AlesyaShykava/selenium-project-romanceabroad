@@ -5,7 +5,7 @@ public class TourToUkraineTests extends BaseUI {
 
     @Test
     public void testTourToUkrainePage() {
-        homePage.clickOnLink(Locators.TOUR_TO_UKRAINE_LINK);
+        homePage.clickOnLink(HomePage.LinksOnHomePage.TOUR_TO_UKRAINE);
         currentUrl = tourToUkrainePage.getCurrentUrl();
         softAssert.assertTrue(Data.tourToUkrainePageTitleExpected.equals(tourToUkrainePage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Tour To Ukraine"));
         softAssert.assertEquals(currentUrl, Data.expectedUrlTourToUkrainePage);

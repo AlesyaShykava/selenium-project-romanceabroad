@@ -4,15 +4,15 @@ public class Locators {
 
     //navbar elements on the 'Home' page
     public static final By NAVBAR = By.xpath("//ul[@class='navbar-nav']/li");
-    public static final By SEARCH_LINK = By.xpath("//a[@href='https://romanceabroad.com/users/search']");
-    public static final By HOME_LINK = By.xpath("//a[@href='#']");
-    public static final By HOW_IT_WORKS_LINK = By.xpath("//a[@href='https://romanceabroad.com/content/view/how-it-works']");
-    public static final By MEDIA_LINK = By.xpath("//a[@href='https://romanceabroad.com/media/index']");
-    public static final By GIFTS_LINK = By.xpath("//a[@href='https://romanceabroad.com/store/category-sweets']");
-    public static final By TOUR_TO_UKRAINE_LINK = By.xpath("//a[@href='https://romanceabroad.com/store/sweets/20-tour_to_ukraine']");
-    public static final By BLOG_LINK = By.xpath("//a[@href='https://romanceabroad.com/content/view/blog']");
-    public static final By SIGN_IN_LINK = By.xpath("//a[@href='https://romanceabroad.com/users/login_form']");
-    public static final By JOIN_FOR_FREE_NOW_LINK = By.cssSelector("#show-registration-block");
+    public static final By NAVBAR_SEARCH_LINK = By.xpath("//a[@href='https://romanceabroad.com/users/search']");
+    public static final By NAVBAR_HOME_LINK = By.xpath("//a[@href='#']");
+    public static final By NAVBAR_HOW_IT_WORKS_LINK = By.xpath("//a[@href='https://romanceabroad.com/content/view/how-it-works']");
+    public static final By NAVBAR_MEDIA_LINK = By.xpath("//a[@href='https://romanceabroad.com/media/index']");
+    public static final By NAVBAR_GIFTS_LINK = By.xpath("//a[@href='https://romanceabroad.com/store/category-sweets']");
+    public static final By NAVBAR_TOUR_TO_UKRAINE_LINK = By.xpath("//a[@href='https://romanceabroad.com/store/sweets/20-tour_to_ukraine']");
+    public static final By NAVBAR_BLOG_LINK = By.xpath("//a[@href='https://romanceabroad.com/content/view/blog']");
+    public static final By NAVBAR_SIGN_IN_LINK = By.xpath("//a[@href='https://romanceabroad.com/users/login_form'][1]");
+    public static final By NAVBAR_JOIN_FOR_FREE_NOW_LINK = By.cssSelector("#show-registration-block");
 
     //other element on the 'Home' page
     public static final By FRAME_WITH_YOUTUBE_VIDEO = By.xpath("//iframe[@src='https://www.youtube.com/embed/RRECuJzm3IY?start=85']");
@@ -46,13 +46,15 @@ public class Locators {
     public static final By REGISTRATION_FORM_YEAR_SELECTION_CARET = By.xpath("//div[@id='yearSelect']//span[@class='caret']");
     public static final By REGISTRATION_FORM_YEAR_1990 = By.xpath("//li[@data-handler='selectYear'][@data-value='1990']/a");
     public static final By REGISTRATION_FORM_TERMS_AND_CONDITIONS_CHECKBOX = By.xpath("//input[@id='confirmation']");
+    public static final String REGISTRATION_FORM_STRING_FORMAT_DAY = "//a[@data-action='change-datepicker'][@data-value='%d']";
+    public static final String REGISTRATION_FORM_STRING_FORMAT_MONTH = "//li[@data-handler='selectMonth'][@data-value='%d']/a";
+    public static final String REGISTRATION_FORM_STRING_FORMAT_YEAR = "//li[@data-handler='selectYear'][@data-value='%d']/a";
 
     //elements on 'Search' page
     public static final By SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN = By.xpath("//select[@id='age_min']");
     public static final By SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN = By.xpath("//select[@id='age_max']");
     public static final By SEARCH_PAGE_SEARCH_PARAMETERS_SEARCH_BUTTON = By.xpath("//input[@id='main_search_button_user_advanced']");
     public static final By SEARCH_PAGE_ORDER_DROPDOWN = By.cssSelector("select[id*='sorter-select']");
-    public static final By SEARCH_PAGE_USER_FROM_SEARCH = By.xpath("//a[@href='https://romanceabroad.com/users/view/330/profile'][@class='g-users-gallery__name']");
     public static final By SEARCH_PAGE_SEARCH_RESULT_WOMEN_SUMMARY = By.xpath("//div[@class='text-overflow'][a]");
     public static final By SEARCH_PAGE_PAGINATION_NEXT_BUTTON = By.xpath("//li[@class='next']/a[@data-page]");
     public static final By SEARCH_PAGE_MIN_AGE_OPTIONS = By.xpath("//select[@name='age_min']/option");

@@ -15,25 +15,25 @@ public class SearchTests extends BaseUI {
 
     @Test
     public void testSearchPage() {
-        homePage.clickOnSearchLink();
+        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         currentUrl = searchPage.getCurrentUrl();
         softAssert.assertEquals(currentUrl, Data.expectedUrlSearchPage);
         softAssert.assertTrue(Data.searchPageTitleExpected.equals(searchPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Search"));
         softAssert.assertAll();
     }
 
-    @Test
-    public void testSearchAndOrder() {
-        homePage.clickOnSearchLink();
-        searchPage.performSearchBasedOnMinAndMaxAgeParameters(Data.minAgeForSearch, Data.maxAgeForSearch);
-        searchPage.setUpOrder(Data.orderValueDataCreated);
-        boolean expectedUserFromSearchDisplayed = searchPage.isUserPresentInSearchResult(Locators.SEARCH_PAGE_USER_FROM_SEARCH);
+    @Test(dataProviderClass = Data.class, dataProvider = "minMaxAgeOrderWomanSummaryDataSet")
+    public void testSearchAndOrder(Integer minAge, Integer maxAge, String order, String womanSummary) {
+        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
+        searchPage.performSearchBasedOnMinAndMaxAgeParameters(minAge, maxAge);
+        searchPage.setUpOrder(order);
+        boolean expectedUserFromSearchDisplayed = searchPage.getListOfWomenSummaryFirstPage().contains(womanSummary);
         Assert.assertTrue(expectedUserFromSearchDisplayed);
     }
 
     @Test(dataProviderClass = Data.class, dataProvider = "minMaxAgeDataSet")
     public void checkAgeInSearchResultCorrespondGivenParameters(Integer minAge, Integer maxAge) {
-        homePage.clickOnSearchLink();
+        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParameters(minAge, maxAge);
         List<String> listWomanSummary = searchPage.getListOfWomenSummaryAll();
         if(listWomanSummary.size() > 0) {
@@ -51,7 +51,7 @@ public class SearchTests extends BaseUI {
 
     @Test(dataProviderClass = Data.class, dataProvider = "minMaxAgeDataSet")
     public void checkPeopleFoundNumberOnTheTitleOfResultPage(Integer minAge, Integer maxAge) {
-        homePage.clickOnSearchLink();
+        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParameters(minAge, maxAge);
         List<String> listWomanSummary = searchPage.getListOfWomenSummaryAll();
         String peopleFoundTitle = searchPage.getPeopleFoundTitle();
@@ -62,7 +62,7 @@ public class SearchTests extends BaseUI {
 
     @Test
     public void checkSearchParametersMinAgeValues(){
-        homePage.clickOnSearchLink();
+        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         List<Integer> minAgeValues = searchPage.getMinAgeDropDownValues();
         int sizeOfListWithMinAgeValues = minAgeValues.size();
         boolean isNumberOfValuesEqualsToExpected = (sizeOfListWithMinAgeValues == Data.searchParametersMaxAgeExpected - Data.searchParametersMinAgeExpected + 1);
@@ -77,7 +77,7 @@ public class SearchTests extends BaseUI {
 
     @Test
     public void checkSummaryOnSearchPageCorrespondToInfoOnProfilePage(){
-        homePage.clickOnSearchLink();
+        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         List<Integer> minAgeValues = searchPage.getMinAgeDropDownValues();
         boolean isSearchResultEmpty = true;
         while (isSearchResultEmpty) {
@@ -104,7 +104,7 @@ public class SearchTests extends BaseUI {
 
     @Test
     public void getScreenshotSearchPage() {
-        homePage.clickOnSearchLink();
+        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         File tempFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(tempFile, new File("screenshots/searchPageScreenshot.png"));

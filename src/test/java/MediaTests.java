@@ -5,7 +5,7 @@ public class MediaTests extends BaseUI {
 
     @Test
     public void testMediaPage() {
-        homePage.clickOnLink(Locators.MEDIA_LINK);
+        homePage.clickOnLink(HomePage.LinksOnHomePage.MEDIA);
         currentUrl = mediaPage.getCurrentUrl();
         softAssert.assertTrue(Data.mediaPageTitleExpected.equals(mediaPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Media"));
         softAssert.assertEquals(currentUrl, Data.expectedUrlMediaPage);

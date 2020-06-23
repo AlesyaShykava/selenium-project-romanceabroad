@@ -27,13 +27,22 @@ public class RegistrationModal extends BaseActions {
         driver.findElement(Locators.REGISTRATION_FORM_PHONE_TEXT_FIELD).sendKeys(phone);
     }
 
-    public void selectDOB(By day, By month, By year) {
+    public void selectDOBDay(int day) {
         driver.findElement(Locators.REGISTRATION_FORM_DAY_SELECT_LINK).click();
-        moveMouseToElementAndClick(day);
+        By dayLocator = getLocatorBODDay(day);
+        moveMouseToElementAndClick(dayLocator);
+    }
+
+    public void selectDOBMonth(int month) {
         driver.findElement(Locators.REGISTRATION_FORM_MONTH_SELECTION_CARET).click();
-        moveMouseToElementAndClick(month);
+        By monthLocator = getLocatorBODMonth(month - 1);
+        moveMouseToElementAndClick(monthLocator);
+    }
+
+    public void selectDOBYear(int year) {
         driver.findElement(Locators.REGISTRATION_FORM_YEAR_SELECTION_CARET).click();
-        moveMouseToElementAndClick(year);
+        By yearLocator = getLocatorBODYear(year);
+        moveMouseToElementAndClick(yearLocator);
     }
 
     public void checkTermsAndConditionsCheckbox() {
@@ -56,7 +65,19 @@ public class RegistrationModal extends BaseActions {
         return getAlertMessage(Locators.REGISTRATION_FORM_INCORRECT_EMAIL_ALERT);
     }
 
-    private String getAlertMessage(By incorrectField) {
-        return driver.findElement(incorrectField).getText();
+    private String getAlertMessage(By field) {
+        return driver.findElement(field).getText();
+    }
+
+    private By getLocatorBODDay(int day) {
+        return By.xpath(String.format(Locators.REGISTRATION_FORM_STRING_FORMAT_DAY, day));
+    }
+
+    private By getLocatorBODMonth(int month) {
+        return By.xpath(String.format(Locators.REGISTRATION_FORM_STRING_FORMAT_MONTH, month));
+    }
+
+    private By getLocatorBODYear(int year) {
+        return By.xpath(String.format(Locators.REGISTRATION_FORM_STRING_FORMAT_YEAR, year));
     }
 }

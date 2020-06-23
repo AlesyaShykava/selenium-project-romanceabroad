@@ -7,8 +7,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Random;
-
 public class BaseActions {
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -20,11 +18,11 @@ public class BaseActions {
         action = new Actions(driver);
     }
 
-    public String getCurrentUrl() {
+    protected String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
 
-    public String getTitle() {
+    protected String getTitle() {
         return driver.getTitle();
     }
 
