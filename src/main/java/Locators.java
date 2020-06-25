@@ -26,6 +26,8 @@ public class Locators {
     public static final By SIGN_IN_PAGE_ALERT_POP_UP_DISPLAYED = By.xpath("//div[@id='autogen_error_block'][not(contains(@style, 'display: none'))]");
 
     //elements on the 'Restore' page
+    public static final By RESTORE_PAGE_HEADER = By.xpath("//div[@class='page-header']/h1");
+    public static final By RESTORE_PAGE_HEADER_COMMENT = By.xpath("//p[@class='header-comment']");
     public static final By RESTORE_PAGE_EMAIL_FIELD = By.cssSelector("#email");
     public static final By RESTORE_PAGE_SUBMIT_BUTTON = By.cssSelector("input[type='submit']");
     public static final By RESTORE_PAGE_ALERT_POP_UP_DISPLAYED = By.xpath("//div[@id='autogen_error_block'][not(contains(@style, 'display: none'))]");
@@ -59,6 +61,7 @@ public class Locators {
     public static final By SEARCH_PAGE_PAGINATION_NEXT_BUTTON = By.xpath("//li[@class='next']/a[@data-page]");
     public static final By SEARCH_PAGE_MIN_AGE_OPTIONS = By.xpath("//select[@name='age_min']/option");
     public static final By SEARCH_PAGE_MAX_AGE_OPTIONS = By.xpath("//select[@name='age_max']/option");
+    public static final By SEARCH_PAGE_ORDER_OPTIONS = By.xpath("//select[contains(@id,'sorter-select')]/option");
     public static final By SEARCH_PAGE_PEOPLE_FOUND_TITLE = By.xpath("//div[@class='st-info']/div");
     public static final By SEARCH_PAGE_LOADING_SPINNER = By.xpath("//div[@id='autogen_loading_block']");
     public static final By SEARCH_PAGE_PROFILE_LINKS = By.xpath("//a[@class='g-users-gallery__name']");
@@ -66,7 +69,21 @@ public class Locators {
     //elements on 'Profile' page
     public static final By PROFILE_PAGE_USER_NAME = By.xpath("//div[contains(@class, 'user-all-description')]/h1");
     public static final By PROFILE_PAGE_AGE = By.xpath("//span[contains(text(), 'years old')]");
+    public static final By PROFILE_PAGE_USER_PHOTO = By.xpath("//div/div/a[@id='user_photo']");
+    public static final By PROFILE_PAGE_SERVICES_MENU = By.xpath("//div/span/button[@id='services-menu']");
+    public static final By PROFILE_PAGE_LAST_REGISTERED_USERS_REFRESH = By.xpath("//div/span/i[@class='fa fa-refresh']");
+    public static final By PROFILE_PAGE_LAST_REGISTERED_USERS_TITLE = By.xpath("//div[@id='last_registered_users']//div/span");
 
     //elements with common locators on different pages
+    public static final String LINKS_CHECKS_STRING_FORMAT = "//%s[not(contains(@href,'javascript') or contains(@href,'mailto') or contains(@href,'callto'))]";
 
+    //main menu
+    public static final By MAIN_MENU_SLIDE_MENU = By.xpath("//div/a/i[contains(@class,'fa-bars')]");
+    public static final By MAIN_MENU_GIFT = By.xpath("//div/a/i[contains(@class,'fa-gift')]");
+    public static final By MAIN_MENU_TRIP_TO_UKRAINE = By.xpath("//a[@href='https://romanceabroad.com/store/sweets/5-vip_individual_tour_to_ukraine'][@data-item]");
+    public static final By MAIN_MENU_SEARCH = By.xpath("//div/form/button[@id='main_search_button_user_line']");
+    public static final By MAIN_MENU_LOGIN = By.xpath("//div/div/a[@id='ajax_login_link']");
+
+    //footer menu
+    public static final By FOOTER_MENU = By.className("footer-menu");
 }

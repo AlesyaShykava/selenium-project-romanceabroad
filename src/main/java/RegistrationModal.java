@@ -20,11 +20,11 @@ public class RegistrationModal extends BaseActions {
     }
 
     public void fillInNickNameWithCorrectRandomData() {
-        driver.findElement(Locators.REGISTRATION_FORM_NICKNAME_TEXT_FIELD).sendKeys(generateNewNumber(Data.correctNickName, 6));
+        driver.findElement(Locators.REGISTRATION_FORM_NICKNAME_TEXT_FIELD).sendKeys(generateRandomNumber(Data.correctNickName, 6));
     }
 
     public void fillInPhone(String phone) {
-        driver.findElement(Locators.REGISTRATION_FORM_PHONE_TEXT_FIELD).sendKeys(phone);
+        sendKeysJS(Locators.REGISTRATION_FORM_PHONE_TEXT_FIELD, phone);
     }
 
     public void selectDOBDay(int day) {
