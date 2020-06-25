@@ -78,13 +78,12 @@ public class SearchTests extends BaseUI {
     @Test
     public void checkSummaryOnSearchPageCorrespondToInfoOnProfilePage(){
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
-        List<Integer> minAgeValues = searchPage.getMinAgeDropDownValues();
-        boolean isSearchResultEmpty = true;
-        while (isSearchResultEmpty) {
-            int randomMinAge = minAgeValues.get(random.nextInt(minAgeValues.size()));
-            searchPage.performSearchBasedOnMinAndMaxAgeParameters(randomMinAge, Data.searchParametersMaxAgeExpected);
-            isSearchResultEmpty = searchPage.getListOfWomenSummaryFirstPage().isEmpty();
-            if(isSearchResultEmpty) continue;
+        boolean isSearchNeeded = true;
+        while (isSearchNeeded) {
+            searchPage.selectRandomOptionFromDropDown(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN, "minAge");
+            searchPage.clickOnSearchButton();
+            isSearchNeeded = searchPage.getListOfWomenSummaryFirstPage().isEmpty();
+            if(isSearchNeeded) continue;
 
             int randomIndex = random.nextInt(searchPage.getListOfWomenSummaryFirstPage().size());
 
@@ -99,6 +98,17 @@ public class SearchTests extends BaseUI {
             Assert.assertEquals(userNameSearchPage, userNameProfilePage, String.format("Expected name: %s, actual name: ", userNameSearchPage, ageProfilePage));
             Assert.assertEquals(ageSearchPage, ageProfilePage, String.format("Expected age: %d, actual age: %d", ageSearchPage, ageProfilePage));
             break;
+        }
+    }
+
+    @Test
+    public void checkAllOrderOptionCanBeSelected() {
+        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
+        int sizeOrderDropDown = searchPage.getSizeDropDownList(Locators.SEARCH_PAGE_ORDER_DROPDOWN);
+        for(int i = 0; i < sizeOrderDropDown; i++) {
+            searchPage.selectFromDropDownListByIndex(Locators.SEARCH_PAGE_ORDER_DROPDOWN, i);
+            boolean isOptionDisplayed = searchPage.isElementDisplayed(Locators.SEARCH_PAGE_ORDER_OPTIONS);
+            Assert.assertTrue(isOptionDisplayed);
         }
     }
 

@@ -1,6 +1,8 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Map;
+
 public class HomeTests extends BaseUI {
     private String currentUrl;
 
@@ -22,5 +24,25 @@ public class HomeTests extends BaseUI {
     @Test
     public void testYouTubeVideoLink() {
         homePage.playYouTubeVideo();
+    }
+
+    @Test
+    public void testLinksResponseCode() {
+        Map<String, Integer> linksWithCodeResponse = homePage.checkLinksOnWebPage("a", "href");
+        for(Map.Entry<String, Integer> pair : linksWithCodeResponse.entrySet()) {
+            boolean isResponseSuccess = Integer.valueOf(200).equals(pair.getValue());
+            softAssert.assertTrue(isResponseSuccess, String.format("For the ulr %s expected code was 200, but found %d", pair.getKey(), pair.getValue()));
+        }
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void testImgResponseCode() {
+        Map<String, Integer> linksWithCodeResponse = homePage.checkLinksOnWebPage("img", "src");
+        for(Map.Entry<String, Integer> pair : linksWithCodeResponse.entrySet()) {
+            boolean isResponseSuccess = Integer.valueOf(200).equals(pair.getValue());
+            softAssert.assertTrue(isResponseSuccess, String.format("For the ulr %s expected code was 200, but found %d", pair.getKey(), pair.getValue()));
+        }
+        softAssert.assertAll();
     }
 }

@@ -13,18 +13,28 @@ public class SearchPage extends BaseActions {
     }
 
     public void performSearchBasedOnMinAndMaxAgeParameters(int minAgeForSearch, int maxAgeForSearch) {
-        selectFromDropDownListByValue(driver.findElement(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN), Integer.toString(minAgeForSearch));
+        selectMinAge(minAgeForSearch);
+        selectMaxAge(maxAgeForSearch);
+        clickOnSearchButton();
+    }
+
+    public void selectMinAge(int minAgeForSearch) {
+        selectFromDropDownListByValue(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN, Integer.toString(minAgeForSearch));
         wait.until(ExpectedConditions.elementToBeClickable(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN));
-        selectFromDropDownListByValue(driver.findElement(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN), Integer.toString(maxAgeForSearch));
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) { }
+    }
+
+    public void selectMaxAge(int maxAgeForSearch) {
+        selectFromDropDownListByValue(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN, Integer.toString(maxAgeForSearch));
+        waitThreadSleepSec(1);
+    }
+
+    public void clickOnSearchButton() {
         driver.findElement(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_SEARCH_BUTTON).click();
         wait.until(ExpectedConditions.invisibilityOfElementLocated(Locators.SEARCH_PAGE_LOADING_SPINNER));
     }
 
     public void setUpOrder(String orderValueDataCreated) {
-        selectFromDropDownListByValue(driver.findElement(Locators.SEARCH_PAGE_ORDER_DROPDOWN), orderValueDataCreated);
+        selectFromDropDownListByValue(Locators.SEARCH_PAGE_ORDER_DROPDOWN, orderValueDataCreated);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(Locators.SEARCH_PAGE_LOADING_SPINNER));
     }
 

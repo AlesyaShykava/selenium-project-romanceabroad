@@ -12,7 +12,9 @@
     <test name="FirefoxTestCases">
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name ="RegistrationTests"/>
+            <class name ="HowWeWorkTests"/>
+            <class name ="MediaTests"/>
+            <class name ="TourToUkraineTests"/>
         </classes>
     </test>
 
