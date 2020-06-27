@@ -12,9 +12,17 @@ import java.util.Random;
 public class SearchTests extends BaseUI {
     private String currentUrl;
     Random random = new Random();
+    public static final boolean TC81 = true;
+    public static final boolean TC82 = true;
+    public static final boolean TC83 = true;
+    public static final boolean TC84 = true;
+    public static final boolean TC85 = true;
+    public static final boolean TC86 = true;
+    public static final boolean TC87 = true;
+    public static final boolean TC88 = true;
 
-    @Test
-    public void testSearchPage() {
+    @Test(groups = {"smoke", "regression"}, enabled = TC81)
+    public void testSearchPageTC81() {
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         currentUrl = searchPage.getCurrentUrl();
         softAssert.assertEquals(currentUrl, Data.expectedUrlSearchPage);
@@ -22,8 +30,8 @@ public class SearchTests extends BaseUI {
         softAssert.assertAll();
     }
 
-    @Test(dataProviderClass = Data.class, dataProvider = "minMaxAgeOrderWomanSummaryDataSet")
-    public void testSearchAndOrder(Integer minAge, Integer maxAge, String order, String womanSummary) {
+    @Test(groups = {"smoke", "regression"}, enabled = TC82, dataProviderClass = Data.class, dataProvider = "minMaxAgeOrderWomanSummaryDataSet")
+    public void testSearchAndOrderTC82(Integer minAge, Integer maxAge, String order, String womanSummary) {
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParameters(minAge, maxAge);
         searchPage.setUpOrder(order);
@@ -31,8 +39,8 @@ public class SearchTests extends BaseUI {
         Assert.assertTrue(expectedUserFromSearchDisplayed);
     }
 
-    @Test(dataProviderClass = Data.class, dataProvider = "minMaxAgeDataSet")
-    public void checkAgeInSearchResultCorrespondGivenParameters(Integer minAge, Integer maxAge) {
+    @Test(groups = {"regression"}, enabled = TC83, dataProviderClass = Data.class, dataProvider = "minMaxAgeDataSet")
+    public void checkAgeInSearchResultCorrespondGivenParametersTC83(Integer minAge, Integer maxAge) {
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParameters(minAge, maxAge);
         List<String> listWomanSummary = searchPage.getListOfWomenSummaryAll();
@@ -49,8 +57,8 @@ public class SearchTests extends BaseUI {
         softAssert.assertAll();
     }
 
-    @Test(dataProviderClass = Data.class, dataProvider = "minMaxAgeDataSet")
-    public void checkPeopleFoundNumberOnTheTitleOfResultPage(Integer minAge, Integer maxAge) {
+    @Test(groups = {"regression"}, enabled = TC84, dataProviderClass = Data.class, dataProvider = "minMaxAgeDataSet")
+    public void checkPeopleFoundNumberOnTheTitleOfResultPageTC84(Integer minAge, Integer maxAge) {
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParameters(minAge, maxAge);
         List<String> listWomanSummary = searchPage.getListOfWomenSummaryAll();
@@ -60,8 +68,8 @@ public class SearchTests extends BaseUI {
         }
     }
 
-    @Test
-    public void checkSearchParametersMinAgeValues(){
+    @Test(groups = {"regression"}, enabled = TC85)
+    public void checkSearchParametersMinAgeValuesTC85(){
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         List<Integer> minAgeValues = searchPage.getMinAgeDropDownValues();
         int sizeOfListWithMinAgeValues = minAgeValues.size();
@@ -75,8 +83,8 @@ public class SearchTests extends BaseUI {
         softAssert.assertAll();
     }
 
-    @Test
-    public void checkSummaryOnSearchPageCorrespondToInfoOnProfilePage(){
+    @Test(groups = {"regression"}, enabled = TC86)
+    public void checkSummaryOnSearchPageCorrespondToInfoOnProfilePageTC86(){
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         boolean isSearchNeeded = true;
         while (isSearchNeeded) {
@@ -101,8 +109,8 @@ public class SearchTests extends BaseUI {
         }
     }
 
-    @Test
-    public void checkAllOrderOptionCanBeSelected() {
+    @Test(groups = {"regression"},  enabled = TC87)
+    public void checkAllOrderOptionCanBeSelectedTC87() {
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         int sizeOrderDropDown = searchPage.getSizeDropDownList(Locators.SEARCH_PAGE_ORDER_DROPDOWN);
         for(int i = 0; i < sizeOrderDropDown; i++) {
@@ -112,8 +120,8 @@ public class SearchTests extends BaseUI {
         }
     }
 
-    @Test
-    public void getScreenshotSearchPage() {
+    @Test(groups = {"regression"},  enabled = TC88)
+    public void testScreenshotSearchPageTC88() {
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         File tempFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {

@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 public class RestorePasswordTests extends BaseUI {
     String currentUrl;
 
-    @Test
+    @Test(groups = {"regression", "integration"})
     public void restorePasswordIncorrectEmail() {
         homePage.clickOnLink(HomePage.LinksOnHomePage.SIGN_IN);
         signInModal.clickOnForgotPasswordLink();

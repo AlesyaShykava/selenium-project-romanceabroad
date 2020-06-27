@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 public class BlogTests extends BaseUI {
     private String currentUrl;
 
-    @Test
+    @Test(groups = {"bvt", "regression"})
     public void testBlogPage() {
         homePage.clickOnLink(HomePage.LinksOnHomePage.BLOG);
         currentUrl = blogPage.getCurrentUrl();

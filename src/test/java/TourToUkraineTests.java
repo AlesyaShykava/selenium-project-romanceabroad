@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 public class TourToUkraineTests extends BaseUI {
     private String currentUrl;
 
-    @Test
+    @Test(groups = {"smoke", "regression"})
     public void testTourToUkrainePage() {
         homePage.clickOnLink(HomePage.LinksOnHomePage.TOUR_TO_UKRAINE);
         currentUrl = tourToUkrainePage.getCurrentUrl();

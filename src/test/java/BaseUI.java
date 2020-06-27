@@ -38,7 +38,7 @@ public class BaseUI {
     protected LoginPage loginPage;
     protected ProfilePage profilePage;
 
-    @BeforeMethod
+    @BeforeMethod(groups = {"smoke", "regression", "integration"}, alwaysRun = true)
     @Parameters("browser")
     public void setup(@Optional("chrome") String browser, Method method){
         if (browser.equalsIgnoreCase("firefox")) {
@@ -79,7 +79,7 @@ public class BaseUI {
         driver.get(mainURl);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterActions(ITestResult result) {
         if(ITestResult.FAILURE == result.getStatus()) {recordFail(result);}
         driver.quit();
