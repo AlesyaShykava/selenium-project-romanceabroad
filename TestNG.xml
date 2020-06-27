@@ -20,6 +20,12 @@
 
     <test name="ChromeTestCases">
         <parameter name="browser" value="chrome"/>
+        <groups>
+            <run>
+                <include name="regression" />
+                <exclude name="integration" />
+            </run>
+        </groups>
         <classes>
             <class name ="BlogTests"/>
             <class name ="GiftsTests"/>
@@ -28,7 +34,12 @@
             <class name ="MediaTests"/>
             <class name ="RegistrationTests"/>
             <class name ="RestorePasswordPage"/>
-            <class name ="SearchTests"/>
+            <class name ="SearchTests">
+                <methods>
+                    <include name="test.*"/>
+                    <exclude name=".*Screenshot.*" />
+                </methods>
+            </class>
             <class name ="SignInTests"/>
             <class name ="TourToUkraineTests"/>
         </classes>

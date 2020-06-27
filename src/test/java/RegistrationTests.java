@@ -2,7 +2,7 @@ import org.testng.annotations.Test;
 
 public class RegistrationTests extends BaseUI {
 
-    @Test
+    @Test(groups = {"smoke", "regression", "integration"})
     public void registrationHappyPath() {
         homePage.clickOnLink(HomePage.LinksOnHomePage.JOIN_FOR_FREE_NOW);
         registrationModal.fillInEmail(Data.correctEmail);
@@ -18,7 +18,7 @@ public class RegistrationTests extends BaseUI {
         }
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void registrationWithWrongCredentials() {
         homePage.clickOnLink(HomePage.LinksOnHomePage.JOIN_FOR_FREE_NOW);
         registrationModal.fillInEmail(Data.incorrectTestData);

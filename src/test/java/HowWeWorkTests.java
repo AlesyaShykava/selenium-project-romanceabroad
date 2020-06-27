@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 public class HowWeWorkTests extends BaseUI {
     private String currentUrl;
 
-    @Test
+    @Test(groups = {"smoke", "regression"})
     public void testHowWeWorkPage() {
         homePage.clickOnLink(HomePage.LinksOnHomePage.HOW_IT_WORKS);
         currentUrl = howWeWorkPage.getCurrentUrl();

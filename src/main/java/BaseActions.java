@@ -125,7 +125,7 @@ public class BaseActions {
         try {
             URL url = new URL(urlValue);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setConnectTimeout(1000);
+            httpURLConnection.setConnectTimeout(3000);
             HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -> true);
             httpURLConnection.connect();
             responseCode = httpURLConnection.getResponseCode();

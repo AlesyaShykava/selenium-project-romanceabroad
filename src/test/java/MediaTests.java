@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 public class MediaTests extends BaseUI {
     private String currentUrl;
 
-    @Test
+    @Test(groups = {"smoke", "regression"})
     public void testMediaPage() {
         homePage.clickOnLink(HomePage.LinksOnHomePage.MEDIA);
         currentUrl = mediaPage.getCurrentUrl();

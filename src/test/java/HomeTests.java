@@ -6,13 +6,13 @@ import java.util.Map;
 public class HomeTests extends BaseUI {
     private String currentUrl;
 
-    @Test
+    @Test(priority = 1, groups = {"regression"})
     public void testNumberOfLinksOfNavbar() {
         int actualNumberOfLinksInNavbar = homePage.getNumberOfLinksInNavbar();
         Assert.assertEquals(actualNumberOfLinksInNavbar, Data.expectedNumberOfLinksInNavbar);
     }
 
-    @Test
+    @Test(groups = {"smoke", "regression"})
     public void testHomePage() {
         homePage.clickOnLink(HomePage.LinksOnHomePage.HOME);
         currentUrl = homePage.getCurrentUrl();
@@ -21,12 +21,12 @@ public class HomeTests extends BaseUI {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(priority = 3, groups = {"regression", "integration"})
     public void testYouTubeVideoLink() {
         homePage.playYouTubeVideo();
     }
 
-    @Test
+    @Test(priority = 3, groups = {"regression", "integration"})
     public void testLinksResponseCode() {
         Map<String, Integer> linksWithCodeResponse = homePage.checkLinksOnWebPage("a", "href");
         for(Map.Entry<String, Integer> pair : linksWithCodeResponse.entrySet()) {
@@ -36,7 +36,7 @@ public class HomeTests extends BaseUI {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(priority = 2, groups = {"regression"})
     public void testImgResponseCode() {
         Map<String, Integer> linksWithCodeResponse = homePage.checkLinksOnWebPage("img", "src");
         for(Map.Entry<String, Integer> pair : linksWithCodeResponse.entrySet()) {
