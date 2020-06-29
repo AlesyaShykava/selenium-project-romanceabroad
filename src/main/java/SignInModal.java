@@ -8,18 +8,18 @@ public class SignInModal extends BaseActions {
     }
 
     public void clickOnForgotPasswordLink() {
-        driver.findElement(Locators.SIGN_IN_PAGE_FORGOT_PASSWORD_LINK).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.RESTORE_PAGE_EMAIL_FIELD));
+        driver.findElement(Locators.SIGN_IN_FORGOT_PASSWORD_LINK).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.RESTORE_PASSWORD_EMAIL_FIELD));
     }
 
     public void fillInEmailField(String email) {
-        driver.findElement(Locators.SIGN_IN_PAGE_EMAIL_FIELD).sendKeys(email);
+        driver.findElement(Locators.SIGN_IN_EMAIL_FIELD).sendKeys(email);
     }
     public void fillInPasswordField(String password) {
-        driver.findElement(Locators.SIGN_IN_PAGE_PASSWORD_FIELD).sendKeys(password);
+        driver.findElement(Locators.SIGN_IN_PASSWORD_FIELD).sendKeys(password);
     }
 
     public void clickOnSubmitButton() {
-        driver.findElement(Locators.SIGN_IN_PAGE_SUBMIT_BUTTON).click();
+        driver.findElement(Locators.SIGN_IN_SUBMIT_BUTTON).click();
     }
 }

@@ -28,6 +28,7 @@
         </groups>
         <classes>
             <class name ="BlogTests"/>
+            <class name ="ContactUsTests"/>
             <class name ="GiftsTests"/>
             <class name ="HomeTests"/>
             <class name ="HowWeWorkTests"/>

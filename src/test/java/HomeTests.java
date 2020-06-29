@@ -6,7 +6,7 @@ import java.util.Map;
 public class HomeTests extends BaseUI {
     private String currentUrl;
 
-    @Test(priority = 1, groups = {"regression"})
+    @Test(groups = {"regression"})
     public void testNumberOfLinksOfNavbar() {
         int actualNumberOfLinksInNavbar = homePage.getNumberOfLinksInNavbar();
         Assert.assertEquals(actualNumberOfLinksInNavbar, Data.expectedNumberOfLinksInNavbar);

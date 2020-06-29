@@ -37,6 +37,7 @@ public class BaseUI {
     protected TourToUkrainePage tourToUkrainePage;
     protected LoginPage loginPage;
     protected ProfilePage profilePage;
+    protected ContactUsPage contactUsPage;
 
     @BeforeMethod(groups = {"smoke", "regression", "integration"}, alwaysRun = true)
     @Parameters("browser")
@@ -75,6 +76,7 @@ public class BaseUI {
         tourToUkrainePage = new TourToUkrainePage(driver, wait);
         loginPage = new LoginPage(driver, wait);
         profilePage = new ProfilePage(driver, wait);
+        contactUsPage = new ContactUsPage(driver, wait);
         driver.manage().window().maximize();
         driver.get(mainURl);
     }

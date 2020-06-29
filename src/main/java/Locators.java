@@ -19,38 +19,37 @@ public class Locators {
     public static final By YOUTUBE_VIDEO_PLAY_BUTTON = By.cssSelector(".ytp-large-play-button.ytp-button");
 
     //elements on the 'Sign In' page
-    public static final By SIGN_IN_PAGE_EMAIL_FIELD = By.cssSelector("input[id='email'][type='text']");
-    public static final By SIGN_IN_PAGE_PASSWORD_FIELD = By.cssSelector("input[id='password'][name='password']");
-    public static final By SIGN_IN_PAGE_SUBMIT_BUTTON = By.cssSelector("button[type='submit']");
-    public static final By SIGN_IN_PAGE_FORGOT_PASSWORD_LINK = By.xpath("//a[contains(text(), 'Forgot password')]");
-    public static final By SIGN_IN_PAGE_ALERT_POP_UP_DISPLAYED = By.xpath("//div[@id='autogen_error_block'][not(contains(@style, 'display: none'))]");
+    public static final By SIGN_IN_EMAIL_FIELD = By.cssSelector("input[id='email'][type='text']");
+    public static final By SIGN_IN_PASSWORD_FIELD = By.cssSelector("input[id='password'][name='password']");
+    public static final By SIGN_IN_SUBMIT_BUTTON = By.cssSelector("button[type='submit']");
+    public static final By SIGN_IN_FORGOT_PASSWORD_LINK = By.xpath("//a[contains(text(), 'Forgot password')]");
+    public static final By SIGN_IN_ALERT_POP_UP_DISPLAYED = By.xpath("//div[@id='autogen_error_block'][not(contains(@style, 'display: none'))]");
 
     //elements on the 'Restore' page
-    public static final By RESTORE_PAGE_HEADER = By.xpath("//div[@class='page-header']/h1");
-    public static final By RESTORE_PAGE_HEADER_COMMENT = By.xpath("//p[@class='header-comment']");
-    public static final By RESTORE_PAGE_EMAIL_FIELD = By.cssSelector("#email");
-    public static final By RESTORE_PAGE_SUBMIT_BUTTON = By.cssSelector("input[type='submit']");
-    public static final By RESTORE_PAGE_ALERT_POP_UP_DISPLAYED = By.xpath("//div[@id='autogen_error_block'][not(contains(@style, 'display: none'))]");
+    public static final By RESTORE_PASSWORD_HEADER = By.xpath("//div[@class='page-header']/h1");
+    public static final By RESTORE_PASSWORD_HEADER_COMMENT = By.xpath("//p[@class='header-comment']");
+    public static final By RESTORE_PASSWORD_EMAIL_FIELD = By.cssSelector("#email");
+    public static final By RRESTORE_PASSWORD_SUBMIT_BUTTON = By.cssSelector("input[type='submit']");
+    public static final By RESTORE_PASSWORD_ALERT_POP_UP_DISPLAYED = By.xpath("//div[@id='autogen_error_block'][not(contains(@style, 'display: none'))]");
 
-    //elements on the 'Registration' page
-    public static final By REGISTRATION_FORM_EMAIL_FIELD = By.xpath("//input[@id='email']");
-    public static final By REGISTRATION_FORM_PASSWORD_FIELD = By.xpath("//input[@id='password']");
-    public static final By REGISTRATION_FORM_PAGINATION = By.xpath("//div[@class='paginator']//i[@data-page='3']");
-    public static final By REGISTRATION_FORM_INCORRECT_EMAIL_ALERT = By.xpath("//input[@id='email']//following-sibling::div[@class='tooltip']");
-    public static final By REGISTRATION_FORM_INCORRECT_PASSWORD_ALERT = By.xpath("//input[@id='password']//following-sibling::div[@class='tooltip']");
-    public static final By REGISTRATION_FORM_NEXT_BUTTON = By.xpath("//button[@data-action='next-page'][text()='Next']");
-    public static final By REGISTRATION_FORM_NICKNAME_TEXT_FIELD = By.xpath("//input[@id='nickname']");
-    public static final By REGISTRATION_FORM_PHONE_TEXT_FIELD = By.xpath("//input[@name='data[phone]']");
-    public static final By REGISTRATION_FORM_DAY_SELECT_LINK = By.xpath("//div[@id='daySelect']/a");
-    public static final By REGISTRATION_FORM_DAY_14 = By.xpath("//a[@data-action='change-datepicker'][@data-value='14']");
-    public static final By REGISTRATION_FORM_MONTH_SELECTION_CARET = By.xpath("//div[@id='monthSelect']//span[@class='caret']");
-    public static final By REGISTRATION_FORM_MONTH_DECEMBER = By.xpath("//li[@data-handler='selectMonth'][@data-value='11']/a");
-    public static final By REGISTRATION_FORM_YEAR_SELECTION_CARET = By.xpath("//div[@id='yearSelect']//span[@class='caret']");
-    public static final By REGISTRATION_FORM_YEAR_1990 = By.xpath("//li[@data-handler='selectYear'][@data-value='1990']/a");
-    public static final By REGISTRATION_FORM_TERMS_AND_CONDITIONS_CHECKBOX = By.xpath("//input[@id='confirmation']");
-    public static final String REGISTRATION_FORM_STRING_FORMAT_DAY = "//a[@data-action='change-datepicker'][@data-value='%d']";
-    public static final String REGISTRATION_FORM_STRING_FORMAT_MONTH = "//li[@data-handler='selectMonth'][@data-value='%d']/a";
-    public static final String REGISTRATION_FORM_STRING_FORMAT_YEAR = "//li[@data-handler='selectYear'][@data-value='%d']/a";
+    //elements on the 'Registration' form
+    public static final By REGISTRATION_EMAIL_FIELD = By.xpath("//input[@id='email']");
+    public static final By REGISTRATION_PASSWORD_FIELD = By.xpath("//input[@id='password']");
+    public static final By REGISTRATION_PAGINATION = By.xpath("//div[@class='paginator']//i[@data-page='3']");
+    public static final By REGISTRATION_INCORRECT_EMAIL_ALERT = By.xpath("//input[@id='email']//following-sibling::div[@class='tooltip']");
+    public static final By REGISTRATION_INCORRECT_PASSWORD_ALERT = By.xpath("//input[@id='password']//following-sibling::div[@class='tooltip']");
+    public static final By REGISTRATION_NEXT_BUTTON = By.xpath("//button[@data-action='next-page'][text()='Next']");
+    public static final By REGISTRATION_NICKNAME_TEXT_FIELD = By.xpath("//input[@id='nickname']");
+    public static final By REGISTRATION_PHONE_TEXT_FIELD = By.xpath("//input[@name='data[phone]']");
+    public static final By REGISTRATION_DAY_SELECTION = By.xpath("//div[@id='daySelect']//span[@class='caret']");
+    public static final By REGISTRATION_MONTH_SELECTION = By.xpath("//div[@id='monthSelect']//span[@class='caret']");
+    public static final By REGISTRATION_YEAR_SELECTION = By.xpath("//div[@id='yearSelect']//span[@class='caret']");
+    public static final By REGISTRATION_DAYS_LIST_ELEMENTS = By.xpath("//li[@data-handler='selectDay']");
+    public static final By REGISTRATION_MONTHS_LIST_ELEMENTS = By.xpath("//li[@data-handler='selectMonth']");
+    public static final By REGISTRATION_YEARS_LIST_ELEMENTS = By.xpath("//li[@data-handler='selectYear']");
+    public static final By REGISTRATION_TERMS_AND_CONDITIONS_CHECKBOX = By.xpath("//input[@id='confirmation']");
+    public static final By REGISTRATION_AUTO_FILLING_FORM_LOCATION = By.xpath("//input[@name='region_name']");
+    public static final By REGISTRATION_AUTO_SUGGESTIONS_LIST_LOCATION = By.xpath("//div[@class='dropdown dropdown_location']//li");
 
     //elements on 'Search' page
     public static final By SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN = By.xpath("//select[@id='age_min']");
@@ -72,18 +71,26 @@ public class Locators {
     public static final By PROFILE_PAGE_USER_PHOTO = By.xpath("//div/div/a[@id='user_photo']");
     public static final By PROFILE_PAGE_SERVICES_MENU = By.xpath("//div/span/button[@id='services-menu']");
     public static final By PROFILE_PAGE_LAST_REGISTERED_USERS_REFRESH = By.xpath("//div/span/i[@class='fa fa-refresh']");
-    public static final By PROFILE_PAGE_LAST_REGISTERED_USERS_TITLE = By.xpath("//div[@id='last_registered_users']//div/span");
+    public static final By PROFILE_PAGE_LAST_REGISTERED_USERS_TITLE = By.xpath("//div[@id='last_registered_users']//div//span");
+
+    //elements on 'Contact Us' page
+    public static final By CONTACT_US_PAGE_REASON_DROPDOWN = By.xpath("//select[@name='id_reason']");
+    public static final By CONTACT_US_PAGE_USER_NAME_INPUT = By.xpath("//input[@name='user_name']");
+    public static final By CONTACT_US_PAGE_USER_EMAIL_INPUT = By.xpath("//input[@name='user_email']");
+    public static final By CONTACT_US_PAGE_SUBJECT_INPUT = By.xpath("//input[@name='subject']");
+    public static final By CONTACT_US_PAGE_MESSAGE_TEXTAREA = By.xpath("//textarea[@name='message']");
 
     //elements with common locators on different pages
     public static final String LINKS_CHECKS_STRING_FORMAT = "//%s[not(contains(@href,'javascript') or contains(@href,'mailto') or contains(@href,'callto'))]";
 
     //main menu
-    public static final By MAIN_MENU_SLIDE_MENU = By.xpath("//div/a/i[contains(@class,'fa-bars')]");
-    public static final By MAIN_MENU_GIFT = By.xpath("//div/a/i[contains(@class,'fa-gift')]");
+    public static final By MAIN_MENU_SLIDE_MENU = By.xpath("//div//a//i[contains(@class,'fa-bars')]");
+    public static final By MAIN_MENU_GIFT = By.xpath("//div//a//i[contains(@class,'fa-gift')]");
     public static final By MAIN_MENU_TRIP_TO_UKRAINE = By.xpath("//a[@href='https://romanceabroad.com/store/sweets/5-vip_individual_tour_to_ukraine'][@data-item]");
-    public static final By MAIN_MENU_SEARCH = By.xpath("//div/form/button[@id='main_search_button_user_line']");
-    public static final By MAIN_MENU_LOGIN = By.xpath("//div/div/a[@id='ajax_login_link']");
+    public static final By MAIN_MENU_SEARCH = By.xpath("//div//form//button[@id='main_search_button_user_line']");
+    public static final By MAIN_MENU_LOGIN = By.xpath("//div//div//a[@id='ajax_login_link']");
 
     //footer menu
     public static final By FOOTER_MENU = By.className("footer-menu");
+    public static final By FOOTER_MENU_CONTACT_US = By.xpath("//*[contains(@id,'footer-menu-tickets-item')]//div");
 }
