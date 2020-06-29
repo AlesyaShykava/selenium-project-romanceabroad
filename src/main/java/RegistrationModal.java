@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegistrationModal extends BaseActions {
@@ -8,76 +9,68 @@ public class RegistrationModal extends BaseActions {
     }
 
     public void fillInEmail(String email) {
-        driver.findElement(Locators.REGISTRATION_FORM_EMAIL_FIELD).sendKeys(email);
+        driver.findElement(Locators.REGISTRATION_EMAIL_FIELD).sendKeys(email);
     }
 
     public void fillInPassword(String password) {
-        driver.findElement(Locators.REGISTRATION_FORM_PASSWORD_FIELD).sendKeys(password);
+        driver.findElement(Locators.REGISTRATION_PASSWORD_FIELD).sendKeys(password);
     }
 
     public void clickOnNextButton() {
-        driver.findElement(Locators.REGISTRATION_FORM_NEXT_BUTTON).click();
+        driver.findElement(Locators.REGISTRATION_NEXT_BUTTON).click();
     }
 
-    public void fillInNickNameWithCorrectRandomData() {
-        driver.findElement(Locators.REGISTRATION_FORM_NICKNAME_TEXT_FIELD).sendKeys(generateRandomNumber(Data.correctNickName, 6));
+    public void fillInNickName(String nickName) {
+        driver.findElement(Locators.REGISTRATION_NICKNAME_TEXT_FIELD).sendKeys(nickName);
     }
 
     public void fillInPhone(String phone) {
-        sendKeysJS(Locators.REGISTRATION_FORM_PHONE_TEXT_FIELD, phone);
+        sendKeysJS(Locators.REGISTRATION_PHONE_TEXT_FIELD, phone);
     }
 
-    public void selectDOBDay(int day) {
-        driver.findElement(Locators.REGISTRATION_FORM_DAY_SELECT_LINK).click();
-        By dayLocator = getLocatorBODDay(day);
-        moveMouseToElementAndClick(dayLocator);
+    public void selectDOBDay(String day) {
+        driver.findElement(Locators.REGISTRATION_DAY_SELECTION).click();
+        clickOnElementFromList(Locators.REGISTRATION_DAYS_LIST_ELEMENTS, day);
     }
 
-    public void selectDOBMonth(int month) {
-        driver.findElement(Locators.REGISTRATION_FORM_MONTH_SELECTION_CARET).click();
-        By monthLocator = getLocatorBODMonth(month - 1);
-        moveMouseToElementAndClick(monthLocator);
+    public void selectDOBMonth(String month) {
+        driver.findElement(Locators.REGISTRATION_MONTH_SELECTION).click();
+        clickOnElementFromList(Locators.REGISTRATION_MONTHS_LIST_ELEMENTS, month);
     }
 
-    public void selectDOBYear(int year) {
-        driver.findElement(Locators.REGISTRATION_FORM_YEAR_SELECTION_CARET).click();
-        By yearLocator = getLocatorBODYear(year);
-        moveMouseToElementAndClick(yearLocator);
+    public void selectDOBYear(String year) {
+        driver.findElement(Locators.REGISTRATION_YEAR_SELECTION).click();
+        clickOnElementFromList(Locators.REGISTRATION_YEARS_LIST_ELEMENTS, year);
     }
 
     public void checkTermsAndConditionsCheckbox() {
-        driver.findElement(Locators.REGISTRATION_FORM_TERMS_AND_CONDITIONS_CHECKBOX).click();
+        driver.findElement(Locators.REGISTRATION_TERMS_AND_CONDITIONS_CHECKBOX).click();
+    }
+
+    public void selectLocation(String partOfLocation, String location) {
+        driver.findElement(Locators.REGISTRATION_AUTO_FILLING_FORM_LOCATION).clear();
+        driver.findElement(Locators.REGISTRATION_AUTO_FILLING_FORM_LOCATION).sendKeys(partOfLocation);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.REGISTRATION_AUTO_SUGGESTIONS_LIST_LOCATION));
+        clickOnElementFromList(Locators.REGISTRATION_AUTO_SUGGESTIONS_LIST_LOCATION, Data.location);
     }
 
     public boolean isTermsAndConditionsChecked() {
-        return driver.findElement(Locators.REGISTRATION_FORM_TERMS_AND_CONDITIONS_CHECKBOX).isSelected();
+        return driver.findElement(Locators.REGISTRATION_TERMS_AND_CONDITIONS_CHECKBOX).isSelected();
     }
 
     public void clickOnPagination() {
-        driver.findElement(Locators.REGISTRATION_FORM_PAGINATION).click();
+        driver.findElement(Locators.REGISTRATION_PAGINATION).click();
     }
 
     public String getPasswordAlertMessage() {
-        return getAlertMessage(Locators.REGISTRATION_FORM_INCORRECT_PASSWORD_ALERT);
+        return getAlertMessage(Locators.REGISTRATION_INCORRECT_PASSWORD_ALERT);
     }
 
     public String getEmailAlertMessage() {
-        return getAlertMessage(Locators.REGISTRATION_FORM_INCORRECT_EMAIL_ALERT);
+        return getAlertMessage(Locators.REGISTRATION_INCORRECT_EMAIL_ALERT);
     }
 
     private String getAlertMessage(By field) {
         return driver.findElement(field).getText();
-    }
-
-    private By getLocatorBODDay(int day) {
-        return By.xpath(String.format(Locators.REGISTRATION_FORM_STRING_FORMAT_DAY, day));
-    }
-
-    private By getLocatorBODMonth(int month) {
-        return By.xpath(String.format(Locators.REGISTRATION_FORM_STRING_FORMAT_MONTH, month));
-    }
-
-    private By getLocatorBODYear(int year) {
-        return By.xpath(String.format(Locators.REGISTRATION_FORM_STRING_FORMAT_YEAR, year));
     }
 }

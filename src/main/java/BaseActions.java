@@ -4,6 +4,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -44,6 +45,22 @@ public class BaseActions {
     protected void selectFromDropDownListByIndex(By dropDownLocator, int index) {
         Select select = new Select(driver.findElement(dropDownLocator));
         select.selectByIndex(index);
+    }
+
+    protected void selectFromDropDownListByText(By dropDownLocator, String text) {
+        Select select = new Select(driver.findElement(dropDownLocator));
+        select.selectByVisibleText(text);
+    }
+
+    protected void clickOnElementFromList(By liLocator, String valueToClick) {
+        List<WebElement> elements = driver.findElements(liLocator);
+        for (int i = 0; i < elements.size(); i++) {
+            WebElement element = elements.get(i);
+            String text = element.getText();
+            if(text != null && text.contains(valueToClick)) {
+                element.click();
+            }
+        }
     }
 
     protected  boolean isElementDisplayed(By locator) {
@@ -91,11 +108,11 @@ public class BaseActions {
     }
 
     /**@return value int, error code -1*/
-    protected int selectRandomOptionFromDropDown(By locator, String dropDownName) {
+    protected int selectRandomOptionFromDropDown(By dropDownLocator, String dropDownName) {
         int randomIndexToSelect = -1;
         try {
-            WebElement webElementDropDown = driver.findElement(locator);
-            scrollToElementUsingJS(locator);
+            WebElement webElementDropDown = driver.findElement(dropDownLocator);
+            scrollToElementUsingJS(dropDownLocator);
             Select select = new Select(webElementDropDown);
             randomIndexToSelect = random.nextInt(select.getOptions().size());
             select.selectByIndex(randomIndexToSelect);
@@ -148,5 +165,11 @@ public class BaseActions {
             System.out.println("getSizeDropDownList error " + e.getMessage());
         }
         return size;
+    }
+
+    protected void clickOnContactUs() {
+        scrollToElementUsingJS(Locators.FOOTER_MENU_CONTACT_US);
+        driver.findElement(Locators.FOOTER_MENU_CONTACT_US).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.CONTACT_US_PAGE_REASON_DROPDOWN));
     }
 }

@@ -18,7 +18,7 @@ public class HomePage extends BaseActions{
         driver.findElement(link.getLocator()).click();
         switch (link) {
             case SIGN_IN:
-                wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SIGN_IN_PAGE_EMAIL_FIELD));
+                wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SIGN_IN_EMAIL_FIELD));
                 break;
             case SEARCH:
                 wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN));

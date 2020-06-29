@@ -8,6 +8,6 @@ public class LoginPage extends BaseActions {
     }
 
     public void checkErrorBlockIsDisplayed() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SIGN_IN_PAGE_ALERT_POP_UP_DISPLAYED));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SIGN_IN_ALERT_POP_UP_DISPLAYED));
     }
 }

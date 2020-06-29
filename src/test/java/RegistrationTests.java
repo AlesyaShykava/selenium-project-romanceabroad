@@ -8,11 +8,12 @@ public class RegistrationTests extends BaseUI {
         registrationModal.fillInEmail(Data.correctEmail);
         registrationModal.fillInPassword(Data.correctPassword);
         registrationModal.clickOnNextButton();
-        registrationModal.fillInNickNameWithCorrectRandomData();
+        registrationModal.fillInNickName(mediaPage.generateRandomNumber(Data.correctNickName, 6));
         registrationModal.fillInPhone(Data.correctPhone);
-        registrationModal.selectDOBDay(14);
-        registrationModal.selectDOBMonth(12);
-        registrationModal.selectDOBYear(1990);
+        registrationModal.selectDOBMonth(Data.month);
+        registrationModal.selectDOBDay(Data.day);
+        registrationModal.selectDOBYear(Data.year);
+        registrationModal.selectLocation(Data.locationCity, Data.location);
         if(!registrationModal.isTermsAndConditionsChecked()) {
             registrationModal.checkTermsAndConditionsCheckbox();
         }

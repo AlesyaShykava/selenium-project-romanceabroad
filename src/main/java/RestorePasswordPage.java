@@ -8,14 +8,14 @@ public class RestorePasswordPage extends BaseActions {
     }
 
     public void fillInEmailField(String email) {
-        driver.findElement(Locators.RESTORE_PAGE_EMAIL_FIELD).sendKeys(email);
+        driver.findElement(Locators.RESTORE_PASSWORD_EMAIL_FIELD).sendKeys(email);
     }
 
     public void clickOnSubmitButton() {
-        driver.findElement(Locators.RESTORE_PAGE_SUBMIT_BUTTON).click();
+        driver.findElement(Locators.RRESTORE_PASSWORD_SUBMIT_BUTTON).click();
     }
 
     public void checkErrorBlockIsDisplayed() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.RESTORE_PAGE_ALERT_POP_UP_DISPLAYED));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.RESTORE_PASSWORD_ALERT_POP_UP_DISPLAYED));
     }
 }
