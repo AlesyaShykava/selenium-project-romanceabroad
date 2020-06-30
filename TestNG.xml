@@ -15,6 +15,7 @@
             <class name ="HowWeWorkTests"/>
             <class name ="MediaTests"/>
             <class name ="TourToUkraineTests"/>
+            <class name ="RegistrationTests"/>
         </classes>
     </test>
 

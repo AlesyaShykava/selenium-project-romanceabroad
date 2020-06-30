@@ -1,5 +1,8 @@
 import org.testng.annotations.DataProvider;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Data {
 
     //'Search' page
@@ -56,6 +59,11 @@ public class Data {
     //'Blog' page
     public static final String blogPageTitleExpected = "Blog";
     public static final String expectedUrlBlogPage = "https://romanceabroad.com/content/view/blog";
+    public static final ArrayList<String> blogPageLinksSkipCheck = new ArrayList<>(Arrays.asList("How it works",
+            "Kharkov dating agency", "Mail order girls", "Real Ukrainian brides", "Marriage agency in Ukraine",
+            "Kiev dating site", "How to marry Ukrainian lady", "Free Ukrainian dating site",
+            "9 Factors to Keep in Mind When Dating a Ukrainian Woman",
+            "Is There a Difference Between Dating or Courting a Ukrainian Woman?"));
 
     //'Restore Password' page
     public static final String expectedUrlRestorePage = "https://romanceabroad.com/users/restore";
@@ -69,15 +77,6 @@ public class Data {
 
     //test data for registration flow
     public static final String incorrectTestData = "abc";
-    public static final String correctEmail = "example@abc.abc";
-    public static final String correctPassword = "123456";
-    public static final String correctNickName = "nick";
-    public static final String correctPhone = "123456789";
-    public static final String day = "14";
-    public static final String month = "May";
-    public static final String year = "1990";
-    public static final String location = "Sydney, State of New South Wales, Australia";
-    public static final String locationCity = "Sydney";
 
     //'Sign In' form
     public static final String signInFormTitleExpected = "The Best Free Ukrainian Dating Site| Romanceabroad.Com";

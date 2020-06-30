@@ -80,8 +80,12 @@ public class Locators {
     public static final By CONTACT_US_PAGE_SUBJECT_INPUT = By.xpath("//input[@name='subject']");
     public static final By CONTACT_US_PAGE_MESSAGE_TEXTAREA = By.xpath("//textarea[@name='message']");
 
+    //elements on 'Blog' page
+    public static final By BLOG_LINK_OF_ARTICLES = By.xpath("//ul[contains(@class, 'content-pages-tree')]//li");
+
     //elements with common locators on different pages
     public static final String LINKS_CHECKS_STRING_FORMAT = "//%s[not(contains(@href,'javascript') or contains(@href,'mailto') or contains(@href,'callto'))]";
+    public static final By H1_TITLE = By.xpath("//h1");
 
     //main menu
     public static final By MAIN_MENU_SLIDE_MENU = By.xpath("//div//a//i[contains(@class,'fa-bars')]");

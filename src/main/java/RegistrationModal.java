@@ -47,11 +47,12 @@ public class RegistrationModal extends BaseActions {
         driver.findElement(Locators.REGISTRATION_TERMS_AND_CONDITIONS_CHECKBOX).click();
     }
 
-    public void selectLocation(String partOfLocation, String location) {
+    public void selectLocation(String partOfLocation, String locationFull) {
         driver.findElement(Locators.REGISTRATION_AUTO_FILLING_FORM_LOCATION).clear();
+        waitThreadSleepMS(50);
         driver.findElement(Locators.REGISTRATION_AUTO_FILLING_FORM_LOCATION).sendKeys(partOfLocation);
         wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.REGISTRATION_AUTO_SUGGESTIONS_LIST_LOCATION));
-        clickOnElementFromList(Locators.REGISTRATION_AUTO_SUGGESTIONS_LIST_LOCATION, Data.location);
+        clickOnElementFromList(Locators.REGISTRATION_AUTO_SUGGESTIONS_LIST_LOCATION, locationFull);
     }
 
     public boolean isTermsAndConditionsChecked() {

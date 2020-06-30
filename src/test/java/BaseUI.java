@@ -43,21 +43,21 @@ public class BaseUI {
     @Parameters("browser")
     public void setup(@Optional("chrome") String browser, Method method){
         if (browser.equalsIgnoreCase("firefox")) {
-            System.setProperty("webdriver.gecko.driver", "geckodriver");
+            System.setProperty("webdriver.gecko.driver", "resources/geckodriver");
             driver = new EventFiringWebDriver(new FirefoxDriver());
             driver.register(new EventReporter());
         } else if (browser.equalsIgnoreCase("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver");
+            System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
             driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
             driver.register(new EventReporter());
             //driver.get("chrome://settings/clearBrowserData");
         } else if (browser.equalsIgnoreCase("IE")) {
-            System.setProperty("webdriver.ie.driver", "IEDriverServer");
+            System.setProperty("webdriver.ie.driver", "resources/IEDriverServer");
             driver = new EventFiringWebDriver(new InternetExplorerDriver());
             driver.register(new EventReporter());
             driver.manage().deleteAllCookies();
         } else {
-            System.setProperty("webdriver.chrome.driver", "chromedriver");
+            System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
             driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
             driver.register(new EventReporter());
             //driver.get("chrome://settings/clearBrowserData");
