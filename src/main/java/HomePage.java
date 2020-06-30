@@ -22,6 +22,10 @@ public class HomePage extends BaseActions{
                 break;
             case SEARCH:
                 wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN));
+                break;
+            case BLOG:
+                wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.BLOG_LINK_OF_ARTICLES));
+                break;
         }
     }
 

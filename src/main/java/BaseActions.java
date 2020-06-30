@@ -172,4 +172,9 @@ public class BaseActions {
         driver.findElement(Locators.FOOTER_MENU_CONTACT_US).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.CONTACT_US_PAGE_REASON_DROPDOWN));
     }
+
+    public String getH1Title() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.H1_TITLE));
+        return driver.findElement(Locators.H1_TITLE).getText();
+    }
 }
