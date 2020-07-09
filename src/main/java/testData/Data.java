@@ -1,5 +1,6 @@
-import org.testng.annotations.DataProvider;
+package testData;
 
+import mainClasses.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -16,24 +17,6 @@ public class Data {
     //test data for search page
     public static final int searchParametersMinAgeExpected = 18;
     public static final int searchParametersMaxAgeExpected = 80;
-
-    @DataProvider(name = "minMaxAgeDataSet")
-    public static Object[][] getMinMaxAgeDataSet() {
-        Object[][] data = new Integer[3][2];
-        data[0][0] = 20;    data[0][1] = 30;
-        data[1][0] = 30;    data[1][1] = 40;
-        data[2][0] = 40;    data[2][1] = 50;
-        return data;
-    }
-
-    @DataProvider(name = "minMaxAgeOrderWomanSummaryDataSet")
-    public static Object[][] getMinMaxAgeOrderWomanSummaryDataSet() {
-        Object[][] data = new Object[3][4];
-        data[0][0] = 20;    data[0][1] = 30;    data[0][2] = searchPageOrderDropDownValueName;            data[0][3] = "Tanya, 25";
-        data[1][0] = 30;    data[1][1] = 40;    data[1][2] = searchPageOrderDropDownValueViewsCount;      data[1][3] = "Solomia Wyshnevetska, 31";
-        data[2][0] = 40;    data[2][1] = 50;    data[2][2] = searchPageOrderDropDownValueDataCreated;     data[2][3] = "Sveta, 45";
-        return data;
-    }
 
     //'Home' page
     public static final String homePageTitleExpected = "The Best Free Ukrainian Dating Site| Romanceabroad.Com";
@@ -77,6 +60,21 @@ public class Data {
 
     //test data for registration flow
     public static final String incorrectTestData = "abc";
+    public static String email1 = "11@gmail.com";
+    public static String email2 = "11yahoo.com";
+    public static String email3 = "11@inbox.com";
+    public static String password = "123456789";
+    public static String nickname1stPart = "nickName";
+    public static final int lengthSecondPartOfNickName = 5;
+    public static String nickname = RegistrationModal.generateRandomNumber(Data.nickname1stPart, lengthSecondPartOfNickName);
+    public static String phone = "222222222";
+    public static String dayDOB = "7";
+    public static String monthDOB = "1";
+    public static String yearDOB = "1987";
+    public static String locationCity = "Sydney";
+    public static String locationFull = "State of New South Wales";
+
+
 
     //'Sign In' form
     public static final String signInFormTitleExpected = "The Best Free Ukrainian Dating Site| Romanceabroad.Com";

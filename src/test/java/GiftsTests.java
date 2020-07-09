@@ -1,4 +1,6 @@
+import mainClasses.HomePage;
 import org.testng.annotations.Test;
+import testData.Data;
 
 public class GiftsTests extends BaseUI {
     private String currentUrl;

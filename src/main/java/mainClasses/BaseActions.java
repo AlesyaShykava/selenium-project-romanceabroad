@@ -1,3 +1,6 @@
+package mainClasses;
+
+import locators.Locators;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -24,11 +27,11 @@ public class BaseActions {
         action = new Actions(driver);
     }
 
-    protected String getCurrentUrl() {
+    public String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
 
-    protected String getTitle() {
+    public String getTitle() {
         return driver.getTitle();
     }
 
@@ -42,17 +45,17 @@ public class BaseActions {
         select.selectByValue(value);
     }
 
-    protected void selectFromDropDownListByIndex(By dropDownLocator, int index) {
+    public void selectFromDropDownListByIndex(By dropDownLocator, int index) {
         Select select = new Select(driver.findElement(dropDownLocator));
         select.selectByIndex(index);
     }
 
-    protected void selectFromDropDownListByText(By dropDownLocator, String text) {
+    public void selectFromDropDownListByText(By dropDownLocator, String text) {
         Select select = new Select(driver.findElement(dropDownLocator));
         select.selectByVisibleText(text);
     }
 
-    protected void clickOnElementFromList(By liLocator, String valueToClick) {
+    public void clickOnElementFromList(By liLocator, String valueToClick) {
         List<WebElement> elements = driver.findElements(liLocator);
         for (int i = 0; i < elements.size(); i++) {
             WebElement element = elements.get(i);
@@ -63,7 +66,7 @@ public class BaseActions {
         }
     }
 
-    protected  boolean isElementDisplayed(By locator) {
+    public boolean isElementDisplayed(By locator) {
         return driver.findElement(locator).isDisplayed();
     }
 
@@ -108,7 +111,7 @@ public class BaseActions {
     }
 
     /**@return value int, error code -1*/
-    protected int selectRandomOptionFromDropDown(By dropDownLocator, String dropDownName) {
+    public int selectRandomOptionFromDropDown(By dropDownLocator, String dropDownName) {
         int randomIndexToSelect = -1;
         try {
             WebElement webElementDropDown = driver.findElement(dropDownLocator);
@@ -123,7 +126,7 @@ public class BaseActions {
         return randomIndexToSelect;
     }
 
-    protected Map<String, Integer> checkLinksOnWebPage(String tagName, String attribute) {
+    public Map<String, Integer> checkLinksOnWebPage(String tagName, String attribute) {
         Map<String, Integer> mappingLinksWithResponseCode = new HashMap<>();
         List<WebElement> listOfElements = driver.findElements(By.xpath(String.format(Locators.LINKS_CHECKS_STRING_FORMAT, tagName)));
         for(int i = 0; i < listOfElements.size(); i++) {
@@ -154,7 +157,7 @@ public class BaseActions {
     }
 
     /**@return value int, error code -1*/
-    protected int getSizeDropDownList(By locator) {
+    public int getSizeDropDownList(By locator) {
         int size = -1;
         try{
             WebElement dropDownList = driver.findElement(locator);
@@ -167,7 +170,7 @@ public class BaseActions {
         return size;
     }
 
-    protected void clickOnContactUs() {
+    public void clickOnContactUs() {
         scrollToElementUsingJS(Locators.FOOTER_MENU_CONTACT_US);
         driver.findElement(Locators.FOOTER_MENU_CONTACT_US).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.CONTACT_US_PAGE_REASON_DROPDOWN));

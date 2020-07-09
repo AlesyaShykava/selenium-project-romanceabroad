@@ -1,35 +1,11 @@
-import org.testng.annotations.DataProvider;
+import mainClasses.HomePage;
+import locators.Locators;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import testData.*;
 
 public class RegistrationTests extends BaseUI {
-
-    @DataProvider(name = "RegistrationDataSetHappyPath")
-    public static Object[][] getRegistrationDataSetHappyPath() throws IOException {
-        List<Object[]> data = new ArrayList<>();
-        Files.readAllLines(Paths.get("resources/RegistrationHP.csv")).stream().forEach(s -> {
-            Object[] line = s.split(",");
-            data.add(new Object[]{line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], line[8]});
-        });
-        return data.toArray(new Object[data.size()][]);
-    }
-
-    @DataProvider(name = "RegistrationDataSetWrongCredentials")
-    public static Object[][] getRegistrationDataSetIncorrectEmailPassword() throws IOException {
-        List<Object[]> data = new ArrayList<>();
-        Files.readAllLines(Paths.get("resources/RegistrationWrongCredentials.csv")).stream().forEach(s -> {
-            Object[] line = s.split(",");
-            data.add(new Object[]{line[0], line[1]});
-        });
-        return data.toArray(new Object[data.size()][]);
-    }
-
-    @Test(groups = {"smoke", "regression"}, dataProvider = "RegistrationDataSetHappyPath")
+    @Test(groups = {"smoke", "regression"}, dataProvider = "RegistrationDataSetHappyPath", dataProviderClass = DataProviders.class)
     public void registrationHappyPath(String email, String password, String nickName, String phone, String monthDOB,
                                       String dayDOB, String yearDOB, String locationCity, String locationFull) {
         homePage.clickOnLink(HomePage.LinksOnHomePage.JOIN_FOR_FREE_NOW);
@@ -47,7 +23,7 @@ public class RegistrationTests extends BaseUI {
         }
     }
 
-    @Test(groups = {"regression"}, dataProvider = "RegistrationDataSetWrongCredentials")
+    @Test(groups = {"regression"}, dataProvider = "RegistrationDataSetWrongCredentials", dataProviderClass = DataProviders.class)
     public void registrationWithWrongCredentials(String incorrectEmail, String incorrectPassword) {
         homePage.clickOnLink(HomePage.LinksOnHomePage.JOIN_FOR_FREE_NOW);
         registrationModal.fillInEmail(incorrectEmail);
@@ -58,5 +34,31 @@ public class RegistrationTests extends BaseUI {
         softAssert.assertTrue(Data.registrationFormEmailIncorrectAlertMessageExpected.equals(emailIncorrectAlertMessageActual));
         softAssert.assertTrue(Data.registrationFormPasswordIncorrectAlertMessageExpected.equals(passwordIncorrectAlertMessageActual));
         softAssert.assertAll();
+    }
+
+    @Test(groups = {"regression"}, dataProvider = "Registration2",dataProviderClass = DataProviders.class)
+    public void testRegistration2(String email, String nickName, boolean requirement) {
+        homePage.clickOnLink(HomePage.LinksOnHomePage.JOIN_FOR_FREE_NOW);
+        registrationModal.fillInEmail(email);
+        registrationModal.fillInPassword(Data.password);
+        if (!requirement) {
+            Assert.assertTrue(registrationModal.isElementDisplayed(Locators.REGISTRATION_INCORRECT_EMAIL_ALERT));
+            String emailIncorrectAlertMessageActual = registrationModal.getEmailAlertMessage();
+            Assert.assertTrue(Data.registrationFormEmailIncorrectAlertMessageExpected.equals(emailIncorrectAlertMessageActual));
+            Assert.assertTrue(registrationModal.isElementDisplayed(Locators.REGISTRATION_NEXT_BUTTON_DISABLED));
+
+        }
+        else {
+            registrationModal.clickOnNextButton();
+            registrationModal.fillInNickName(nickName);
+            registrationModal.fillInPhone(Data.phone);
+            registrationModal.selectDOBMonth(Data.monthDOB);
+            registrationModal.selectDOBDay(Data.dayDOB);
+            registrationModal.selectDOBYear(Data.yearDOB);
+            registrationModal.selectLocation(Data.locationCity, Data.locationFull);
+            if(!registrationModal.isTermsAndConditionsChecked()) {
+                registrationModal.checkTermsAndConditionsCheckbox();
+            }
+        }
     }
 }

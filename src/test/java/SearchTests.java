@@ -1,8 +1,12 @@
+import locators.Locators;
+import mainClasses.HomePage;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import testData.Data;
+import testData.DataProviders;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +34,7 @@ public class SearchTests extends BaseUI {
         softAssert.assertAll();
     }
 
-    @Test(groups = {"smoke", "regression"}, enabled = TC82, dataProviderClass = Data.class, dataProvider = "minMaxAgeOrderWomanSummaryDataSet")
+    @Test(groups = {"smoke", "regression"}, enabled = TC82, dataProviderClass = DataProviders.class, dataProvider = "minMaxAgeOrderWomanSummaryDataSet")
     public void testSearchAndOrderTC82(Integer minAge, Integer maxAge, String order, String womanSummary) {
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParameters(minAge, maxAge);
@@ -39,7 +43,7 @@ public class SearchTests extends BaseUI {
         Assert.assertTrue(expectedUserFromSearchDisplayed);
     }
 
-    @Test(groups = {"regression"}, enabled = TC83, dataProviderClass = Data.class, dataProvider = "minMaxAgeDataSet")
+    @Test(groups = {"regression"}, enabled = TC83, dataProviderClass = DataProviders.class, dataProvider = "minMaxAgeDataSet")
     public void checkAgeInSearchResultCorrespondGivenParametersTC83(Integer minAge, Integer maxAge) {
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParameters(minAge, maxAge);
@@ -57,7 +61,7 @@ public class SearchTests extends BaseUI {
         softAssert.assertAll();
     }
 
-    @Test(groups = {"regression"}, enabled = TC84, dataProviderClass = Data.class, dataProvider = "minMaxAgeDataSet")
+    @Test(groups = {"regression"}, enabled = TC84, dataProviderClass = DataProviders.class, dataProvider = "minMaxAgeDataSet")
     public void checkPeopleFoundNumberOnTheTitleOfResultPageTC84(Integer minAge, Integer maxAge) {
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParameters(minAge, maxAge);
