@@ -24,6 +24,7 @@
         <groups>
             <run>
                 <include name="regression" />
+                <include name="smoke" />
                 <exclude name="integration" />
             </run>
         </groups>
@@ -35,7 +36,7 @@
             <class name ="HowWeWorkTests"/>
             <class name ="MediaTests"/>
             <class name ="RegistrationTests"/>
-            <class name ="RestorePasswordPage"/>
+            <class name ="RestorePasswordTests"/>
             <class name ="SearchTests">
                 <methods>
                     <include name="test.*"/>

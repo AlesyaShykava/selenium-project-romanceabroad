@@ -1,3 +1,6 @@
+package mainClasses;
+
+import locators.Locators;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,7 +20,7 @@ public class RegistrationModal extends BaseActions {
     }
 
     public void clickOnNextButton() {
-        driver.findElement(Locators.REGISTRATION_NEXT_BUTTON).click();
+        driver.findElement(Locators.REGISTRATION_NEXT_BUTTON_ENABLED).click();
     }
 
     public void fillInNickName(String nickName) {
@@ -48,8 +51,8 @@ public class RegistrationModal extends BaseActions {
     }
 
     public void selectLocation(String partOfLocation, String locationFull) {
+        waitThreadSleepSec(3);
         driver.findElement(Locators.REGISTRATION_AUTO_FILLING_FORM_LOCATION).clear();
-        waitThreadSleepMS(50);
         driver.findElement(Locators.REGISTRATION_AUTO_FILLING_FORM_LOCATION).sendKeys(partOfLocation);
         wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.REGISTRATION_AUTO_SUGGESTIONS_LIST_LOCATION));
         clickOnElementFromList(Locators.REGISTRATION_AUTO_SUGGESTIONS_LIST_LOCATION, locationFull);

@@ -1,10 +1,13 @@
+package mainClasses;
+
+import locators.Locators;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class BlogPage extends BaseActions{
+public class BlogPage extends BaseActions {
     public BlogPage(WebDriver webDriver, WebDriverWait wait) {
         super(webDriver, wait);
     }

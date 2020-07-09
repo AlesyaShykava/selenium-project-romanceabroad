@@ -1,3 +1,6 @@
+package mainClasses;
+
+import locators.Locators;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 

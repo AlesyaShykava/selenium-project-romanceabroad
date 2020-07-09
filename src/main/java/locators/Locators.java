@@ -1,3 +1,5 @@
+package locators;
+
 import org.openqa.selenium.By;
 
 public class Locators {
@@ -38,7 +40,8 @@ public class Locators {
     public static final By REGISTRATION_PAGINATION = By.xpath("//div[@class='paginator']//i[@data-page='3']");
     public static final By REGISTRATION_INCORRECT_EMAIL_ALERT = By.xpath("//input[@id='email']//following-sibling::div[@class='tooltip']");
     public static final By REGISTRATION_INCORRECT_PASSWORD_ALERT = By.xpath("//input[@id='password']//following-sibling::div[@class='tooltip']");
-    public static final By REGISTRATION_NEXT_BUTTON = By.xpath("//button[@data-action='next-page'][text()='Next']");
+    public static final By REGISTRATION_NEXT_BUTTON_ENABLED = By.xpath("//button[@data-action='next-page'][text()='Next']");
+    public static final By REGISTRATION_NEXT_BUTTON_DISABLED = By.xpath("//button[@data-action='next-page'][text()='Next'][@disabled]");
     public static final By REGISTRATION_NICKNAME_TEXT_FIELD = By.xpath("//input[@id='nickname']");
     public static final By REGISTRATION_PHONE_TEXT_FIELD = By.xpath("//input[@name='data[phone]']");
     public static final By REGISTRATION_DAY_SELECTION = By.xpath("//div[@id='daySelect']//span[@class='caret']");
