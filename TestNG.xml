@@ -5,17 +5,17 @@
 <!--    <test name="IETestCases">-->
 <!--        <parameter name="browser" value="ie"/>-->
 <!--        <classes>-->
-<!--            <class name ="RegistrationTests"/>-->
+<!--            <class name ="com.romanceabroad.ui.RegistrationTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
     <test name="FirefoxTestCases">
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name ="HowWeWorkTests"/>
-            <class name ="MediaTests"/>
-            <class name ="TourToUkraineTests"/>
-            <class name ="RegistrationTests"/>
+            <class name ="com.romanceabroad.ui.HowWeWorkTests"/>
+            <class name ="com.romanceabroad.ui.MediaTests"/>
+            <class name ="com.romanceabroad.ui.TourToUkraineTests"/>
+            <class name ="com.romanceabroad.ui.RegistrationTests"/>
         </classes>
     </test>
 
@@ -29,22 +29,22 @@
             </run>
         </groups>
         <classes>
-            <class name ="BlogTests"/>
-            <class name ="ContactUsTests"/>
-            <class name ="GiftsTests"/>
-            <class name ="HomeTests"/>
-            <class name ="HowWeWorkTests"/>
-            <class name ="MediaTests"/>
-            <class name ="RegistrationTests"/>
-            <class name ="RestorePasswordTests"/>
-            <class name ="SearchTests">
+            <class name ="com.romanceabroad.ui.BlogTests"/>
+            <class name ="com.romanceabroad.ui.ContactUsTests"/>
+            <class name ="com.romanceabroad.ui.GiftsTests"/>
+            <class name ="com.romanceabroad.ui.HomeTests"/>
+            <class name ="com.romanceabroad.ui.HowWeWorkTests"/>
+            <class name ="com.romanceabroad.ui.MediaTests"/>
+            <class name ="com.romanceabroad.ui.RegistrationTests"/>
+            <class name ="com.romanceabroad.ui.RestorePasswordTests"/>
+            <class name ="com.romanceabroad.ui.SearchTests">
                 <methods>
                     <include name="test.*"/>
                     <exclude name=".*Screenshot.*" />
                 </methods>
             </class>
-            <class name ="SignInTests"/>
-            <class name ="TourToUkraineTests"/>
+            <class name ="com.romanceabroad.ui.SignInTests"/>
+            <class name ="com.romanceabroad.ui.TourToUkraineTests"/>
         </classes>
     </test>
 
