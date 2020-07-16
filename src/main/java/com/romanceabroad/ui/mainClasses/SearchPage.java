@@ -1,5 +1,7 @@
 package com.romanceabroad.ui.mainClasses;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.romanceabroad.ui.locators.Locators;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,8 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchPage extends BaseActions {
-    public SearchPage(WebDriver webDriver, WebDriverWait wait) {
+    private static ExtentTest extentTest;
+
+    public SearchPage(WebDriver webDriver, WebDriverWait wait, ExtentTest extentTest) {
         super(webDriver, wait);
+        this.extentTest = extentTest;
     }
 
     @Override
@@ -30,21 +35,25 @@ public class SearchPage extends BaseActions {
     public void selectMinAgeByValue(int minAgeForSearch) {
         selectFromDropDownListByValue(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN, Integer.toString(minAgeForSearch));
         wait.until(ExpectedConditions.elementToBeClickable(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN));
+        extentTest.log(Status.INFO, String.format("%s value is selected from min_age_dropdown", minAgeForSearch));
     }
 
     public void selectMaxAgeByValue(int maxAgeForSearch) {
         selectFromDropDownListByValue(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN, Integer.toString(maxAgeForSearch));
         waitThreadSleepSec(1);
+        extentTest.log(Status.INFO, String.format("%s value is selected from max_age_dropdown list", maxAgeForSearch));
     }
 
     public void clickOnSearchButton() {
         driver.findElement(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_SEARCH_BUTTON).click();
         wait.until(ExpectedConditions.invisibilityOfElementLocated(Locators.SEARCH_PAGE_LOADING_SPINNER));
+        extentTest.log(Status.INFO, "Click on search button");
     }
 
     public void setUpOrderByValue(String orderValue) {
         selectFromDropDownListByValue(Locators.SEARCH_PAGE_ORDER_DROPDOWN, orderValue);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(Locators.SEARCH_PAGE_LOADING_SPINNER));
+        extentTest.log(Status.INFO, String.format("%s value was selected from order_dropdown list", orderValue));
     }
 
     public boolean isUserPresentInSearchResult(By locator) {
@@ -57,6 +66,7 @@ public class SearchPage extends BaseActions {
 
     public void pagination_clickOnNextButton() {
         driver.findElement(Locators.SEARCH_PAGE_PAGINATION_NEXT_BUTTON).click();
+        extentTest.log(Status.INFO, "SEARCH_PAGE_PAGINATION_NEXT_BUTTON is clicked");
     }
 
     public List<String> getListOfUserInfoAllPages() {
@@ -102,9 +112,11 @@ public class SearchPage extends BaseActions {
         WebElement profileLink = linksToProfilePage.get(index);
         profileLink.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.PROFILE_PAGE_USER_NAME));
+        extentTest.log(Status.INFO, String.format("Clicked on profile link by %d index", index));
     }
 
     public String getUserInfoByIndex(int index) {
+        extentTest.log(Status.INFO, String.format("Get user info by %d index", index));
         return driver.findElements(Locators.SEARCH_PAGE_SEARCH_RESULT_WOMEN_SUMMARY).get(index).getText();
     }
 }
