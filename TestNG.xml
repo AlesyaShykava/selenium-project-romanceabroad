@@ -1,7 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="TestSuite" parallel="none">
-
+<listeners>
+    <listener class-name="com.romanceabroad.ui.reportUtil.TestListeners"></listener>
+</listeners>
 <!--    <test name="IETestCases">-->
 <!--        <parameter name="browser" value="ie"/>-->
 <!--        <classes>-->

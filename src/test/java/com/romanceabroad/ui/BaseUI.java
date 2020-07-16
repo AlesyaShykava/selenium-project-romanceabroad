@@ -1,8 +1,17 @@
 package com.romanceabroad.ui;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.romanceabroad.ui.mainClasses.*;
-import com.romanceabroad.ui.utils.EventReporter;
 import com.google.common.io.Files;
+import com.romanceabroad.ui.reportUtil.EventReporter;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,18 +21,20 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 
 public class BaseUI {
+    public ExtentHtmlReporter htmlReporter;
+    public ExtentReports extentReports;
+    public ExtentTest extentTest;
     protected String mainURl = "https://romanceabroad.com/";
     protected EventFiringWebDriver driver;
     protected WebDriverWait wait;
@@ -42,30 +53,49 @@ public class BaseUI {
     protected ProfilePage profilePage;
     protected ContactUsPage contactUsPage;
 
+    @BeforeSuite
+    public void beforeSuiteActions() {
+        htmlReporter = new ExtentHtmlReporter("./reports/extent.html");
+        htmlReporter.config().setEncoding("utf-8");
+        htmlReporter.config().setDocumentTitle("Automation Reports");
+        htmlReporter.config().setReportName("Automation Test Results");
+        htmlReporter.config().setTheme(Theme.DARK);
+
+        extentReports = new ExtentReports();
+        extentReports.setSystemInfo("Organization", "Romanceabroad");
+        extentReports.attachReporter(htmlReporter);
+    }
+
     @BeforeMethod(groups = {"smoke", "regression", "integration"}, alwaysRun = true)
     @Parameters("browser")
     public void setup(@Optional("chrome") String browser, Method method){
+
         if (browser.equalsIgnoreCase("firefox")) {
             System.setProperty("webdriver.gecko.driver", "resources/geckodriver");
+            extentReports.setSystemInfo("Browser", "Firefox");
             driver = new EventFiringWebDriver(new FirefoxDriver());
             driver.register(new EventReporter());
         } else if (browser.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
+            extentReports.setSystemInfo("Browser", "Chrome");
             driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
             driver.register(new EventReporter());
             //driver.get("chrome://settings/clearBrowserData");
         } else if (browser.equalsIgnoreCase("IE")) {
             System.setProperty("webdriver.ie.driver", "resources/IEDriverServer");
+            extentReports.setSystemInfo("Browser", "IE");
             driver = new EventFiringWebDriver(new InternetExplorerDriver());
             driver.register(new EventReporter());
             driver.manage().deleteAllCookies();
         } else {
             System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
+            extentReports.setSystemInfo("Browser", "Chrome");
             driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
             driver.register(new EventReporter());
             //driver.get("chrome://settings/clearBrowserData");
         }
 
+        extentTest = extentReports.createTest(method.getName());
         wait = new WebDriverWait(driver, 40);
         homePage = new HomePage(driver, wait);
         blogPage = new BlogPage(driver, wait);
@@ -75,7 +105,7 @@ public class BaseUI {
         registrationModal = new RegistrationModal(driver, wait);
         restorePasswordPage = new RestorePasswordPage(driver, wait);
         signInModal = new SignInModal(driver, wait);
-        searchPage = new SearchPage(driver, wait);
+        searchPage = new SearchPage(driver, wait, extentTest);
         tourToUkrainePage = new TourToUkrainePage(driver, wait);
         loginPage = new LoginPage(driver, wait);
         profilePage = new ProfilePage(driver, wait);
@@ -85,19 +115,61 @@ public class BaseUI {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void afterActions(ITestResult result) {
-        if(ITestResult.FAILURE == result.getStatus()) {recordFail(result);}
+    public void afterMethodActions(ITestResult result) {
+        String methodName = result.getMethod().getMethodName();
+        if(ITestResult.FAILURE == result.getStatus()) {
+            String exceptionMessage = Arrays.toString(result.getThrowable().getStackTrace());
+            extentTest.fail("<details><summary><b><font color=red>Exception occurred, click for more details:"
+                    + "</font></b></summary>" + exceptionMessage.replaceAll(",", "<br>")
+                    + "</details> \n");
+            try {
+                takeScreenshotFile(methodName);
+                extentTest.fail("<b><font color=red>" + "Screenshot of failure" + "</font></b>",
+                        MediaEntityBuilder.createScreenCaptureFromBase64String(takeScreenshotBase64()).build());
+            } catch (IOException e) {
+                extentTest.fail("Test failed, cannot attach the screenshot");
+            }
+            String logText = "<b>Test Method " + methodName + " Failed</b>";
+            Markup markup = MarkupHelper.createLabel(logText, ExtentColor.RED);
+            extentTest.log(Status.FAIL, markup);
+        } else if(ITestResult.SKIP == result.getStatus()) {
+            String logText = "<b>Test Method " + methodName + " Skipped</b>";
+            Markup markup = MarkupHelper.createLabel(logText, ExtentColor.YELLOW);
+            extentTest.log(Status.SKIP, markup);
+        }else if(ITestResult.SUCCESS == result.getStatus()) {
+            String logText = "<b>Test Method " + methodName + " Successful</b>";
+            Markup markup = MarkupHelper.createLabel(logText, ExtentColor.GREEN);
+            extentTest.log(Status.PASS, markup);
+        }
         driver.quit();
     }
 
-    public void recordFail(ITestResult result) {
-        TakesScreenshot camera = (TakesScreenshot)driver;
-        File failScreenshot = camera.getScreenshotAs(OutputType.FILE);
+    public static String getScreenshotName(String methodName) {
+        Date d = new Date();
+        String fileName = methodName + "_" + d.toString().replaceAll(":", "_").replaceAll(" ", "_") + ".png";
+        return fileName;
+    }
+
+    public String takeScreenshotBase64() {
+        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BASE64);
+    }
+
+    public String takeScreenshotFile(String methodName) {
+        String fileName = getScreenshotName(methodName);
+        String directory = System.getProperty("user.dir") + "/screenshots/";
+        String path = directory + fileName;
+        File failScreenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
-            Files.move(failScreenshot, new File("screenshots/" + result.getName() + ".png"));
+            Files.move(failScreenshot, new File(path));
         } catch (IOException e) {
             System.out.println("Screenshot was not saved");
         }
+        return path;
+    }
+
+    @AfterSuite
+    public void afterSuiteActions() {
+        extentReports.flush();
     }
 
     private ChromeOptions getChromeOptions() {

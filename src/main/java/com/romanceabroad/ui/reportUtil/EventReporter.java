@@ -1,4 +1,4 @@
-package com.romanceabroad.ui.utils;
+package com.romanceabroad.ui.reportUtil;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
