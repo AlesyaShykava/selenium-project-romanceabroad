@@ -29,6 +29,9 @@ public class HomePage extends BaseActions {
             case BLOG:
                 wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.BLOG_LINK_OF_ARTICLES));
                 break;
+            case MEDIA:
+                wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.MEDIA_PAGE_TAB_LINK_All));
+                break;
         }
     }
 

@@ -50,19 +50,19 @@ public class DataProviders {
     @DataProvider(name = "minMaxAgeOrderDataSet")
     public static Object[][] getMaxAgeOrderDataSet() {
         return new Object[][] {
-                {"18", "80", Data.searchPageOrderDropDownValueDefault},
-                {"18", "19", Data.searchPageOrderDropDownValueName},
-                {"30", "40", Data.searchPageOrderDropDownValueViewsCount},
-                {"60", "80", Data.searchPageOrderDropDownValueDataCreated},
+                {"18", "80", Data.searchPageOrderDropDownTextDefault},
+                {"18", "19", Data.searchPageOrderDropDownTextName},
+                {"30", "40", Data.searchPageOrderDropDownTextViewsCount},
+                {"60", "80", Data.searchPageOrderDropDownTextDataCreated},
         };
     }
 
     @DataProvider(name = "minMaxAgeOrderUserInfoDataSet")
     public static Object[][] getMinMaxAgeOrderUserInfoDataSet() {
         Object[][] data = new Object[3][4];
-        data[0][0] = 20;    data[0][1] = 30;    data[0][2] = Data.searchPageOrderDropDownValueName;            data[0][3] = "Tanya, 25";
-        data[1][0] = 30;    data[1][1] = 40;    data[1][2] = Data.searchPageOrderDropDownValueViewsCount;      data[1][3] = "Solomia Wyshnevetska, 31";
-        data[2][0] = 40;    data[2][1] = 50;    data[2][2] = Data.searchPageOrderDropDownValueDataCreated;     data[2][3] = "Sveta, 45";
+        data[0][0] = 20;    data[0][1] = 30;    data[0][2] = Data.searchPageOrderDropDownTextName;            data[0][3] = "Tanya, 25";
+        data[1][0] = 30;    data[1][1] = 40;    data[1][2] = Data.searchPageOrderDropDownTextViewsCount;      data[1][3] = "Solomia Wyshnevetska, 31";
+        data[2][0] = 40;    data[2][1] = 50;    data[2][2] = Data.searchPageOrderDropDownTextDataCreated;     data[2][3] = "Sveta, 45";
         return data;
     }
 }

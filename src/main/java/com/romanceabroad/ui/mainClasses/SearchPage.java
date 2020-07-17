@@ -50,10 +50,10 @@ public class SearchPage extends BaseActions {
         extentTest.log(Status.INFO, "Click on search button");
     }
 
-    public void setUpOrderByValue(String orderValue) {
-        selectFromDropDownListByValue(Locators.SEARCH_PAGE_ORDER_DROPDOWN, orderValue);
+    public void setUpOrderByText(String orderText) {
+        selectFromDropDownListByText(Locators.SEARCH_PAGE_ORDER_DROPDOWN, orderText);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(Locators.SEARCH_PAGE_LOADING_SPINNER));
-        extentTest.log(Status.INFO, String.format("%s value was selected from order_dropdown list", orderValue));
+        extentTest.log(Status.INFO, String.format("%s value was selected from order_dropdown list", orderText));
     }
 
     public boolean isUserPresentInSearchResult(By locator) {
@@ -69,10 +69,10 @@ public class SearchPage extends BaseActions {
         extentTest.log(Status.INFO, "SEARCH_PAGE_PAGINATION_NEXT_BUTTON is clicked");
     }
 
-    public List<String> getListOfUserInfoAllPages() {
+    public List<String> getListOfUserInfoNameAndAgeAllPages() {
         List<String> result = new ArrayList<>();
         while(true) {
-            List<WebElement> listWomanSummaryPageResult = driver.findElements(Locators.SEARCH_PAGE_SEARCH_RESULT_WOMEN_SUMMARY);
+            List<WebElement> listWomanSummaryPageResult = driver.findElements(Locators.SEARCH_PAGE_USER_INFO_NAME_AGE);
             for(int i = 0; i < listWomanSummaryPageResult.size(); i++) {
                 result.add(listWomanSummaryPageResult.get(i).getText());
             }
@@ -85,9 +85,18 @@ public class SearchPage extends BaseActions {
         return result;
     }
 
-    public List<String> getListOfUserInfoFirstPage() {
+    public List<String> getListOfUserInfoNameAndAgeFirstPage() {
         List<String> result = new ArrayList<>();
-        List<WebElement> listWomanSummaryPageResult = driver.findElements(Locators.SEARCH_PAGE_SEARCH_RESULT_WOMEN_SUMMARY);
+        List<WebElement> listWomanSummaryPageResult = driver.findElements(Locators.SEARCH_PAGE_USER_INFO_NAME_AGE);
+        for(int i = 0; i < listWomanSummaryPageResult.size(); i++) {
+            result.add(listWomanSummaryPageResult.get(i).getText());
+        }
+        return result;
+    }
+
+    public List<String> getListOfUserInfoAllFirstPage() {
+        List<String> result = new ArrayList<>();
+        List<WebElement> listWomanSummaryPageResult = driver.findElements(Locators.SEARCH_PAGE_USER_INFO_ALL);
         for(int i = 0; i < listWomanSummaryPageResult.size(); i++) {
             result.add(listWomanSummaryPageResult.get(i).getText());
         }
@@ -117,6 +126,6 @@ public class SearchPage extends BaseActions {
 
     public String getUserInfoByIndex(int index) {
         extentTest.log(Status.INFO, String.format("Get user info by %d index", index));
-        return driver.findElements(Locators.SEARCH_PAGE_SEARCH_RESULT_WOMEN_SUMMARY).get(index).getText();
+        return driver.findElements(Locators.SEARCH_PAGE_USER_INFO_NAME_AGE).get(index).getText();
     }
 }
