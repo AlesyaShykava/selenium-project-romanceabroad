@@ -59,7 +59,8 @@ public class Locators {
     public static final By SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN = By.xpath("//select[@id='age_max']");
     public static final By SEARCH_PAGE_SEARCH_PARAMETERS_SEARCH_BUTTON = By.xpath("//input[@id='main_search_button_user_advanced']");
     public static final By SEARCH_PAGE_ORDER_DROPDOWN = By.cssSelector("select[id*='sorter-select']");
-    public static final By SEARCH_PAGE_SEARCH_RESULT_WOMEN_SUMMARY = By.xpath("//div[@class='text-overflow'][a]");
+    public static final By SEARCH_PAGE_USER_INFO_NAME_AGE = By.xpath("//div[@class='text-overflow'][a]");
+    public static final By SEARCH_PAGE_USER_INFO_ALL = By.xpath("//div[@class='text-overflow']");
     public static final By SEARCH_PAGE_PAGINATION_NEXT_BUTTON = By.xpath("//li[@class='next']/a[@data-page]");
     public static final By SEARCH_PAGE_MIN_AGE_OPTIONS = By.xpath("//select[@name='age_min']/option");
     public static final By SEARCH_PAGE_MAX_AGE_OPTIONS = By.xpath("//select[@name='age_max']/option");
@@ -85,6 +86,13 @@ public class Locators {
 
     //elements on 'Blog' page
     public static final By BLOG_LINK_OF_ARTICLES = By.xpath("//ul[contains(@class, 'content-pages-tree')]//li");
+
+    //elements on 'Media' page
+    public static final By MEDIA_PAGE_TAB_LINKS = By.xpath("//ul[@id='gallery_filters']//a");
+    public static final By MEDIA_PAGE_TAB_LINK_All = By.xpath("//ul[@id='gallery_filters']//a[contains(@href,'all')]");
+    public static final By MEDIA_PAGE_TAB_LINK_PHOTO = By.xpath("//ul[@id='gallery_filters']//a[contains(@href,'photo')]");
+    public static final By MEDIA_PAGE_TAB_LINK_VIDEO = By.xpath("//ul[@id='gallery_filters']//a[contains(@href,'video')]");
+    public static final By MEDIA_PAGE_TAB_LINK_ALBUMS = By.xpath("//ul[@id='gallery_filters']//a[contains(@href,'albums')]");
 
     //elements with common com.romanceabroad.ui.locators on different pages
     public static final String LINKS_CHECKS_STRING_FORMAT = "//%s[not(contains(@href,'javascript') or contains(@href,'mailto') or contains(@href,'callto'))]";

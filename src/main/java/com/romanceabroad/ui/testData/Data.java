@@ -13,6 +13,10 @@ public class Data {
     public static final String searchPageOrderDropDownValueName = "name";
     public static final String searchPageOrderDropDownValueViewsCount = "views_count";
     public static final String searchPageOrderDropDownValueDataCreated = "date_created";
+    public static final String searchPageOrderDropDownTextDefault = "Default";
+    public static final String searchPageOrderDropDownTextName = "Name";
+    public static final String searchPageOrderDropDownTextViewsCount = "Views";
+    public static final String searchPageOrderDropDownTextDataCreated = "Registration date";
 
     //test data for search page
     public static final int searchParametersMinAgeExpected = 18;
@@ -29,7 +33,11 @@ public class Data {
 
     //'Media' page
     public static final String mediaPageTitleExpected = "Ukrainian women photos: ladies pictures at Marry Ukrainian Lady";
-    public static final String expectedUrlMediaPage = "https://romanceabroad.com/media/index";
+    public static final String mediaPageExpectedUrlMediaPage = "https://romanceabroad.com/media/index";
+    public static final String mediaPageExpectedTitleAllTab = "Gallery";
+    public static final String mediaPageExpectedTitlePhotoTab = "Photo gallery";
+    public static final String mediaPageExpectedTitleVideoTab = "Video gallery";
+    public static final String mediaPageExpectedTitleAlbumTab = "Gallery albums";
 
     //'Gifts' page
     public static final String giftsPageTitleExpected = "Pilot Group: Gift store - Categories";

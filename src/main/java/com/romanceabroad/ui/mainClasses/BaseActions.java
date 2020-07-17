@@ -106,7 +106,7 @@ public class BaseActions {
         }
     }
 
-    protected void waitThreadSleepSec(int sec) {
+    public void waitThreadSleepSec(int sec) {
         try {
             Thread.sleep(sec * 1000);
         } catch (InterruptedException e) {
@@ -114,7 +114,7 @@ public class BaseActions {
         }
     }
 
-    protected void waitThreadSleepMS(int ms) {
+    public void waitThreadSleepMS(int ms) {
         try {
             Thread.sleep(ms);
         } catch (InterruptedException e) {

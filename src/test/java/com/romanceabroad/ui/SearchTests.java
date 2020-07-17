@@ -1,5 +1,6 @@
 package com.romanceabroad.ui;
 
+import com.aventstack.extentreports.Status;
 import com.romanceabroad.ui.locators.Locators;
 import com.romanceabroad.ui.mainClasses.HomePage;
 import com.romanceabroad.ui.testData.Data;
@@ -42,8 +43,8 @@ public class SearchTests extends BaseUI {
     public void testSearchAndOrderTC802(Integer minAge, Integer maxAge, String order, String womanSummary) {
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParametersByValue(minAge, maxAge);
-        searchPage.setUpOrderByValue(order);
-        boolean expectedUserFromSearchDisplayed = searchPage.getListOfUserInfoFirstPage().contains(womanSummary);
+        searchPage.setUpOrderByText(order);
+        boolean expectedUserFromSearchDisplayed = searchPage.getListOfUserInfoNameAndAgeFirstPage().contains(womanSummary);
         Assert.assertTrue(expectedUserFromSearchDisplayed);
     }
 
@@ -51,7 +52,7 @@ public class SearchTests extends BaseUI {
     public void checkPeopleFoundNumberTC803(Integer minAge, Integer maxAge) {
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParametersByValue(minAge, maxAge);
-        List<String> listWomanSummary = searchPage.getListOfUserInfoAllPages();
+        List<String> listWomanSummary = searchPage.getListOfUserInfoNameAndAgeAllPages();
         String peopleFoundTitle = searchPage.getPeopleFoundTitle();
         if(!peopleFoundTitle.contains(Integer.toString(listWomanSummary.size()))) {
             Assert.fail("The incorrect number of founded people is displayed on the title");
@@ -80,10 +81,10 @@ public class SearchTests extends BaseUI {
         while (isSearchNeeded) {
             searchPage.selectRandomOptionFromDropDown(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN, "minAge");
             searchPage.clickOnSearchButton();
-            isSearchNeeded = searchPage.getListOfUserInfoFirstPage().isEmpty();
+            isSearchNeeded = searchPage.getListOfUserInfoNameAndAgeFirstPage().isEmpty();
             if(isSearchNeeded) continue;
 
-            int randomIndex = random.nextInt(searchPage.getListOfUserInfoFirstPage().size());
+            int randomIndex = random.nextInt(searchPage.getListOfUserInfoNameAndAgeFirstPage().size());
 
             String womanSummary = searchPage.getUserInfoByIndex(randomIndex);
             String userNameSearchPage = womanSummary.substring(0, womanSummary.indexOf(", "));
@@ -123,9 +124,10 @@ public class SearchTests extends BaseUI {
 
     @Test(groups = {"regression"}, enabled = TC808, dataProviderClass = DataProviders.class, dataProvider = "minMaxAgeDataSet")
     public void checkAgeInSearchResultCorrespondToSelectedMinAndMaxAgesTC808(Integer minAge, Integer maxAge) {
+        extentTest.log(Status.INFO, String.format("Test Data: minAge - %d, maxAge - %d", minAge, minAge));
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParametersByValue(minAge, maxAge);
-        List<String> listWomanSummary = searchPage.getListOfUserInfoAllPages();
+        List<String> listWomanSummary = searchPage.getListOfUserInfoNameAndAgeAllPages();
         if(listWomanSummary.size() > 0) {
             for (int i = 0; i < listWomanSummary.size(); i++) {
                 String womanSummary = listWomanSummary.get(i);
@@ -141,14 +143,31 @@ public class SearchTests extends BaseUI {
 
     @Test(dataProviderClass = DataProviders.class, dataProvider = "minMaxAgeOrderDataSet", groups = {"regression"},  enabled = TC809)
     public void searchDifferentResultsTC809(String minAge, String maxAge, String searchOrder) {
-        int min = Integer.parseInt(minAge);
-        int max = Integer.parseInt(maxAge);
+        int minExpected = Integer.parseInt(minAge);
+        int maxExpected = Integer.parseInt(maxAge);
+        extentTest.log(Status.INFO, String.format("Test Data: minAge - %d, maxAge - %d, searchOrder - %s", minExpected, maxExpected, searchOrder));
 
         homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
-        searchPage.selectMinAgeByValue(min);
-        searchPage.selectMaxAgeByValue(max);
-        searchPage.setUpOrderByValue(searchOrder);
+        searchPage.selectMinAgeByValue(minExpected);
+        searchPage.selectMaxAgeByValue(maxExpected);
+        searchPage.setUpOrderByText(searchOrder);
         searchPage.clickOnSearchButton();
-        List<String> listOfUserInfo = searchPage.getListOfUserInfoAllPages();
+        List<String> listOfUserInfoAllFirstPage = searchPage.getListOfUserInfoAllFirstPage();
+
+        for (int i = 0; i < listOfUserInfoAllFirstPage.size(); i++) {
+            if(i % 2 == 0) {
+                String info = listOfUserInfoAllFirstPage.get(i);
+                String[] splitedPhase = info.split(", ");
+                int ageActual = Integer.parseInt(splitedPhase[1]);
+
+                if(ageActual >= minExpected && ageActual <= maxExpected) {
+                    extentTest.log(Status.INFO, "This age: " + ageActual + " is correct");
+                } else {
+                    extentTest.fail("Wrong age: " + ageActual);
+                }
+            }
+            searchPage.waitThreadSleepSec(1);
+            listOfUserInfoAllFirstPage = searchPage.getListOfUserInfoAllFirstPage();
+        }
     }
 }

@@ -32,8 +32,8 @@ import java.util.Collections;
 import java.util.Date;
 
 public class BaseUI {
-    public ExtentHtmlReporter htmlReporter;
-    public ExtentReports extentReports;
+    public static ExtentHtmlReporter htmlReporter;
+    public static ExtentReports extentReports;
     public ExtentTest extentTest;
     protected String mainURl = "https://romanceabroad.com/";
     protected EventFiringWebDriver driver;
@@ -53,7 +53,7 @@ public class BaseUI {
     protected ProfilePage profilePage;
     protected ContactUsPage contactUsPage;
 
-    @BeforeSuite
+    @BeforeSuite(groups = {"smoke", "regression", "integration"}, alwaysRun = true)
     public void beforeSuiteActions() {
         htmlReporter = new ExtentHtmlReporter("./reports/extent.html");
         htmlReporter.config().setEncoding("utf-8");
@@ -69,27 +69,22 @@ public class BaseUI {
     @BeforeMethod(groups = {"smoke", "regression", "integration"}, alwaysRun = true)
     @Parameters("browser")
     public void setup(@Optional("chrome") String browser, Method method){
-
         if (browser.equalsIgnoreCase("firefox")) {
             System.setProperty("webdriver.gecko.driver", "resources/geckodriver");
-            extentReports.setSystemInfo("Browser", "Firefox");
             driver = new EventFiringWebDriver(new FirefoxDriver());
             driver.register(new EventReporter());
         } else if (browser.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
-            extentReports.setSystemInfo("Browser", "Chrome");
             driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
             driver.register(new EventReporter());
             //driver.get("chrome://settings/clearBrowserData");
         } else if (browser.equalsIgnoreCase("IE")) {
             System.setProperty("webdriver.ie.driver", "resources/IEDriverServer");
-            extentReports.setSystemInfo("Browser", "IE");
             driver = new EventFiringWebDriver(new InternetExplorerDriver());
             driver.register(new EventReporter());
             driver.manage().deleteAllCookies();
         } else {
             System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
-            extentReports.setSystemInfo("Browser", "Chrome");
             driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
             driver.register(new EventReporter());
             //driver.get("chrome://settings/clearBrowserData");
@@ -167,8 +162,9 @@ public class BaseUI {
         return path;
     }
 
-    @AfterSuite
+    @AfterSuite(alwaysRun = true)
     public void afterSuiteActions() {
+        System.out.println("After Suit");
         extentReports.flush();
     }
 
