@@ -34,6 +34,7 @@ public class Data {
     //'Media' page
     public static final String mediaPageTitleExpected = "Ukrainian women photos: ladies pictures at Marry Ukrainian Lady";
     public static final String mediaPageExpectedUrlMediaPage = "https://romanceabroad.com/media/index";
+    public static final String mediaPageExpectedTitleGallery = "Ukrainian women photos";
     public static final String mediaPageExpectedTitleAllTab = "Gallery";
     public static final String mediaPageExpectedTitlePhotoTab = "Photo gallery";
     public static final String mediaPageExpectedTitleVideoTab = "Video gallery";

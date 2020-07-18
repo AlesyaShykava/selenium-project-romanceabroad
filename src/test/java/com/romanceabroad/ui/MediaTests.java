@@ -28,6 +28,8 @@ public class MediaTests extends BaseUI {
     public void testUserTabs() {
         homePage.clickOnLink(HomePage.LinksOnHomePage.MEDIA);
         MediaPage.TabLinks[] userTabs = MediaPage.TabLinks.values();
+        actualTitle = mediaPage.getH1Title();
+        Assert.assertEquals(actualTitle, Data.mediaPageExpectedTitleGallery);
 
         for (int i = 0; i < userTabs.length; i++) {
             mediaPage.clickOnTabLink(userTabs[i]);
