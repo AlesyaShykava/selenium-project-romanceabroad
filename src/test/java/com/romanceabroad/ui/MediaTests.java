@@ -1,15 +1,11 @@
 package com.romanceabroad.ui;
 
-import com.romanceabroad.ui.locators.Locators;
 import com.romanceabroad.ui.mainClasses.HomePage;
 import com.romanceabroad.ui.mainClasses.MediaPage;
 import com.romanceabroad.ui.testData.Data;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 public class MediaTests extends BaseUI {
     private String currentUrl;
@@ -40,8 +36,14 @@ public class MediaTests extends BaseUI {
                 Assert.assertEquals(actualTitle, Data.mediaPageExpectedTitlePhotoTab);
             } else if(i == 2) {
                 Assert.assertEquals(actualTitle, Data.mediaPageExpectedTitleVideoTab);
+                String textMedia = mediaPage.getTextFromVideoTab();
+                if(textMedia.contains((Data.mediaPageTextVideoTabText))) {
+                    System.out.println("Text media is correct!");
+                }
             } else if(i == 3) {
                 Assert.assertEquals(actualTitle, Data.mediaPageExpectedTitleAlbumTab);
+                mediaPage.waitThreadSleepSec(2);
+                Assert.assertTrue(mediaPage.isElementDisplayed(By.xpath("//span[@data-click='album']")));
             }
         }
     }

@@ -45,6 +45,7 @@
             </class>
             <class name ="com.romanceabroad.ui.SignInTests"/>
             <class name ="com.romanceabroad.ui.TourToUkraineTests"/>
+            <class name ="com.romanceabroad.ui.UserProfileTests"/>
         </classes>
     </test>
 
