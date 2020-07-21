@@ -50,7 +50,7 @@ public class BaseUI {
     protected SearchPage searchPage;
     protected TourToUkrainePage tourToUkrainePage;
     protected LoginPage loginPage;
-    protected ProfilePage profilePage;
+    protected UserProfilePage userProfilePage;
     protected ContactUsPage contactUsPage;
 
     @BeforeSuite(groups = {"smoke", "regression", "integration"}, alwaysRun = true)
@@ -103,7 +103,7 @@ public class BaseUI {
         searchPage = new SearchPage(driver, wait, extentTest);
         tourToUkrainePage = new TourToUkrainePage(driver, wait);
         loginPage = new LoginPage(driver, wait);
-        profilePage = new ProfilePage(driver, wait);
+        userProfilePage = new UserProfilePage(driver, wait);
         contactUsPage = new ContactUsPage(driver, wait);
         driver.manage().window().maximize();
         driver.get(mainURl);

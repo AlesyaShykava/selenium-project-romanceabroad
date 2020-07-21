@@ -21,6 +21,10 @@ public class MediaPage extends BaseActions {
         driver.findElement(link.getLocator()).click();
     }
 
+    public String getTextFromVideoTab() {
+        return driver.findElement(By.xpath("//div[@class='g-flatty-block']")).getText();
+    }
+
     public enum TabLinks {
         All(Locators.MEDIA_PAGE_TAB_LINK_All),
         Photo(Locators.MEDIA_PAGE_TAB_LINK_PHOTO),

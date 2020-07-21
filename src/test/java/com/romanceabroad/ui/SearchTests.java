@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class SearchTests extends BaseUI {
     private String currentUrl;
-    Random random = new Random();
+    private Random random = new Random();
     public static final boolean TC801 = true;
     public static final boolean TC802 = true;
     public static final boolean TC803 = true;
@@ -91,8 +91,8 @@ public class SearchTests extends BaseUI {
             int ageSearchPage = Integer.parseInt(womanSummary.substring(womanSummary.length() - 2));
 
             searchPage.clickOnProfileLinkByIndex(randomIndex);
-            String userNameProfilePage = profilePage.getUserName();
-            int ageProfilePage = profilePage.getAge();
+            String userNameProfilePage = userProfilePage.getUserName();
+            int ageProfilePage = userProfilePage.getAge();
 
             Assert.assertEquals(userNameSearchPage, userNameProfilePage, String.format("Expected name: %s, actual name: ", userNameSearchPage, ageProfilePage));
             Assert.assertEquals(ageSearchPage, ageProfilePage, String.format("Expected age: %d, actual age: %d", ageSearchPage, ageProfilePage));

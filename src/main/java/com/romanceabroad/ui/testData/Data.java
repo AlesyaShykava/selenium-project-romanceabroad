@@ -39,6 +39,7 @@ public class Data {
     public static final String mediaPageExpectedTitlePhotoTab = "Photo gallery";
     public static final String mediaPageExpectedTitleVideoTab = "Video gallery";
     public static final String mediaPageExpectedTitleAlbumTab = "Gallery albums";
+    public static final String mediaPageTextVideoTabText = "On our website you have access to photos of all different kinds of women.";
 
     //'Gifts' page
     public static final String giftsPageTitleExpected = "Pilot Group: Gift store - Categories";
@@ -63,6 +64,9 @@ public class Data {
     //'Login' page
     public static final String expectedUrlLoginPage = "https://romanceabroad.com/users/login_form";
 
+    //'User Profile' page
+    public static String userProfilePageExpectedActiveTab = "Profile";
+
     //'Registration' form
     public static final String registrationFormEmailIncorrectAlertMessageExpected = "Email is incorrect, please try again";
     public static final String registrationFormPasswordIncorrectAlertMessageExpected = "Please choose a password that is at least 6 characters long";
@@ -82,8 +86,6 @@ public class Data {
     public static String yearDOB = "1987";
     public static String locationCity = "Sydney";
     public static String locationFull = "State of New South Wales";
-
-
 
     //'Sign In' form
     public static final String signInFormTitleExpected = "The Best Free Ukrainian Dating Site| Romanceabroad.Com";

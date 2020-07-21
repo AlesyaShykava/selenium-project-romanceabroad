@@ -76,6 +76,10 @@ public class Locators {
     public static final By PROFILE_PAGE_SERVICES_MENU = By.xpath("//div/span/button[@id='services-menu']");
     public static final By PROFILE_PAGE_LAST_REGISTERED_USERS_REFRESH = By.xpath("//div/span/i[@class='fa fa-refresh']");
     public static final By PROFILE_PAGE_LAST_REGISTERED_USERS_TITLE = By.xpath("//div[@id='last_registered_users']//div//span");
+    public static final By PROFILE_PAGE_TAB_LINK_WALL = By.xpath("//a[contains(text(),'Wall')]");
+    public static final By PROFILE_PAGE_TAB_LINK_PROFILE = By.xpath("//a[contains(text(),'Profile')]");
+    public static final By PROFILE_PAGE_TAB_LINK_GALLERY = By.xpath("//a[contains(text(),'Gallery')]");
+    public static final By PROFILE_PAGE_TABS_LIST = By.xpath("//div[@class='profile-menu clearfix']//li");
 
     //elements on 'Contact Us' page
     public static final By CONTACT_US_PAGE_REASON_DROPDOWN = By.xpath("//select[@name='id_reason']");
