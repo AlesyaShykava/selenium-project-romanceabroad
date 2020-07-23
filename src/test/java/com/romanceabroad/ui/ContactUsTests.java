@@ -1,6 +1,6 @@
 package com.romanceabroad.ui;
 
-import com.romanceabroad.ui.mainClasses.HomePage;
+import com.romanceabroad.ui.mainClasses.Enums;
 import com.romanceabroad.ui.testData.Data;
 import org.testng.annotations.Test;
 
@@ -8,7 +8,7 @@ public class ContactUsTests extends BaseUI {
 
     @Test
     public void contactAdministrator() {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         searchPage.clickOnContactUs();
         contactUsPage.selectReasonByText(Data.contactUsReasonDropDownTextOther);
         contactUsPage.fillInName(contactUsPage.generateRandomNumber(Data.name, 6));

@@ -12,7 +12,7 @@ public class BlogTests extends BaseUI {
 
     @Test(groups = {"bvt", "regression"})
     public void testBlogPage() {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.BLOG);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.BLOG);
         currentUrl = blogPage.getCurrentUrl();
         softAssert.assertTrue(Data.blogPageTitleExpected.equals(blogPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Blog"));
         softAssert.assertEquals(currentUrl, Data.expectedUrlBlogPage);
@@ -21,7 +21,7 @@ public class BlogTests extends BaseUI {
 
     @Test(groups = {"regression"})
     public void testArticlesAndTitles() {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.BLOG);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.BLOG);
         List<WebElement> links = blogPage.collectAllLinksOfArticles();
         for(int i = 0; i < links.size(); i++) {
             WebElement link = links.get(i);

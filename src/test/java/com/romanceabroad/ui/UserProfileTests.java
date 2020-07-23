@@ -1,7 +1,7 @@
 package com.romanceabroad.ui;
 
 import com.romanceabroad.ui.locators.Locators;
-import com.romanceabroad.ui.mainClasses.HomePage;
+import com.romanceabroad.ui.mainClasses.Enums;
 import com.romanceabroad.ui.mainClasses.UserProfilePage;
 import com.romanceabroad.ui.testData.Data;
 import org.testng.Assert;
@@ -14,7 +14,7 @@ public class UserProfileTests extends BaseUI {
 
     @Test(groups = {"smoke", "regression"})
     public void testTabs() {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         boolean isSearchNeeded = true;
         while (isSearchNeeded) {
             searchPage.selectRandomOptionFromDropDown(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN, "minAge");

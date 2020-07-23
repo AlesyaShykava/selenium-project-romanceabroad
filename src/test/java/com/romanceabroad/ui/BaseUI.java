@@ -53,7 +53,7 @@ public class BaseUI {
     protected UserProfilePage userProfilePage;
     protected ContactUsPage contactUsPage;
 
-    @BeforeSuite(groups = {"smoke", "regression", "integration"}, alwaysRun = true)
+    @BeforeSuite(groups = {"smoke", "regression", "integration",  "negative"}, alwaysRun = true)
     public void beforeSuiteActions() {
         htmlReporter = new ExtentHtmlReporter("./reports/extent.html");
         htmlReporter.config().setEncoding("utf-8");
@@ -66,7 +66,7 @@ public class BaseUI {
         extentReports.attachReporter(htmlReporter);
     }
 
-    @BeforeMethod(groups = {"smoke", "regression", "integration"}, alwaysRun = true)
+    @BeforeMethod(groups = {"smoke", "regression", "integration", "negative"}, alwaysRun = true)
     @Parameters("browser")
     public void setup(@Optional("chrome") String browser, Method method){
         if (browser.equalsIgnoreCase("firefox")) {

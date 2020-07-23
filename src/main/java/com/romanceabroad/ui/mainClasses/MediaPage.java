@@ -17,7 +17,7 @@ public class MediaPage extends BaseActions {
         return driver.findElements(Locators.MEDIA_PAGE_TAB_LINKS);
     }
 
-    public void clickOnTabLink(TabLinks link) {
+    public void clickOnTabLink(Enums.MediaPageTabLinks link) {
         driver.findElement(link.getLocator()).click();
     }
 
@@ -25,20 +25,4 @@ public class MediaPage extends BaseActions {
         return driver.findElement(By.xpath("//div[@class='g-flatty-block']")).getText();
     }
 
-    public enum TabLinks {
-        All(Locators.MEDIA_PAGE_TAB_LINK_All),
-        Photo(Locators.MEDIA_PAGE_TAB_LINK_PHOTO),
-        Video(Locators.MEDIA_PAGE_TAB_LINK_VIDEO),
-        Albums(Locators.MEDIA_PAGE_TAB_LINK_ALBUMS);
-
-        private By locator;
-
-        public By getLocator() {
-            return locator;
-        }
-
-        TabLinks(By locator) {
-                this.locator = locator;
-            }
-    }
 }

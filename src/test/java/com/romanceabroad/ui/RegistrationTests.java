@@ -1,6 +1,6 @@
 package com.romanceabroad.ui;
 
-import com.romanceabroad.ui.mainClasses.HomePage;
+import com.romanceabroad.ui.mainClasses.Enums;
 import com.romanceabroad.ui.locators.Locators;
 import com.romanceabroad.ui.testData.*;
 import org.testng.Assert;
@@ -10,7 +10,7 @@ public class RegistrationTests extends BaseUI {
     @Test(groups = {"smoke", "regression"}, dataProvider = "RegistrationDataSetHappyPath", dataProviderClass = DataProviders.class)
     public void registrationHappyPath(String email, String password, String nickName, String phone, String monthDOB,
                                       String dayDOB, String yearDOB, String locationCity, String locationFull) {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.JOIN_FOR_FREE_NOW);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.JOIN_FOR_FREE_NOW);
         registrationModal.fillInEmail(email);
         registrationModal.fillInPassword(password);
         registrationModal.clickOnNextButton();
@@ -27,7 +27,7 @@ public class RegistrationTests extends BaseUI {
 
     @Test(groups = {"regression"}, dataProvider = "RegistrationDataSetWrongCredentials", dataProviderClass = DataProviders.class)
     public void registrationWithWrongCredentials(String incorrectEmail, String incorrectPassword) {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.JOIN_FOR_FREE_NOW);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.JOIN_FOR_FREE_NOW);
         registrationModal.fillInEmail(incorrectEmail);
         registrationModal.fillInPassword(incorrectPassword);
         registrationModal.clickOnPagination();
@@ -40,7 +40,7 @@ public class RegistrationTests extends BaseUI {
 
     @Test(groups = {"regression"}, dataProvider = "Registration2",dataProviderClass = DataProviders.class)
     public void testRegistration2(String email, String nickName, boolean requirement) {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.JOIN_FOR_FREE_NOW);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.JOIN_FOR_FREE_NOW);
         registrationModal.fillInEmail(email);
         registrationModal.fillInPassword(Data.password);
         if (!requirement) {

@@ -1,6 +1,6 @@
 package com.romanceabroad.ui;
 
-import com.romanceabroad.ui.mainClasses.HomePage;
+import com.romanceabroad.ui.mainClasses.Enums;
 import com.romanceabroad.ui.testData.Data;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -18,7 +18,7 @@ public class HomeTests extends BaseUI {
 
     @Test(groups = {"smoke", "regression"})
     public void testHomePage() {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.HOME);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.HOME);
         currentUrl = homePage.getCurrentUrl();
         softAssert.assertEquals(currentUrl, Data.expectedUrlHomePage);
         softAssert.assertTrue(Data.homePageTitleExpected.equals(homePage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Home"));

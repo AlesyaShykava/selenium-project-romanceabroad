@@ -17,9 +17,12 @@ public class SignInModal extends BaseActions {
 
     public void fillInEmailField(String email) {
         driver.findElement(Locators.SIGN_IN_EMAIL_FIELD).sendKeys(email);
+        wait.until(ExpectedConditions.elementToBeClickable(Locators.SIGN_IN_SUBMIT_BUTTON));
     }
+
     public void fillInPasswordField(String password) {
         driver.findElement(Locators.SIGN_IN_PASSWORD_FIELD).sendKeys(password);
+        wait.until(ExpectedConditions.elementToBeClickable(Locators.SIGN_IN_SUBMIT_BUTTON));
     }
 
     public void clickOnSubmitButton() {

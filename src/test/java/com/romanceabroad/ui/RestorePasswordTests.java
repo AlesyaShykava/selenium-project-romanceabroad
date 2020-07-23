@@ -1,6 +1,6 @@
 package com.romanceabroad.ui;
 
-import com.romanceabroad.ui.mainClasses.HomePage;
+import com.romanceabroad.ui.mainClasses.Enums;
 import com.romanceabroad.ui.testData.Data;
 import org.testng.annotations.Test;
 
@@ -9,7 +9,7 @@ public class RestorePasswordTests extends BaseUI {
 
     @Test(groups = {"regression", "integration"})
     public void restorePasswordIncorrectEmail() {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.SIGN_IN);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SIGN_IN);
         signInModal.clickOnForgotPasswordLink();
         currentUrl = restorePasswordPage.getCurrentUrl();
         softAssert.assertEquals(currentUrl, Data.expectedUrlRestorePage);

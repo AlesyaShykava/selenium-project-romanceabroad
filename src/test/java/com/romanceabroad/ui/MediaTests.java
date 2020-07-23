@@ -1,7 +1,6 @@
 package com.romanceabroad.ui;
 
-import com.romanceabroad.ui.mainClasses.HomePage;
-import com.romanceabroad.ui.mainClasses.MediaPage;
+import com.romanceabroad.ui.mainClasses.Enums;
 import com.romanceabroad.ui.testData.Data;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -13,7 +12,7 @@ public class MediaTests extends BaseUI {
 
     @Test(groups = {"smoke", "regression"})
     public void testMediaPage() {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.MEDIA);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.MEDIA);
         currentUrl = mediaPage.getCurrentUrl();
         softAssert.assertTrue(Data.mediaPageTitleExpected.equals(mediaPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Media"));
         softAssert.assertEquals(currentUrl, Data.mediaPageExpectedUrlMediaPage);
@@ -22,8 +21,8 @@ public class MediaTests extends BaseUI {
 
     @Test(groups = {"smoke", "regression"})
     public void testUserTabs() {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.MEDIA);
-        MediaPage.TabLinks[] userTabs = MediaPage.TabLinks.values();
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.MEDIA);
+        Enums.MediaPageTabLinks[] userTabs = Enums.MediaPageTabLinks.values();
         actualTitle = mediaPage.getH1Title();
         Assert.assertEquals(actualTitle, Data.mediaPageExpectedTitleGallery);
 
