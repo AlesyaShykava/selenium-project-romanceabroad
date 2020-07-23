@@ -2,7 +2,7 @@ package com.romanceabroad.ui;
 
 import com.aventstack.extentreports.Status;
 import com.romanceabroad.ui.locators.Locators;
-import com.romanceabroad.ui.mainClasses.HomePage;
+import com.romanceabroad.ui.mainClasses.Enums;
 import com.romanceabroad.ui.testData.Data;
 import com.romanceabroad.ui.testData.DataProviders;
 import org.apache.commons.io.FileUtils;
@@ -32,7 +32,7 @@ public class SearchTests extends BaseUI {
 
     @Test(groups = {"smoke", "regression"}, enabled = TC801)
     public void testSearchPageTC801() {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         currentUrl = searchPage.getCurrentUrl();
         softAssert.assertEquals(currentUrl, Data.expectedUrlSearchPage);
         softAssert.assertTrue(Data.searchPageTitleExpected.equals(searchPage.getTitle()), String.format(Data.incorrectTitleTestMessageFormat, "Search"));
@@ -41,7 +41,7 @@ public class SearchTests extends BaseUI {
 
     @Test(groups = {"smoke", "regression"}, enabled = TC802, dataProviderClass = DataProviders.class, dataProvider = "minMaxAgeOrderUserInfoDataSet")
     public void testSearchAndOrderTC802(Integer minAge, Integer maxAge, String order, String womanSummary) {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParametersByValue(minAge, maxAge);
         searchPage.setUpOrderByText(order);
         boolean expectedUserFromSearchDisplayed = searchPage.getListOfUserInfoNameAndAgeFirstPage().contains(womanSummary);
@@ -50,7 +50,7 @@ public class SearchTests extends BaseUI {
 
     @Test(groups = {"regression"}, enabled = TC803, dataProviderClass = DataProviders.class, dataProvider = "minMaxAgeDataSet")
     public void checkPeopleFoundNumberTC803(Integer minAge, Integer maxAge) {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParametersByValue(minAge, maxAge);
         List<String> listWomanSummary = searchPage.getListOfUserInfoNameAndAgeAllPages();
         String peopleFoundTitle = searchPage.getPeopleFoundTitle();
@@ -61,7 +61,7 @@ public class SearchTests extends BaseUI {
 
     @Test(groups = {"regression"}, enabled = TC804)
     public void checkSearchParametersMinAgeValuesTC804(){
-        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         List<Integer> minAgeValues = searchPage.getMinAgeDropDownValues();
         int sizeOfListWithMinAgeValues = minAgeValues.size();
         boolean isNumberOfValuesEqualsToExpected = (sizeOfListWithMinAgeValues == Data.searchParametersMaxAgeExpected - Data.searchParametersMinAgeExpected + 1);
@@ -76,7 +76,7 @@ public class SearchTests extends BaseUI {
 
     @Test(groups = {"regression"}, enabled = TC805)
     public void checkSummaryOnSearchPageCorrespondToInfoOnProfilePageTC805(){
-        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         boolean isSearchNeeded = true;
         while (isSearchNeeded) {
             searchPage.selectRandomOptionFromDropDown(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN, "minAge");
@@ -102,7 +102,7 @@ public class SearchTests extends BaseUI {
 
     @Test(groups = {"regression"},  enabled = TC806)
     public void checkAllOrderOptionCanBeSelectedTC806() {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         int sizeOrderDropDown = searchPage.getSizeDropDownList(Locators.SEARCH_PAGE_ORDER_DROPDOWN);
         for(int i = 0; i < sizeOrderDropDown; i++) {
             searchPage.selectFromDropDownListByIndex(Locators.SEARCH_PAGE_ORDER_DROPDOWN, i);
@@ -113,7 +113,7 @@ public class SearchTests extends BaseUI {
 
     @Test(groups = {"regression"},  enabled = TC807)
     public void testScreenshotSearchPageTC807() {
-        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         File tempFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(tempFile, new File("screenshots/searchPageScreenshot.png"));
@@ -125,7 +125,7 @@ public class SearchTests extends BaseUI {
     @Test(groups = {"regression"}, enabled = TC808, dataProviderClass = DataProviders.class, dataProvider = "minMaxAgeDataSet")
     public void checkAgeInSearchResultCorrespondToSelectedMinAndMaxAgesTC808(Integer minAge, Integer maxAge) {
         extentTest.log(Status.INFO, String.format("Test Data: minAge - %d, maxAge - %d", minAge, minAge));
-        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParametersByValue(minAge, maxAge);
         List<String> listWomanSummary = searchPage.getListOfUserInfoNameAndAgeAllPages();
         if(listWomanSummary.size() > 0) {
@@ -147,7 +147,7 @@ public class SearchTests extends BaseUI {
         int maxExpected = Integer.parseInt(maxAge);
         extentTest.log(Status.INFO, String.format("Test Data: minAge - %d, maxAge - %d, searchOrder - %s", minExpected, maxExpected, searchOrder));
 
-        homePage.clickOnLink(HomePage.LinksOnHomePage.SEARCH);
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         searchPage.selectMinAgeByValue(minExpected);
         searchPage.selectMaxAgeByValue(maxExpected);
         searchPage.setUpOrderByText(searchOrder);

@@ -65,4 +65,24 @@ public class DataProviders {
         data[2][0] = 40;    data[2][1] = 50;    data[2][2] = Data.searchPageOrderDropDownTextDataCreated;     data[2][3] = "Sveta, 45";
         return data;
     }
+
+    @DataProvider(name = "signInNegativeCheckEmailField")
+    public static Object[][] getSignInNegativeSetForTestEmailField() throws IOException {
+        List<Object[]> data = new ArrayList<>();
+        Files.readAllLines(Paths.get("resources/SingInNegativeCheckEmailField.csv")).stream().forEach(s -> {
+            Object[] line = s.split(",");
+            data.add(new Object[]{line[0], line[1]});
+        });
+        return data.toArray(new Object[data.size()][]);
+    }
+
+    @DataProvider(name = "signInNegativeCheckPasswordField")
+    public static Object[][] getSignInNegativeSetForTestPasswordField() throws IOException {
+        List<Object[]> data = new ArrayList<>();
+        Files.readAllLines(Paths.get("resources/SingInNegativeCheckPasswordField.csv")).stream().forEach(s -> {
+            Object[] line = s.split(",");
+            data.add(new Object[]{line[0], line[1]});
+        });
+        return data.toArray(new Object[data.size()][]);
+    }
 }

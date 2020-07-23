@@ -28,6 +28,4 @@ public class ContactUsPage extends BaseActions {
     public void fillInMessage(String message) {
         driver.findElement(Locators.CONTACT_US_PAGE_MESSAGE_TEXTAREA).sendKeys(message);
     }
-
-
 }
