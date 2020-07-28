@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class RestorePasswordPage extends BaseActions {
+public class RestorePasswordPage extends BaseActions implements FooterActions {
     public RestorePasswordPage(WebDriver webDriver, WebDriverWait wait) {
         super(webDriver, wait);
     }

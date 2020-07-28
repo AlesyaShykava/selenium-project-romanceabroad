@@ -111,5 +111,6 @@ public class Locators {
 
     //footer menu
     public static final By FOOTER_MENU = By.className("footer-menu");
+    public static final By FOOTER_MENU_LINKS = By.xpath("//div[@class='footer-menu']//a//div");
     public static final By FOOTER_MENU_CONTACT_US = By.xpath("//*[contains(@id,'footer-menu-tickets-item')]//div");
 }

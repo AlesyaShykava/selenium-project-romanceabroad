@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class MediaPage extends BaseActions {
+public class MediaPage extends BaseActions implements FooterActions {
     public MediaPage(WebDriver webDriver, WebDriverWait wait) {
         super(webDriver, wait);
     }

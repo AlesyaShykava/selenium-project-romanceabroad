@@ -170,4 +170,10 @@ public class SearchTests extends BaseUI {
             listOfUserInfoAllFirstPage = searchPage.getListOfUserInfoAllFirstPage();
         }
     }
+
+    @Test(groups = {"regression"})
+    public void checkFooterLinks() {
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
+        FooterTestsMethods.checkFooterLinks(searchPage);
+    }
 }

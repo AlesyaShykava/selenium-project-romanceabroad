@@ -12,14 +12,17 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.romanceabroad.ui.mainClasses.*;
 import com.google.common.io.Files;
 import com.romanceabroad.ui.reportUtil.EventReporter;
+import com.romanceabroad.ui.testData.Data;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
@@ -30,6 +33,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class BaseUI {
     public static ExtentHtmlReporter htmlReporter;

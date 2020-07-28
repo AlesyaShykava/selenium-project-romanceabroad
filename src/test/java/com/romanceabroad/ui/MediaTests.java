@@ -46,4 +46,10 @@ public class MediaTests extends BaseUI {
             }
         }
     }
+
+    @Test(groups = {"regression"})
+    public void checkFooterLinks() {
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.MEDIA);
+        FooterTestsMethods.checkFooterLinks(mediaPage);
+    }
 }

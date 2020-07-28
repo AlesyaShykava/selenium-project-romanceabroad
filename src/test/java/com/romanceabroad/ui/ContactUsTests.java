@@ -16,4 +16,10 @@ public class ContactUsTests extends BaseUI {
         contactUsPage.fillInSubject(Data.subject);
         contactUsPage.fillInMessage(Data.message);
     }
+
+    @Test(groups = {"regression"})
+    public void checkFooterLinks() {
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.BLOG);
+        FooterTestsMethods.checkFooterLinks(contactUsPage);
+    }
 }
