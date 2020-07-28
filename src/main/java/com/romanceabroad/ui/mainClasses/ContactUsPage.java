@@ -4,7 +4,7 @@ import com.romanceabroad.ui.locators.Locators;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ContactUsPage extends BaseActions {
+public class ContactUsPage extends BaseActions implements FooterActions {
     public ContactUsPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }

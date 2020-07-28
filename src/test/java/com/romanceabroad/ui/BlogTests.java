@@ -37,4 +37,9 @@ public class BlogTests extends BaseUI {
         softAssert.assertAll();
     }
 
+    @Test(groups = {"regression"})
+    public void checkFooterLinks() {
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.BLOG);
+        FooterTestsMethods.checkFooterLinks(blogPage);
+    }
 }

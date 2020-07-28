@@ -15,4 +15,10 @@ public class TourToUkraineTests extends BaseUI {
         softAssert.assertEquals(currentUrl, Data.expectedUrlTourToUkrainePage);
         softAssert.assertAll();
     }
+
+    @Test(groups = {"regression"})
+    public void checkFooterLinks() {
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.TOUR_TO_UKRAINE);
+        FooterTestsMethods.checkFooterLinks(tourToUkrainePage);
+    }
 }

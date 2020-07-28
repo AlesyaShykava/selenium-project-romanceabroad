@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class UserProfilePage extends BaseActions {
+public class UserProfilePage extends BaseActions implements FooterActions {
     public UserProfilePage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }

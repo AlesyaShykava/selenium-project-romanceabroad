@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class BlogPage extends BaseActions {
+public class BlogPage extends BaseActions implements FooterActions {
     public BlogPage(WebDriver webDriver, WebDriverWait wait) {
         super(webDriver, wait);
     }

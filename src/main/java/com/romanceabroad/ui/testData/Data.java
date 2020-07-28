@@ -29,6 +29,7 @@ public class Data {
 
     //'How It Works' page
     public static final String howItWorksPageTitleExpected = "Real Ukrainian women for marriage: legitimate dating site Marry Ukrainian Lady";
+    public static final String howItWorksPageH1TitleExpected = "Ukrainian women for marriage";
     public static final String expectedUrlHowItWorksPage = "https://romanceabroad.com/content/view/how-it-works";
 
     //'Media' page
@@ -94,6 +95,16 @@ public class Data {
     public static final String contactUsReasonDropDownTextPreSales = "Pre-Sales Questions";
     public static final String contactUsReasonDropDownTextTechnicalSupport = "Technical support";
     public static final String contactUsReasonDropDownTextOther = "Other";
+    public static final String contactUsH1TitleExpected = "Contact administrator";
+
+    //'Site map' page
+    public static final String siteMapH1TitleExpected = "Site map";
+
+    //'Privacy' page
+    public static final String privacyH1TitleExpected = "Privacy Policy";
+
+    //'Terms of use'
+    public static final String termsOfUseH1TitleExpected = "Terms of use";
 
     //test data for contact us page
     public static final String email = "example@abc.abc";

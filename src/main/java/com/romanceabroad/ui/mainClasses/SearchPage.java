@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchPage extends BaseActions {
+public class SearchPage extends BaseActions implements FooterActions {
     private static ExtentTest extentTest;
 
     public SearchPage(WebDriver webDriver, WebDriverWait wait, ExtentTest extentTest) {

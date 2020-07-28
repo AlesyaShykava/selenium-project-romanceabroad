@@ -12,7 +12,6 @@
     <test name="FirefoxTestCases">
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name ="com.romanceabroad.ui.HowWeWorkTests"/>
             <class name ="com.romanceabroad.ui.MediaTests"/>
             <class name ="com.romanceabroad.ui.TourToUkraineTests"/>
             <class name ="com.romanceabroad.ui.RegistrationTests"/>

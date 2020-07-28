@@ -15,4 +15,10 @@ public class GiftsTests extends BaseUI {
         softAssert.assertEquals(currentUrl, Data.expectedUrlGiftsPage);
         softAssert.assertAll();
     }
+
+    @Test(groups = {"regression"})
+    public void checkFooterLinks() {
+        homePage.clickOnLink(Enums.HomePageLinksOnHomePage.GIFTS);
+        FooterTestsMethods.checkFooterLinks(giftsPage);
+    }
 }

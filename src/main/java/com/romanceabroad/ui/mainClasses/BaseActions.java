@@ -15,7 +15,7 @@ import javax.net.ssl.HttpsURLConnection;
 import java.net.*;
 import java.util.*;
 
-public class BaseActions {
+public abstract class BaseActions {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Actions action;
@@ -25,6 +25,14 @@ public class BaseActions {
         this.driver = driver;
         this.wait = wait;
         action = new Actions(driver);
+    }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public WebDriverWait getWait() {
+        return wait;
     }
 
     public String getCurrentUrl() {
@@ -106,7 +114,7 @@ public class BaseActions {
         }
     }
 
-    public void waitThreadSleepSec(int sec) {
+    public static void waitThreadSleepSec(int sec) {
         try {
             Thread.sleep(sec * 1000);
         } catch (InterruptedException e) {
@@ -114,7 +122,7 @@ public class BaseActions {
         }
     }
 
-    public void waitThreadSleepMS(int ms) {
+    public static void waitThreadSleepMS(int ms) {
         try {
             Thread.sleep(ms);
         } catch (InterruptedException e) {
