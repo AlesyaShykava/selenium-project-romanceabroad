@@ -1,0 +1,30 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TestSuite" parallel="tests" thread-count="2">
+
+    <test name="FirefoxTestCases">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name ="com.romanceabroad.ui.MediaTests"/>
+            <class name ="com.romanceabroad.ui.TourToUkraineTests"/>
+        </classes>
+    </test>
+
+    <test name="ChromeTestCases">
+        <parameter name="browser" value="chrome"/>
+        <groups>
+            <run>
+                <include name="regression" />
+                <include name="smoke" />
+                <exclude name="integration" />
+            </run>
+        </groups>
+        <classes>
+            <class name ="com.romanceabroad.ui.BlogTests"/>
+            <class name ="com.romanceabroad.ui.ContactUsTests"/>
+            <class name ="com.romanceabroad.ui.GiftsTests"/>
+            <class name ="com.romanceabroad.ui.HomeTests"/>
+        </classes>
+    </test>
+
+</suite>

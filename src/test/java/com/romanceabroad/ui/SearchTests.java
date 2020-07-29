@@ -10,13 +10,16 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+import com.automation.remarks.testng.VideoListener;
+import com.automation.remarks.video.annotations.Video;
+import org.testng.annotations.Listeners;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
+@Listeners(VideoListener.class)
 public class SearchTests extends BaseUI {
     private String currentUrl;
     private Random random = new Random();
@@ -29,7 +32,9 @@ public class SearchTests extends BaseUI {
     public static final boolean TC807 = true;
     public static final boolean TC808 = true;
     public static final boolean TC809 = true;
+    public static final boolean TC810 = true;
 
+    @Video(name = "testSearchPageTC801")
     @Test(groups = {"smoke", "regression"}, enabled = TC801)
     public void testSearchPageTC801() {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
@@ -39,6 +44,7 @@ public class SearchTests extends BaseUI {
         softAssert.assertAll();
     }
 
+    @Video(name = "testSearchAndOrderTC802")
     @Test(groups = {"smoke", "regression"}, enabled = TC802, dataProviderClass = DataProviders.class, dataProvider = "minMaxAgeOrderUserInfoDataSet")
     public void testSearchAndOrderTC802(Integer minAge, Integer maxAge, String order, String womanSummary) {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
@@ -48,6 +54,7 @@ public class SearchTests extends BaseUI {
         Assert.assertTrue(expectedUserFromSearchDisplayed);
     }
 
+    @Video(name = "checkPeopleFoundNumberTC803")
     @Test(groups = {"regression"}, enabled = TC803, dataProviderClass = DataProviders.class, dataProvider = "minMaxAgeDataSet")
     public void checkPeopleFoundNumberTC803(Integer minAge, Integer maxAge) {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
@@ -59,6 +66,7 @@ public class SearchTests extends BaseUI {
         }
     }
 
+    @Video(name = "checkSearchParametersMinAgeValuesTC804")
     @Test(groups = {"regression"}, enabled = TC804)
     public void checkSearchParametersMinAgeValuesTC804(){
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
@@ -74,6 +82,7 @@ public class SearchTests extends BaseUI {
         softAssert.assertAll();
     }
 
+    @Video(name = "checkSummaryOnSearchPageCorrespondToInfoOnProfilePageTC805")
     @Test(groups = {"regression"}, enabled = TC805)
     public void checkSummaryOnSearchPageCorrespondToInfoOnProfilePageTC805(){
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
@@ -100,6 +109,7 @@ public class SearchTests extends BaseUI {
         }
     }
 
+    @Video(name = "checkAllOrderOptionCanBeSelectedTC806")
     @Test(groups = {"regression"},  enabled = TC806)
     public void checkAllOrderOptionCanBeSelectedTC806() {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
@@ -111,6 +121,7 @@ public class SearchTests extends BaseUI {
         }
     }
 
+    @Video(name = "testScreenshotSearchPageTC807")
     @Test(groups = {"regression"},  enabled = TC807)
     public void testScreenshotSearchPageTC807() {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
@@ -122,6 +133,7 @@ public class SearchTests extends BaseUI {
         }
     }
 
+    @Video(name = "checkAgeInSearchResultCorrespondToSelectedMinAndMaxAgesTC808")
     @Test(groups = {"regression"}, enabled = TC808, dataProviderClass = DataProviders.class, dataProvider = "minMaxAgeDataSet")
     public void checkAgeInSearchResultCorrespondToSelectedMinAndMaxAgesTC808(Integer minAge, Integer maxAge) {
         extentTest.log(Status.INFO, String.format("Test Data: minAge - %d, maxAge - %d", minAge, minAge));
@@ -141,6 +153,7 @@ public class SearchTests extends BaseUI {
         softAssert.assertAll();
     }
 
+    @Video(name = "searchDifferentResultsTC809")
     @Test(dataProviderClass = DataProviders.class, dataProvider = "minMaxAgeOrderDataSet", groups = {"regression"},  enabled = TC809)
     public void searchDifferentResultsTC809(String minAge, String maxAge, String searchOrder) {
         int minExpected = Integer.parseInt(minAge);
@@ -171,8 +184,9 @@ public class SearchTests extends BaseUI {
         }
     }
 
+    @Video(name = "checkFooterLinksSearchPageTC810")
     @Test(groups = {"regression"})
-    public void checkFooterLinks() {
+    public void checkFooterLinksTC810() {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         FooterTestsMethods.checkFooterLinks(searchPage);
     }

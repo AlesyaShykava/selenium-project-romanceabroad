@@ -4,12 +4,17 @@ import com.romanceabroad.ui.mainClasses.*;
 import com.romanceabroad.ui.testData.Data;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+import com.automation.remarks.testng.VideoListener;
+import com.automation.remarks.video.annotations.Video;
+import org.testng.annotations.Listeners;
 
 import java.util.List;
 
+@Listeners(VideoListener.class)
 public class BlogTests extends BaseUI {
     private String currentUrl;
 
+    @Video(name = "testBlogPage")
     @Test(groups = {"bvt", "regression"})
     public void testBlogPage() {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.BLOG);
@@ -19,6 +24,7 @@ public class BlogTests extends BaseUI {
         softAssert.assertAll();
     }
 
+    @Video(name = "testArticlesAndTitles")
     @Test(groups = {"regression"})
     public void testArticlesAndTitles() {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.BLOG);
@@ -37,6 +43,7 @@ public class BlogTests extends BaseUI {
         softAssert.assertAll();
     }
 
+    @Video(name = "checkFooterLinksBlogPage")
     @Test(groups = {"regression"})
     public void checkFooterLinks() {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.BLOG);

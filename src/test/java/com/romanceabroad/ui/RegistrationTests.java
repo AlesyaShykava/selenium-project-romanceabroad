@@ -5,8 +5,14 @@ import com.romanceabroad.ui.locators.Locators;
 import com.romanceabroad.ui.testData.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import com.automation.remarks.testng.VideoListener;
+import com.automation.remarks.video.annotations.Video;
+import org.testng.annotations.Listeners;
 
+@Listeners(VideoListener.class)
 public class RegistrationTests extends BaseUI {
+
+    @Video(name = "registrationHappyPath")
     @Test(groups = {"smoke", "regression"}, dataProvider = "RegistrationDataSetHappyPath", dataProviderClass = DataProviders.class)
     public void registrationHappyPath(String email, String password, String nickName, String phone, String monthDOB,
                                       String dayDOB, String yearDOB, String locationCity, String locationFull) {
@@ -25,6 +31,7 @@ public class RegistrationTests extends BaseUI {
         }
     }
 
+    @Video(name = "registrationWithWrongCredentials")
     @Test(groups = {"regression"}, dataProvider = "RegistrationDataSetWrongCredentials", dataProviderClass = DataProviders.class)
     public void registrationWithWrongCredentials(String incorrectEmail, String incorrectPassword) {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.JOIN_FOR_FREE_NOW);
@@ -38,6 +45,7 @@ public class RegistrationTests extends BaseUI {
         softAssert.assertAll();
     }
 
+    @Video(name = "testRegistration2")
     @Test(groups = {"regression"}, dataProvider = "Registration2",dataProviderClass = DataProviders.class)
     public void testRegistration2(String email, String nickName, boolean requirement) {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.JOIN_FOR_FREE_NOW);

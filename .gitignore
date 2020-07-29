@@ -1,4 +1,6 @@
 .idea/
+test-output/
+video/
 target/
 pom.xml.tag
 pom.xml.releaseBackup
