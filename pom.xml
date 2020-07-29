@@ -35,7 +35,7 @@
                 <version>3.0.0-M3</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>TestNG.xml</suiteXmlFile>
+                        <suiteXmlFile>TestNGParallelTesting.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <reportsDirectory>./test-output/${timestamp}</reportsDirectory>
                 </configuration>
@@ -85,6 +85,11 @@
             <version>4.0.9</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.automation-remarks</groupId>
+            <artifactId>video-recorder-testng</artifactId>
+            <version>1.0</version>
+        </dependency>
 
     </dependencies>
 

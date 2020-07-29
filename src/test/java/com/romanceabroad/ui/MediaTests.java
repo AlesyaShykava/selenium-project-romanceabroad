@@ -5,11 +5,16 @@ import com.romanceabroad.ui.testData.Data;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import com.automation.remarks.testng.VideoListener;
+import com.automation.remarks.video.annotations.Video;
+import org.testng.annotations.Listeners;
 
+@Listeners(VideoListener.class)
 public class MediaTests extends BaseUI {
     private String currentUrl;
     private String actualTitle;
 
+    @Video(name = "testMediaPage")
     @Test(groups = {"smoke", "regression"})
     public void testMediaPage() {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.MEDIA);
@@ -19,6 +24,7 @@ public class MediaTests extends BaseUI {
         softAssert.assertAll();
     }
 
+    @Video(name = "testUserTabs")
     @Test(groups = {"smoke", "regression"})
     public void testUserTabs() {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.MEDIA);
@@ -47,6 +53,7 @@ public class MediaTests extends BaseUI {
         }
     }
 
+    @Video(name = "checkFooterLinksMediaPage")
     @Test(groups = {"regression"})
     public void checkFooterLinks() {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.MEDIA);

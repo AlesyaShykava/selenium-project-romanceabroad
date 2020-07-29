@@ -4,18 +4,24 @@ import com.romanceabroad.ui.mainClasses.Enums;
 import com.romanceabroad.ui.testData.Data;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import com.automation.remarks.testng.VideoListener;
+import com.automation.remarks.video.annotations.Video;
+import org.testng.annotations.Listeners;
 
 import java.util.Map;
 
+@Listeners(VideoListener.class)
 public class HomeTests extends BaseUI {
     private String currentUrl;
 
+    @Video(name = "testNumberOfLinksOfNavbar")
     @Test(groups = {"regression"})
     public void testNumberOfLinksOfNavbar() {
         int actualNumberOfLinksInNavbar = homePage.getNumberOfLinksInNavbar();
         Assert.assertEquals(actualNumberOfLinksInNavbar, Data.expectedNumberOfLinksInNavbar);
     }
 
+    @Video(name = "testHomePage")
     @Test(groups = {"smoke", "regression"})
     public void testHomePage() {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.HOME);
@@ -25,11 +31,13 @@ public class HomeTests extends BaseUI {
         softAssert.assertAll();
     }
 
+    @Video(name = "testYouTubeVideoLink")
     @Test(priority = 3, groups = {"regression", "integration"})
     public void testYouTubeVideoLink() {
         homePage.playYouTubeVideo();
     }
 
+    @Video(name = "testLinksResponseCode")
     @Test(priority = 3, groups = {"regression", "integration"})
     public void testLinksResponseCode() {
         Map<String, Integer> linksWithCodeResponse = homePage.checkLinksOnWebPage("a", "href");
@@ -40,6 +48,7 @@ public class HomeTests extends BaseUI {
         softAssert.assertAll();
     }
 
+    @Video(name = "testImgResponseCode")
     @Test(priority = 2, groups = {"regression"})
     public void testImgResponseCode() {
         Map<String, Integer> linksWithCodeResponse = homePage.checkLinksOnWebPage("img", "src");
