@@ -24,6 +24,8 @@
             <class name ="com.romanceabroad.ui.ContactUsTests"/>
             <class name ="com.romanceabroad.ui.GiftsTests"/>
             <class name ="com.romanceabroad.ui.HomeTests"/>
+            <class name ="com.romanceabroad.ui.RegistrationTests"/>
+            <class name ="com.romanceabroad.ui.SearchTests"/>
         </classes>
     </test>
 

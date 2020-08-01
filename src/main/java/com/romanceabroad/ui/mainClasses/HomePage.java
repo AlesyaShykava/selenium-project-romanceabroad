@@ -1,6 +1,8 @@
 package com.romanceabroad.ui.mainClasses;
 
+import com.aventstack.extentreports.Status;
 import com.romanceabroad.ui.locators.Locators;
+import com.romanceabroad.ui.reportUtil.Reports;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,6 +19,7 @@ public class HomePage extends BaseActions {
     }
 
     public void clickOnLink(Enums.HomePageLinksOnHomePage link) {
+        Reports.log(Status.INFO, String.format("Click on link on Home page: %s", link.toString()));
         driver.findElement(link.getLocator()).click();
         switch (link) {
             case SIGN_IN:
