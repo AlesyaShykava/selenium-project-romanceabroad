@@ -1,8 +1,8 @@
 package com.romanceabroad.ui.mainClasses;
 
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.romanceabroad.ui.locators.Locators;
+import com.romanceabroad.ui.reportUtil.Reports;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,11 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchPage extends BaseActions implements FooterActions {
-    private static ExtentTest extentTest;
-
-    public SearchPage(WebDriver webDriver, WebDriverWait wait, ExtentTest extentTest) {
+    public SearchPage(WebDriver webDriver, WebDriverWait wait) {
         super(webDriver, wait);
-        this.extentTest = extentTest;
     }
 
     @Override
@@ -33,27 +30,27 @@ public class SearchPage extends BaseActions implements FooterActions {
     }
 
     public void selectMinAgeByValue(int minAgeForSearch) {
+        Reports.log(Status.INFO, String.format("Select age from min_age_dropdown: %s", minAgeForSearch));
         selectFromDropDownListByValue(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN, Integer.toString(minAgeForSearch));
         wait.until(ExpectedConditions.elementToBeClickable(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN));
-        extentTest.log(Status.INFO, String.format("%s value is selected from min_age_dropdown", minAgeForSearch));
     }
 
     public void selectMaxAgeByValue(int maxAgeForSearch) {
+        Reports.log(Status.INFO, String.format("Select age from max_age_dropdown: %s", maxAgeForSearch));
         selectFromDropDownListByValue(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN, Integer.toString(maxAgeForSearch));
         waitThreadSleepSec(1);
-        extentTest.log(Status.INFO, String.format("%s value is selected from max_age_dropdown list", maxAgeForSearch));
     }
 
     public void clickOnSearchButton() {
+        Reports.log(Status.INFO,"Click on search button");
         driver.findElement(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_SEARCH_BUTTON).click();
         wait.until(ExpectedConditions.invisibilityOfElementLocated(Locators.SEARCH_PAGE_LOADING_SPINNER));
-        extentTest.log(Status.INFO, "Click on search button");
     }
 
     public void setUpOrderByText(String orderText) {
+        Reports.log(Status.INFO, String.format("Select order from order_dropdown", orderText));
         selectFromDropDownListByText(Locators.SEARCH_PAGE_ORDER_DROPDOWN, orderText);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(Locators.SEARCH_PAGE_LOADING_SPINNER));
-        extentTest.log(Status.INFO, String.format("%s value was selected from order_dropdown list", orderText));
     }
 
     public boolean isUserPresentInSearchResult(By locator) {
@@ -65,8 +62,8 @@ public class SearchPage extends BaseActions implements FooterActions {
     }
 
     public void pagination_clickOnNextButton() {
+        Reports.log(Status.INFO, "Click on SEARCH_PAGE_PAGINATION_NEXT_BUTTON");
         driver.findElement(Locators.SEARCH_PAGE_PAGINATION_NEXT_BUTTON).click();
-        extentTest.log(Status.INFO, "SEARCH_PAGE_PAGINATION_NEXT_BUTTON is clicked");
     }
 
     public List<String> getListOfUserInfoNameAndAgeAllPages() {
@@ -119,13 +116,14 @@ public class SearchPage extends BaseActions implements FooterActions {
     public void clickOnProfileLinkByIndex(int index) {
         List<WebElement> linksToProfilePage = driver.findElements(Locators.SEARCH_PAGE_PROFILE_LINKS);
         WebElement profileLink = linksToProfilePage.get(index);
+        Reports.log(Status.INFO, String.format("Click on profile link from search result by index: %d", index));
         profileLink.click();
+        Reports.log(Status.INFO, "Wait for loading profile page");
         wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.PROFILE_PAGE_USER_NAME));
-        extentTest.log(Status.INFO, String.format("Clicked on profile link by %d index", index));
     }
 
     public String getUserInfoByIndex(int index) {
-        extentTest.log(Status.INFO, String.format("Get user info by %d index", index));
+        Reports.log(Status.INFO, String.format("Get user info by %d index", index));
         return driver.findElements(Locators.SEARCH_PAGE_USER_INFO_NAME_AGE).get(index).getText();
     }
 }

@@ -1,7 +1,9 @@
 package com.romanceabroad.ui;
 
+import com.aventstack.extentreports.Status;
 import com.romanceabroad.ui.mainClasses.Enums;
 import com.romanceabroad.ui.locators.Locators;
+import com.romanceabroad.ui.reportUtil.Reports;
 import com.romanceabroad.ui.testData.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -40,8 +42,24 @@ public class RegistrationTests extends BaseUI {
         registrationModal.clickOnPagination();
         String emailIncorrectAlertMessageActual = registrationModal.getEmailAlertMessage();
         String passwordIncorrectAlertMessageActual = registrationModal.getPasswordAlertMessage();
-        softAssert.assertTrue(Data.registrationFormEmailIncorrectAlertMessageExpected.equals(emailIncorrectAlertMessageActual));
-        softAssert.assertTrue(Data.registrationFormPasswordIncorrectAlertMessageExpected.equals(passwordIncorrectAlertMessageActual));
+        boolean isEmailAlertCorrect = Data.registrationFormEmailIncorrectAlertMessageExpected.equals(emailIncorrectAlertMessageActual);
+        if(isEmailAlertCorrect) {
+            Reports.log(Status.INFO, String.format("Alert message for email field correct: %s", emailIncorrectAlertMessageActual));
+            softAssert.assertTrue(true);
+        } else {
+            Reports.log(Status.FAIL, String.format("Alert message for email field is incorrect. Expected: %s, Actual: %s",
+                    Data.registrationFormEmailIncorrectAlertMessageExpected, emailIncorrectAlertMessageActual));
+            softAssert.fail("");
+        }
+        boolean isPasswordAlertCorrect = Data.registrationFormPasswordIncorrectAlertMessageExpected.equals(passwordIncorrectAlertMessageActual);
+        if(isPasswordAlertCorrect) {
+            Reports.log(Status.INFO, String.format("Alert message for password field correct: %s", passwordIncorrectAlertMessageActual));
+            softAssert.assertTrue(true);
+        } else {
+            Reports.log(Status.FAIL, String.format("Alert message for password field is incorrect. Expected: %s, Actual: %s",
+                    Data.registrationFormPasswordIncorrectAlertMessageExpected, passwordIncorrectAlertMessageActual));
+            softAssert.fail("");
+        }
         softAssert.assertAll();
     }
 

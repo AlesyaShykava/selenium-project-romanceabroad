@@ -3,6 +3,7 @@ package com.romanceabroad.ui;
 import com.aventstack.extentreports.Status;
 import com.romanceabroad.ui.locators.Locators;
 import com.romanceabroad.ui.mainClasses.Enums;
+import com.romanceabroad.ui.reportUtil.Reports;
 import com.romanceabroad.ui.testData.Data;
 import com.romanceabroad.ui.testData.DataProviders;
 import org.apache.commons.io.FileUtils;
@@ -136,7 +137,7 @@ public class SearchTests extends BaseUI {
     @Video(name = "checkAgeInSearchResultCorrespondToSelectedMinAndMaxAgesTC808")
     @Test(groups = {"regression"}, enabled = TC808, dataProviderClass = DataProviders.class, dataProvider = "minMaxAgeDataSet")
     public void checkAgeInSearchResultCorrespondToSelectedMinAndMaxAgesTC808(Integer minAge, Integer maxAge) {
-        extentTest.log(Status.INFO, String.format("Test Data: minAge - %d, maxAge - %d", minAge, minAge));
+        Reports.log(Status.INFO, String.format("Test Data: minAge - %d, maxAge - %d", minAge, minAge));
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         searchPage.performSearchBasedOnMinAndMaxAgeParametersByValue(minAge, maxAge);
         List<String> listWomanSummary = searchPage.getListOfUserInfoNameAndAgeAllPages();
@@ -158,7 +159,7 @@ public class SearchTests extends BaseUI {
     public void searchDifferentResultsTC809(String minAge, String maxAge, String searchOrder) {
         int minExpected = Integer.parseInt(minAge);
         int maxExpected = Integer.parseInt(maxAge);
-        extentTest.log(Status.INFO, String.format("Test Data: minAge - %d, maxAge - %d, searchOrder - %s", minExpected, maxExpected, searchOrder));
+        Reports.log(Status.INFO, String.format("Test Data: minAge - %d, maxAge - %d, searchOrder - %s", minExpected, maxExpected, searchOrder));
 
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         searchPage.selectMinAgeByValue(minExpected);
@@ -174,9 +175,9 @@ public class SearchTests extends BaseUI {
                 int ageActual = Integer.parseInt(splitedPhase[1]);
 
                 if(ageActual >= minExpected && ageActual <= maxExpected) {
-                    extentTest.log(Status.INFO, "This age: " + ageActual + " is correct");
+                    Reports.log(Status.INFO, "This age: " + ageActual + " is correct");
                 } else {
-                    extentTest.fail("Wrong age: " + ageActual);
+                    Reports.log(Status.FAIL, "Wrong age: " + ageActual);
                 }
             }
             searchPage.waitThreadSleepSec(1);
