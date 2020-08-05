@@ -9,42 +9,42 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="FirefoxTestCases">
-        <parameter name="browser" value="firefox"/>
-        <classes>
-            <class name ="com.romanceabroad.ui.MediaTests"/>
-            <class name ="com.romanceabroad.ui.TourToUkraineTests"/>
-            <class name ="com.romanceabroad.ui.RegistrationTests"/>
-        </classes>
-    </test>
+<!--    <test name="FirefoxTestCases">-->
+<!--        <parameter name="browser" value="firefox"/>-->
+<!--        <classes>-->
+<!--            <class name ="com.romanceabroad.ui.MediaTests"/>-->
+<!--            <class name ="com.romanceabroad.ui.TourToUkraineTests"/>-->
+<!--            <class name ="com.romanceabroad.ui.RegistrationTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="ChromeTestCases">
         <parameter name="browser" value="chrome"/>
         <groups>
-            <run>
-                <include name="regression" />
-                <include name="smoke" />
-                <exclude name="integration" />
-            </run>
+<!--            <run>-->
+<!--                <include name="regression" />-->
+<!--                <include name="smoke" />-->
+<!--                <exclude name="integration" />-->
+<!--            </run>-->
         </groups>
         <classes>
             <class name ="com.romanceabroad.ui.BlogTests"/>
-            <class name ="com.romanceabroad.ui.ContactUsTests"/>
-            <class name ="com.romanceabroad.ui.GiftsTests"/>
-            <class name ="com.romanceabroad.ui.HomeTests"/>
-            <class name ="com.romanceabroad.ui.HowWeWorkTests"/>
-            <class name ="com.romanceabroad.ui.MediaTests"/>
-            <class name ="com.romanceabroad.ui.RegistrationTests"/>
-            <class name ="com.romanceabroad.ui.RestorePasswordTests"/>
-            <class name ="com.romanceabroad.ui.SearchTests">
-                <methods>
-                    <include name="test.*"/>
-                    <exclude name=".*Screenshot.*" />
-                </methods>
-            </class>
-            <class name ="com.romanceabroad.ui.SignInTests"/>
-            <class name ="com.romanceabroad.ui.TourToUkraineTests"/>
-            <class name ="com.romanceabroad.ui.UserProfileTests"/>
+<!--            <class name ="com.romanceabroad.ui.ContactUsTests"/>-->
+<!--            <class name ="com.romanceabroad.ui.GiftsTests"/>-->
+<!--            <class name ="com.romanceabroad.ui.HomeTests"/>-->
+<!--            <class name ="com.romanceabroad.ui.HowWeWorkTests"/>-->
+<!--            <class name ="com.romanceabroad.ui.MediaTests"/>-->
+<!--            <class name ="com.romanceabroad.ui.RegistrationTests"/>-->
+<!--            <class name ="com.romanceabroad.ui.RestorePasswordTests"/>-->
+<!--            <class name ="com.romanceabroad.ui.SearchTests">-->
+<!--                <methods>-->
+<!--                    <include name="test.*"/>-->
+<!--                    <exclude name=".*Screenshot.*" />-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name ="com.romanceabroad.ui.SignInTests"/>-->
+<!--            <class name ="com.romanceabroad.ui.TourToUkraineTests"/>-->
+<!--            <class name ="com.romanceabroad.ui.UserProfileTests"/>-->
         </classes>
     </test>
 

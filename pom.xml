@@ -35,7 +35,7 @@
                 <version>3.0.0-M3</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>TestNGParallelTesting.xml</suiteXmlFile>
+                        <suiteXmlFile>TestNG.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <reportsDirectory>./test-output/${timestamp}</reportsDirectory>
                 </configuration>
