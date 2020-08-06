@@ -23,6 +23,8 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class Reports {
+    private static final boolean isJenkinsExecution = true;
+
     public static ExtentHtmlReporter htmlReporter;
     public static ExtentReports extentReports;
     private static ThreadLocal<ExtentTest> extentTestThreadLocal = new ThreadLocal<>();
@@ -31,12 +33,16 @@ public class Reports {
     private static String currentTestSuiteResultsPathDir;
 
     static {
-        System.out.println(Thread.currentThread().toString());
         LocalDateTime ldt = LocalDateTime.now();
         String formattedDate = ldt.format(DateTimeFormatter.ofPattern("yyyy -MM-dd HH-mm-ss"));
 
-        currentTestSuiteResultsPathDir = "./reports/Suite_" + formattedDate + "/";
-        new File(currentTestSuiteResultsPathDir).mkdir();
+        if (isJenkinsExecution) {
+            currentTestSuiteResultsPathDir = "./reports/JenkinsReport/";
+        } else {
+            currentTestSuiteResultsPathDir = "./reports/Suite_" + formattedDate + "/";
+            new File(currentTestSuiteResultsPathDir).mkdir();
+        }
+
         htmlReporter = new ExtentHtmlReporter(currentTestSuiteResultsPathDir + "extent.html");
         htmlReporter.config().setEncoding("utf-8");
         htmlReporter.config().setDocumentTitle("Automation Reports");
