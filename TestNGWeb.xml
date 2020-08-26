@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="TestSuite" parallel="none">
+<suite name="Test Suite for Web running not in Sauce Labs">
 
 <!--    <test name="IETestCases">-->
 <!--        <parameter name="browser" value="ie"/>-->
@@ -9,14 +9,14 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--    <test name="FirefoxTestCases">-->
-<!--        <parameter name="browser" value="firefox"/>-->
-<!--        <classes>-->
-<!--            <class name ="com.romanceabroad.ui.MediaTests"/>-->
-<!--            <class name ="com.romanceabroad.ui.TourToUkraineTests"/>-->
-<!--            <class name ="com.romanceabroad.ui.RegistrationTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="FirefoxTestCases">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name ="com.romanceabroad.ui.MediaTests"/>
+            <class name ="com.romanceabroad.ui.TourToUkraineTests"/>
+            <class name ="com.romanceabroad.ui.RegistrationTests"/>
+        </classes>
+    </test>
 
     <test name="ChromeTestCases">
         <parameter name="browser" value="chrome"/>

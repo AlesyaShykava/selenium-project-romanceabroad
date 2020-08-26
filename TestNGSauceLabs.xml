@@ -1,0 +1,60 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Test Suite for Web running in Sauce Labs" parallel="tests" thread-count="2">
+
+    <test name="ChromeTestCases">
+        <parameter name="testBox" value="sauce"/>
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="version" value="68.0"/>
+        <parameter name="platform" value="Windows 10"/>
+
+        <classes>
+            <class name ="com.romanceabroad.ui.RegistrationTestsSauceLabs"/>
+        </classes>
+    </test>
+
+    <test name="FirefoxTestCases">
+        <parameter name="testBox" value="sauce"/>
+        <parameter name="browser" value="Firefox"/>
+        <parameter name="version" value="68.0"/>
+        <parameter name="platform" value="macOS 10.14"/>
+
+        <classes>
+            <class name ="com.romanceabroad.ui.RegistrationTestsSauceLabs"/>
+        </classes>
+    </test>
+
+    <test name="EdgeTestCases">
+        <parameter name="testBox" value="sauce"/>
+        <parameter name="browser" value="MicrosoftEdge"/>
+        <parameter name="version" value="16.16299"/>
+        <parameter name="platform" value="Windows 10"/>
+
+        <classes>
+            <class name ="com.romanceabroad.ui.RegistrationTestsSauceLabs"/>
+        </classes>
+    </test>
+
+    <test name="IETestCases">
+        <parameter name="testBox" value="sauce"/>
+        <parameter name="browser" value="Internet Explorer"/>
+        <parameter name="version" value="11.285"/>
+        <parameter name="platform" value="Windows 10"/>
+
+        <classes>
+            <class name ="com.romanceabroad.ui.RegistrationTestsSauceLabs"/>
+        </classes>
+    </test>
+
+    <test name="SafariTestCases">
+        <parameter name="testBox" value="sauce"/>
+        <parameter name="browser" value="Safari"/>
+        <parameter name="version" value="12.1"/>
+        <parameter name="platform" value="macOS 10.13"/>
+
+        <classes>
+            <class name ="com.romanceabroad.ui.RegistrationTestsSauceLabs"/>
+        </classes>
+    </test>
+
+</suite>

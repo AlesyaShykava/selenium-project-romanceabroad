@@ -1,0 +1,45 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Test Suite for mobile optimization running">
+
+    <test name="Galaxy S5 Test Cases">
+        <parameter name="testBox" value="not_sauce_mobile"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="deviceName" value="Galaxy S5"/>
+
+        <classes>
+            <class name ="com.romanceabroad.ui.RegistrationTestsSauceLabs"/>
+        </classes>
+    </test>
+
+    <test name="Galaxy Note 3 Test Cases">
+        <parameter name="testBox" value="not_sauce_mobile"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="deviceName" value="Galaxy Note 3"/>
+
+        <classes>
+            <class name ="com.romanceabroad.ui.RegistrationTestsSauceLabs"/>
+        </classes>
+    </test>
+
+    <test name="iPhone X Test Cases">
+        <parameter name="testBox" value="not_sauce_mobile"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="deviceName" value="iPhone X"/>
+
+        <classes>
+            <class name ="com.romanceabroad.ui.RegistrationTestsSauceLabs"/>
+        </classes>
+    </test>
+
+    <test name="iPhone 6/7/8 Test Cases">
+        <parameter name="testBox" value="not_sauce_mobile"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="deviceName" value="iPhone 6/7/8"/>
+
+        <classes>
+            <class name ="com.romanceabroad.ui.RegistrationTestsSauceLabs"/>
+        </classes>
+    </test>
+
+</suite>
