@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="TestSuite" parallel="tests" thread-count="2">
+<suite name="Test Suite for Web running in Sauce Labs" parallel="tests" thread-count="2">
 
     <test name="ChromeTestCases">
         <parameter name="testBox" value="sauce"/>

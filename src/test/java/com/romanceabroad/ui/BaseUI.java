@@ -21,6 +21,8 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaseUI {
     protected String mainURl = "https://romanceabroad.com/";
@@ -41,43 +43,63 @@ public class BaseUI {
     protected UserProfilePage userProfilePage;
     protected ContactUsPage contactUsPage;
     protected RunningConfiguration runningConfiguration;
+    protected Browser testBrowser;
 
     protected enum RunningConfiguration {
-        SAUCE,
-        LOCAL;
+        SAUCE, NOT_SAUCE_WEB, NOT_SAUCE_MOBILE;
+    }
+
+    protected enum Browser {
+        CHROME, FIREFOX, IE,
     }
 
     @BeforeMethod(groups = {"smoke", "regression", "integration", "negative"}, alwaysRun = true)
-    @Parameters({"browser", "version", "platform", "testBox"})
-    public void setup(@Optional("Chrome") String browser, @Optional String version, @Optional String platform, @Optional String configuration, Method method) throws MalformedURLException {
+    @Parameters({"browser", "version", "platform", "testBox", "deviceName"})
+    public void setup(@Optional("Chrome") String browser, @Optional String version, @Optional String platform, @Optional("not_sauce_web") String configuration, @Optional String deviceName, Method method) throws MalformedURLException {
         Reports.startTest(method.getDeclaringClass().getName() + " : " + method.getName());
         Reports.log(Status.INFO, "Starting execution of test case on the browser: " + browser);
 
         runningConfiguration = RunningConfiguration.valueOf(configuration.toUpperCase());
+        if (runningConfiguration != RunningConfiguration.SAUCE) {
+            testBrowser = Browser.valueOf(browser.toUpperCase());
+        }
 
         switch (runningConfiguration) {
-            case LOCAL:
-                if (browser.equalsIgnoreCase("firefox")) {
-                    System.setProperty("webdriver.gecko.driver", "resources/geckodriver");
-                    driver = new EventFiringWebDriver(new FirefoxDriver());
-                    driver.register(new EventReporter());
-                } else if (browser.equalsIgnoreCase("chrome")) {
-                    System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
-                    driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
-                    driver.register(new EventReporter());
-                    //driver.get("chrome://settings/clearBrowserData");
-                } else if (browser.equalsIgnoreCase("IE")) {
-                    System.setProperty("webdriver.ie.driver", "resources/IEDriverServer");
-                    driver = new EventFiringWebDriver(new InternetExplorerDriver());
-                    driver.register(new EventReporter());
-                    driver.manage().deleteAllCookies();
-                } else {
-                    System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
-                    driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
-                    driver.register(new EventReporter());
-                    //driver.get("chrome://settings/clearBrowserData");
+
+            case NOT_SAUCE_WEB:
+                switch (testBrowser) {
+                    case CHROME:
+                        System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
+                        driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
+                        driver.register(new EventReporter());
+                        //driver.get("chrome://settings/clearBrowserData");
+                        break;
+                    case FIREFOX:
+                        System.setProperty("webdriver.gecko.driver", "resources/geckodriver");
+                        driver = new EventFiringWebDriver(new FirefoxDriver());
+                        driver.register(new EventReporter());
+                        break;
+                    case IE:
+                        System.setProperty("webdriver.ie.driver", "resources/IEDriverServer");
+                        driver = new EventFiringWebDriver(new InternetExplorerDriver());
+                        driver.register(new EventReporter());
+                        driver.manage().deleteAllCookies();
+                        break;
                 }
                 break;
+
+            case NOT_SAUCE_MOBILE:
+                System.out.println("Mobile Chrome");
+                Map<String, String> mobileEmulation = new HashMap<>();
+                mobileEmulation.put("deviceName", deviceName);
+                ChromeOptions chromeOptions = getChromeOptions();
+                chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
+                System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
+                driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
+                driver.register(new EventReporter());
+                //driver.get("chrome://settings/clearBrowserData");
+                break;
+
             case SAUCE:
                 DesiredCapabilities capabilities = new DesiredCapabilities();
                 capabilities.setCapability("username", "ASocolova");
