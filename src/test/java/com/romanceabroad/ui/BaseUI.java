@@ -4,10 +4,13 @@ import com.aventstack.extentreports.Status;
 import com.romanceabroad.ui.mainClasses.*;
 import com.romanceabroad.ui.reportUtil.EventReporter;
 import com.romanceabroad.ui.reportUtil.Reports;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
@@ -15,6 +18,8 @@ import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collections;
 
 public class BaseUI {
@@ -35,31 +40,57 @@ public class BaseUI {
     protected LoginPage loginPage;
     protected UserProfilePage userProfilePage;
     protected ContactUsPage contactUsPage;
+    protected RunningConfiguration runningConfiguration;
+
+    protected enum RunningConfiguration {
+        SAUCE,
+        LOCAL;
+    }
 
     @BeforeMethod(groups = {"smoke", "regression", "integration", "negative"}, alwaysRun = true)
-    @Parameters("browser")
-    public void setup(@Optional("chrome") String browser, Method method){
+    @Parameters({"browser", "version", "platform", "testBox"})
+    public void setup(@Optional("Chrome") String browser, @Optional String version, @Optional String platform, @Optional String configuration, Method method) throws MalformedURLException {
         Reports.startTest(method.getDeclaringClass().getName() + " : " + method.getName());
         Reports.log(Status.INFO, "Starting execution of test case on the browser: " + browser);
-        if (browser.equalsIgnoreCase("firefox")) {
-            System.setProperty("webdriver.gecko.driver", "resources/geckodriver");
-            driver = new EventFiringWebDriver(new FirefoxDriver());
-            driver.register(new EventReporter());
-        } else if (browser.equalsIgnoreCase("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
-            driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
-            driver.register(new EventReporter());
-            //driver.get("chrome://settings/clearBrowserData");
-        } else if (browser.equalsIgnoreCase("IE")) {
-            System.setProperty("webdriver.ie.driver", "resources/IEDriverServer");
-            driver = new EventFiringWebDriver(new InternetExplorerDriver());
-            driver.register(new EventReporter());
-            driver.manage().deleteAllCookies();
-        } else {
-            System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
-            driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
-            driver.register(new EventReporter());
-            //driver.get("chrome://settings/clearBrowserData");
+
+        runningConfiguration = RunningConfiguration.valueOf(configuration.toUpperCase());
+
+        switch (runningConfiguration) {
+            case LOCAL:
+                if (browser.equalsIgnoreCase("firefox")) {
+                    System.setProperty("webdriver.gecko.driver", "resources/geckodriver");
+                    driver = new EventFiringWebDriver(new FirefoxDriver());
+                    driver.register(new EventReporter());
+                } else if (browser.equalsIgnoreCase("chrome")) {
+                    System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
+                    driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
+                    driver.register(new EventReporter());
+                    //driver.get("chrome://settings/clearBrowserData");
+                } else if (browser.equalsIgnoreCase("IE")) {
+                    System.setProperty("webdriver.ie.driver", "resources/IEDriverServer");
+                    driver = new EventFiringWebDriver(new InternetExplorerDriver());
+                    driver.register(new EventReporter());
+                    driver.manage().deleteAllCookies();
+                } else {
+                    System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
+                    driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
+                    driver.register(new EventReporter());
+                    //driver.get("chrome://settings/clearBrowserData");
+                }
+                break;
+            case SAUCE:
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability("username", "ASocolova");
+                capabilities.setCapability("accessKey", "4a2d7600-9d2e-4ce6-ac84-574b28fb76ab");
+                capabilities.setCapability("browserName", browser);
+                capabilities.setCapability("platform", platform);
+                capabilities.setCapability("version", version);
+                capabilities.setCapability("name", method.getName());
+                driver = new EventFiringWebDriver(new RemoteWebDriver(
+                        new URL("http://" + System.getenv("SAUCE_USERNAME") + ":" + System.getenv("SAUCE_ACCESS_KEY") + "@ondemand.saucelabs.com:80/wd/hub"),
+                        capabilities));
+                driver.register(new EventReporter());
+                break;
         }
 
         wait = new WebDriverWait(driver, 40);
@@ -89,6 +120,11 @@ public class BaseUI {
         }else if(ITestResult.SUCCESS == result.getStatus()) {
             Reports.passedTest(result);
         }
+
+        if(runningConfiguration == RunningConfiguration.SAUCE) {
+            ((JavascriptExecutor)driver).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
+        }
+
         driver.quit();
     }
 

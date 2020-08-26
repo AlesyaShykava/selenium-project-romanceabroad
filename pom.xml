@@ -35,7 +35,7 @@
                 <version>3.0.0-M3</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>TestNG.xml</suiteXmlFile>
+                        <suiteXmlFile>TestNGSauceLabs.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <reportsDirectory>./test-output/${timestamp}</reportsDirectory>
                 </configuration>
