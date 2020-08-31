@@ -23,6 +23,11 @@ public class SearchPage extends BaseActions implements FooterActions {
         return driver.getTitle();
     }
 
+    public void clickMobileSearchParametersButton() {
+        driver.findElement(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MOBILE_BUTTON).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN));
+    }
+
     public void performSearchBasedOnMinAndMaxAgeParametersByValue(int minAgeForSearch, int maxAgeForSearch) {
         selectMinAgeByValue(minAgeForSearch);
         selectMaxAgeByValue(maxAgeForSearch);

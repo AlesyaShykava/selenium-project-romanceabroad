@@ -4,6 +4,7 @@ import com.aventstack.extentreports.Status;
 import com.romanceabroad.ui.mainClasses.*;
 import com.romanceabroad.ui.reportUtil.EventReporter;
 import com.romanceabroad.ui.reportUtil.Reports;
+import com.romanceabroad.ui.testData.Data;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -25,7 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BaseUI {
-    protected String mainURl = "https://romanceabroad.com/";
     protected EventFiringWebDriver driver;
     protected WebDriverWait wait;
     protected SoftAssert softAssert = new SoftAssert();
@@ -46,7 +46,19 @@ public class BaseUI {
     protected Browser testBrowser;
 
     protected enum RunningConfiguration {
-        SAUCE, NOT_SAUCE_WEB, NOT_SAUCE_MOBILE;
+        SAUCE("sauce"),
+        NOT_SAUCE_WEB("notSauceWeb"),
+        NOT_SAUCE_MOBILE("notSauceMobile");
+
+        private String name;
+
+        RunningConfiguration(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 
     protected enum Browser {
@@ -54,8 +66,14 @@ public class BaseUI {
     }
 
     @BeforeMethod(groups = {"smoke", "regression", "integration", "negative"}, alwaysRun = true)
-    @Parameters({"browser", "version", "platform", "testBox", "deviceName"})
-    public void setup(@Optional("Chrome") String browser, @Optional String version, @Optional String platform, @Optional("not_sauce_web") String configuration, @Optional String deviceName, Method method) throws MalformedURLException {
+    @Parameters({"browser", "version", "platform", "configuration", "deviceName", "testEnv"})
+    public void setup(@Optional("Chrome") String browser,
+                      @Optional String version,
+                      @Optional String platform,
+                      @Optional("not_sauce_web") String configuration,
+                      @Optional String deviceName,
+                      @Optional("qa") String testEnv,
+                      Method method) throws MalformedURLException {
         Reports.startTest(method.getDeclaringClass().getName() + " : " + method.getName());
         Reports.log(Status.INFO, "Starting execution of test case on the browser: " + browser);
 
@@ -86,6 +104,7 @@ public class BaseUI {
                         driver.manage().deleteAllCookies();
                         break;
                 }
+                driver.manage().window().maximize();
                 break;
 
             case NOT_SAUCE_MOBILE:
@@ -129,8 +148,15 @@ public class BaseUI {
         loginPage = new LoginPage(driver, wait);
         userProfilePage = new UserProfilePage(driver, wait);
         contactUsPage = new ContactUsPage(driver, wait);
-        driver.manage().window().maximize();
-        driver.get(mainURl);
+        if(testEnv.equals("qa")) {
+            driver.get(Data.qaURl);
+        } else if (testEnv.equals("uat")) {
+            driver.get(Data.uatURl);
+        } else if (testEnv.equals("dev")) {
+            driver.get(Data.devURl);
+        } else if (testEnv.equals("prod")) {
+            driver.get(Data.prodURl);
+        }
     }
 
     @AfterMethod(alwaysRun = true)

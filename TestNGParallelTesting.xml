@@ -3,6 +3,7 @@
 <suite name="Test Suite for Parallel Web running not in Sauce Labs" parallel="tests" thread-count="2">
 
     <test name="FirefoxTestCases">
+        <parameter name="env" value="prod"/>
         <parameter name="browser" value="firefox"/>
         <classes>
             <class name ="com.romanceabroad.ui.MediaTests"/>
@@ -11,6 +12,7 @@
     </test>
 
     <test name="ChromeTestCases">
+        <parameter name="env" value="prod"/>
         <parameter name="browser" value="chrome"/>
         <groups>
             <run>

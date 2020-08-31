@@ -18,6 +18,34 @@ public class HomePage extends BaseActions {
         return driver.findElements(Locators.NAVBAR).size();
     }
 
+    public void clickMobileNavbarButton() {
+        driver.findElement(Locators.NAVBAR_MOBILE_BUTTON).click();
+    }
+
+    public void clickMobileNavbarButton1(String runningConfiguration) {
+        if(runningConfiguration.equals("notSauceMobile")) {
+            driver.findElement(Locators.NAVBAR_MOBILE_BUTTON).click();
+        }
+    }
+
+    public void clickMobileNavbarButton1() {
+        try {
+            driver.findElement(Locators.NAVBAR_MOBILE_BUTTON).click();
+        } catch (Exception e) { }
+    }
+
+    public void clickMobileNavbarButton2() {
+        if(driver.findElement(Locators.NAVBAR_MOBILE_BUTTON).isDisplayed()) {
+            driver.findElement(Locators.NAVBAR_MOBILE_BUTTON).click();
+        }
+    }
+
+    public void clickMobileNavbarButton3() {
+        if(driver.findElements(Locators.NAVBAR_MOBILE_BUTTON).size() > 0) {
+            driver.findElement(Locators.NAVBAR_MOBILE_BUTTON).click();
+        }
+    }
+
     public void clickOnLink(Enums.HomePageLinksOnHomePage link) {
         Reports.log(Status.INFO, String.format("Click on link on Home page: %s", link.toString()));
         driver.findElement(link.getLocator()).click();
@@ -26,7 +54,7 @@ public class HomePage extends BaseActions {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SIGN_IN_EMAIL_FIELD));
                 break;
             case SEARCH:
-                wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN));
+                wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SEARCH_PAGE_ORDER_DROPDOWN));
                 break;
             case BLOG:
                 wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.BLOG_LINK_OF_ARTICLES));
