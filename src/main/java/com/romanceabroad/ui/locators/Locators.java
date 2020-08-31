@@ -15,6 +15,7 @@ public class Locators {
     public static final By NAVBAR_BLOG_LINK = By.xpath("//a[@href='https://romanceabroad.com/content/view/blog']");
     public static final By NAVBAR_SIGN_IN_LINK = By.xpath("//a[@href='https://romanceabroad.com/users/login_form'][1]");
     public static final By NAVBAR_JOIN_FOR_FREE_NOW_LINK = By.cssSelector("#show-registration-block");
+    public static final By NAVBAR_MOBILE_BUTTON = By.xpath("//button[contains(@class, 'navbar-toggler-right')]");
 
     //other element on the 'Home' page
     public static final By FRAME_WITH_YOUTUBE_VIDEO = By.xpath("//iframe[@src='https://www.youtube.com/embed/RRECuJzm3IY?start=85']");
@@ -55,6 +56,7 @@ public class Locators {
     public static final By REGISTRATION_AUTO_SUGGESTIONS_LIST_LOCATION = By.xpath("//div[@class='dropdown dropdown_location']//li");
 
     //elements on 'Search' page
+    public static final By SEARCH_PAGE_SEARCH_PARAMETERS_MOBILE_BUTTON = By.xpath("//div[@class='search-param-button mb10']//a");
     public static final By SEARCH_PAGE_SEARCH_PARAMETERS_MIN_AGE_DROPDOWN = By.xpath("//select[@id='age_min']");
     public static final By SEARCH_PAGE_SEARCH_PARAMETERS_MAX_AGE_DROPDOWN = By.xpath("//select[@id='age_max']");
     public static final By SEARCH_PAGE_SEARCH_PARAMETERS_SEARCH_BUTTON = By.xpath("//input[@id='main_search_button_user_advanced']");

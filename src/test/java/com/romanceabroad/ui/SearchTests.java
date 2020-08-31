@@ -24,16 +24,16 @@ import java.util.Random;
 public class SearchTests extends BaseUI {
     private String currentUrl;
     private Random random = new Random();
-    public static final boolean TC801 = true;
-    public static final boolean TC802 = true;
-    public static final boolean TC803 = true;
-    public static final boolean TC804 = true;
-    public static final boolean TC805 = true;
-    public static final boolean TC806 = true;
-    public static final boolean TC807 = true;
-    public static final boolean TC808 = true;
+    public static final boolean TC801 = false;
+    public static final boolean TC802 = false;
+    public static final boolean TC803 = false;
+    public static final boolean TC804 = false;
+    public static final boolean TC805 = false;
+    public static final boolean TC806 = false;
+    public static final boolean TC807 = false;
+    public static final boolean TC808 = false;
     public static final boolean TC809 = true;
-    public static final boolean TC810 = true;
+    public static final boolean TC810 = false;
 
     @Video(name = "testSearchPageTC801")
     @Test(groups = {"smoke", "regression"}, enabled = TC801)
@@ -161,7 +161,13 @@ public class SearchTests extends BaseUI {
         int maxExpected = Integer.parseInt(maxAge);
         Reports.log(Status.INFO, String.format("Test Data: minAge - %d, maxAge - %d, searchOrder - %s", minExpected, maxExpected, searchOrder));
 
+//        if(runningConfiguration.getName().equals("notSauceMobile")) homePage.clickMobileNavbarButton();
+
+        homePage.clickMobileNavbarButton1(runningConfiguration.getName());
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
+
+        if(runningConfiguration.getName().equals("notSauceMobile")) searchPage.clickMobileSearchParametersButton();
+
         searchPage.selectMinAgeByValue(minExpected);
         searchPage.selectMaxAgeByValue(maxExpected);
         searchPage.setUpOrderByText(searchOrder);
@@ -186,7 +192,7 @@ public class SearchTests extends BaseUI {
     }
 
     @Video(name = "checkFooterLinksSearchPageTC810")
-    @Test(groups = {"regression"})
+    @Test(groups = {"regression"}, enabled = TC810)
     public void checkFooterLinksTC810() {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
         FooterTestsMethods.checkFooterLinks(searchPage);

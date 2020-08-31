@@ -25,6 +25,7 @@
     </test>
 
     <test name="EdgeTestCases">
+        <parameter name="env" value="prod"/>
         <parameter name="testBox" value="sauce"/>
         <parameter name="browser" value="MicrosoftEdge"/>
         <parameter name="version" value="16.16299"/>
@@ -36,7 +37,7 @@
     </test>
 
     <test name="IETestCases">
-        <parameter name="testBox" value="sauce"/>
+        <parameter name="configuration" value="sauce"/>
         <parameter name="browser" value="Internet Explorer"/>
         <parameter name="version" value="11.285"/>
         <parameter name="platform" value="Windows 10"/>

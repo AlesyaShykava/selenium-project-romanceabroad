@@ -10,6 +10,7 @@
 <!--    </test>-->
 
     <test name="FirefoxTestCases">
+        <parameter name="env" value="prod"/>
         <parameter name="browser" value="firefox"/>
         <classes>
             <class name ="com.romanceabroad.ui.MediaTests"/>

@@ -6,6 +6,12 @@ import java.util.Arrays;
 
 public class Data {
 
+    public static final String qaURl = "https://romanceabroad.com/";
+    public static final String devURl = "https://romanceabroad.com/";
+    public static final String uatURl = "https://romanceabroad.com/";
+    public static final String prodURl = "https://romanceabroad.com/";
+
+
     //'Search' page
     public static final String searchPageTitleExpected = "Meet single Ukrainian women online: dating and marriage at Marry Ukrainian Lady";
     public static final String expectedUrlSearchPage = "https://romanceabroad.com/users/search";
