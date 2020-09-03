@@ -126,7 +126,7 @@ public class SearchTests extends BaseUI {
     @Test(groups = {"regression"},  enabled = TC807)
     public void testScreenshotSearchPageTC807() {
         homePage.clickOnLink(Enums.HomePageLinksOnHomePage.SEARCH);
-        File tempFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File tempFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(tempFile, new File("screenshots/searchPageScreenshot.png"));
         } catch (IOException e) {
