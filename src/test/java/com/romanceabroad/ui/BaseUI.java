@@ -6,12 +6,15 @@ import com.romanceabroad.ui.reportUtil.EventReporter;
 import com.romanceabroad.ui.reportUtil.Reports;
 import com.romanceabroad.ui.testData.Data;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
@@ -26,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BaseUI {
-    protected EventFiringWebDriver driver;
+    protected WebDriver driver;
     protected WebDriverWait wait;
     protected SoftAssert softAssert = new SoftAssert();
     protected HomePage homePage;
@@ -62,7 +65,7 @@ public class BaseUI {
     }
 
     protected enum Browser {
-        CHROME, FIREFOX, IE,
+        CHROME, FIREFOX, IE, REMOTE_CHROME, REMOTE_FIREFOX
     }
 
     @BeforeMethod(groups = {"smoke", "regression", "integration", "negative"}, alwaysRun = true)
@@ -88,20 +91,29 @@ public class BaseUI {
                 switch (testBrowser) {
                     case CHROME:
                         System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
-                        driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
-                        driver.register(new EventReporter());
+                        driver = new ChromeDriver(getChromeOptions());
                         //driver.get("chrome://settings/clearBrowserData");
                         break;
                     case FIREFOX:
                         System.setProperty("webdriver.gecko.driver", "resources/geckodriver");
-                        driver = new EventFiringWebDriver(new FirefoxDriver());
-                        driver.register(new EventReporter());
+                        driver = new FirefoxDriver();
                         break;
                     case IE:
                         System.setProperty("webdriver.ie.driver", "resources/IEDriverServer");
-                        driver = new EventFiringWebDriver(new InternetExplorerDriver());
-                        driver.register(new EventReporter());
+                        driver = new InternetExplorerDriver();
                         driver.manage().deleteAllCookies();
+                        break;
+                    case REMOTE_CHROME:
+                        System.out.println("Remote Chrome");
+                        ChromeOptions chromeOptions = new ChromeOptions();
+                        chromeOptions.addArguments("--headless");
+                        driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
+                        break;
+                    case REMOTE_FIREFOX:
+                        System.out.println("Remote Firefox");
+                        FirefoxOptions firefoxOptions = new FirefoxOptions();
+                        firefoxOptions.addArguments("--headless");
+                        driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), firefoxOptions);
                         break;
                 }
                 driver.manage().window().maximize();
@@ -114,8 +126,7 @@ public class BaseUI {
                 ChromeOptions chromeOptions = getChromeOptions();
                 chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
                 System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
-                driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
-                driver.register(new EventReporter());
+                driver = new ChromeDriver(chromeOptions);
                 //driver.get("chrome://settings/clearBrowserData");
                 break;
 
@@ -127,10 +138,9 @@ public class BaseUI {
                 capabilities.setCapability("platform", platform);
                 capabilities.setCapability("version", version);
                 capabilities.setCapability("name", method.getName());
-                driver = new EventFiringWebDriver(new RemoteWebDriver(
+                driver = new RemoteWebDriver(
                         new URL("http://" + System.getenv("SAUCE_USERNAME") + ":" + System.getenv("SAUCE_ACCESS_KEY") + "@ondemand.saucelabs.com:80/wd/hub"),
-                        capabilities));
-                driver.register(new EventReporter());
+                        capabilities);
                 break;
         }
 
@@ -148,6 +158,9 @@ public class BaseUI {
         loginPage = new LoginPage(driver, wait);
         userProfilePage = new UserProfilePage(driver, wait);
         contactUsPage = new ContactUsPage(driver, wait);
+
+        PageFactory.initElements(driver, homePage);
+
         if(testEnv.equals("qa")) {
             driver.get(Data.qaURl);
         } else if (testEnv.equals("uat")) {
@@ -170,7 +183,7 @@ public class BaseUI {
         }
 
         if(runningConfiguration == RunningConfiguration.SAUCE) {
-            ((JavascriptExecutor)driver).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
+            ((JavascriptExecutor) driver).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
         }
 
         driver.quit();

@@ -5,10 +5,17 @@ import com.romanceabroad.ui.locators.Locators;
 import com.romanceabroad.ui.reportUtil.Reports;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BaseActions {
+
+    @FindBy(xpath = "//button[contains(@class, 'navbar-toggler-right')]")
+    WebElement navbarMobileButton;
+
+    @FindBy(xpath = "//iframe[@src='https://www.youtube.com/embed/RRECuJzm3IY?start=85']")
+    WebElement frameWithYoutubeVideo;
 
     public HomePage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -19,30 +26,30 @@ public class HomePage extends BaseActions {
     }
 
     public void clickMobileNavbarButton() {
-        driver.findElement(Locators.NAVBAR_MOBILE_BUTTON).click();
+        navbarMobileButton.click();
     }
 
     public void clickMobileNavbarButton1(String runningConfiguration) {
         if(runningConfiguration.equals("notSauceMobile")) {
-            driver.findElement(Locators.NAVBAR_MOBILE_BUTTON).click();
+            navbarMobileButton.click();
         }
     }
 
     public void clickMobileNavbarButton1() {
         try {
-            driver.findElement(Locators.NAVBAR_MOBILE_BUTTON).click();
+            navbarMobileButton.click();
         } catch (Exception e) { }
     }
 
     public void clickMobileNavbarButton2() {
-        if(driver.findElement(Locators.NAVBAR_MOBILE_BUTTON).isDisplayed()) {
-            driver.findElement(Locators.NAVBAR_MOBILE_BUTTON).click();
+        if(navbarMobileButton.isDisplayed()) {
+            navbarMobileButton.click();
         }
     }
 
     public void clickMobileNavbarButton3() {
         if(driver.findElements(Locators.NAVBAR_MOBILE_BUTTON).size() > 0) {
-            driver.findElement(Locators.NAVBAR_MOBILE_BUTTON).click();
+            navbarMobileButton.click();
         }
     }
 
@@ -66,9 +73,8 @@ public class HomePage extends BaseActions {
     }
 
     public void playYouTubeVideo() {
-        scrollToElementUsingJS(Locators.FRAME_WITH_YOUTUBE_VIDEO);
-        WebElement frame = driver.findElement(Locators.FRAME_WITH_YOUTUBE_VIDEO);
-        driver.switchTo().frame(frame);
+        scrollToElementUsingJS(frameWithYoutubeVideo);
+        driver.switchTo().frame(frameWithYoutubeVideo);
         driver.findElement(Locators.YOUTUBE_VIDEO_PLAY_BUTTON);
     }
 
