@@ -68,7 +68,7 @@ public class BaseUI {
         CHROME, FIREFOX, IE, REMOTE_CHROME, REMOTE_FIREFOX
     }
 
-    @BeforeMethod(groups = {"smoke", "regression", "integration", "negative"}, alwaysRun = true)
+    @BeforeMethod(groups = {"smoke", "regression", "integration", "negative", "positive"}, alwaysRun = true)
     @Parameters({"browser", "version", "platform", "configuration", "deviceName", "testEnv"})
     public void setup(@Optional("Chrome") String browser,
                       @Optional String version,
