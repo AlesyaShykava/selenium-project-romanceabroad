@@ -13,7 +13,7 @@ public class Locators {
     public static final By NAVBAR_GIFTS_LINK = By.xpath("//a[@href='https://romanceabroad.com/store/category-sweets']");
     public static final By NAVBAR_TOUR_TO_UKRAINE_LINK = By.xpath("//a[@href='https://romanceabroad.com/store/sweets/20-tour_to_ukraine']");
     public static final By NAVBAR_BLOG_LINK = By.xpath("//a[@href='https://romanceabroad.com/content/view/blog']");
-    public static final By NAVBAR_SIGN_IN_LINK = By.xpath("//a[@href='https://romanceabroad.com/users/login_form'][1]");
+    public static final By NAVBAR_SIGN_IN_LINK = By.xpath("//a[@href='https://romanceabroad.com/users/login_form'][@id='ajax_login_link']");
     public static final By NAVBAR_JOIN_FOR_FREE_NOW_LINK = By.cssSelector("#show-registration-block");
     public static final By NAVBAR_MOBILE_BUTTON = By.xpath("//button[contains(@class, 'navbar-toggler-right')]");
 

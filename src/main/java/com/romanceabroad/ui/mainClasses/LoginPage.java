@@ -10,7 +10,13 @@ public class LoginPage extends BaseActions implements FooterActions {
         super(driver, wait);
     }
 
-    public void checkErrorBlockIsDisplayed() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SIGN_IN_ALERT_POP_UP_DISPLAYED));
+    public boolean checkErrorBlockIsAppears() {
+        boolean errorBlockIsDisplayed = false;
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.SIGN_IN_ALERT_POP_UP_DISPLAYED));
+            errorBlockIsDisplayed = true;
+        } catch (Exception e) { }
+
+        return errorBlockIsDisplayed;
     }
 }

@@ -85,4 +85,48 @@ public class DataProviders {
         });
         return data.toArray(new Object[data.size()][]);
     }
+
+    @DataProvider(name = "newRequirementsForPassword")
+    public static Object[][] newRequirementsForPassword() {
+        return new  Object[][]{
+                {"Boston1!", true},
+                {"Boston2@", true},
+                {"#Boston3", true},
+                {"$Bos4ton", true},
+                {"Bos6$ton", true},
+                {"New York&7", true},
+                {"Miami**12", true},
+                {"Miami.,90", true},
+                {"***", false},
+                {"1234567890", false},
+                {"FLORIDA", false},
+                {"Flori1!", false}, //Less than 8 characters
+                {"Florida!", false}, //no digits
+                {"Arizona1", false}, //no spec characters
+                {"FLORIDA1", false}, //no Lower case
+                {"florida1", false} //no Upper case
+        };
+    }
+
+    @DataProvider(name = "oldRequirementsForPassword")
+    public static Object[][] oldRequirementsForPassword() {
+        return new  Object[][]{
+                {"Boston1!", true},
+                {"Boston2@", true},
+                {"#Boston3", true},
+                {"$Bos4ton", true},
+                {"Bos6$ton", true},
+                {"New York&7", false},
+                {"Miami**12", true},
+                {"Miami.,90", true},
+                {"***", false},
+                {"1234567890", false},
+                {"FLORIDA", false},
+                {"Flori1!", false}, //Less than 8 characters
+                {"Florida!", false}, //no digits
+                {"Arizona1", false}, //no spec characters
+                {"FLORIDA1", false}, //no Lower case
+                {"florida1", false} //no Upper case
+        };
+    }
 }
